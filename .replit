@@ -1,0 +1,14 @@
+run = "npm run dev"
+
+modules = ["nodejs-18:v31-20240213-3f08513", "web:v7-20240209-9e3a339"]
+
+[nix]
+channel = "stable-23_05"
+
+[deployment]
+run = ["node", "index.js"]
+deploymentTarget = "cloudrun"
+
+[[ports]]
+localPort = 3100
+externalPort = 80

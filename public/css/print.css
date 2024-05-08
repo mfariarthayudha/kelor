@@ -1,0 +1,31 @@
+@media print {
+  * {
+    font-family: "Times New Roman", Times, serif;
+  }
+  tr,
+  p,
+  ol > li {
+    font-size: 12pt;
+    /* margin-bottom: 0; */
+    line-height: 1;
+  }
+  .row > .col-6 > p {
+    font-size: 12pt;
+    margin-bottom: 0;
+  }
+  table td:first-child {
+    width: 150px; /* Adjust the width as needed */
+  }
+  .text-uppercase {
+    text-transform: uppercase;
+  }
+
+  table,
+  .indent {
+    margin-left: 10%;
+  }
+  body {
+    margin: 5%;
+    /* padding-right: 5%; */
+  }
+}

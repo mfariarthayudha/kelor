@@ -1,0 +1,265 @@
+<!--  -->
+<div id="layoutSidenav_nav">
+  <nav
+    class="sidenav shadow-right sidenav-light"
+    style="background-color: #71ce97"
+  >
+    <div class="sidenav-menu">
+      <div class="nav accordion" id="accordionSidenav">
+        <!-- Sidenav Menu Heading (Account)-->
+        <!-- * * Note: * * Visible only on and above the sm breakpoint-->
+        <a
+          class="nav-link fw-bold m-auto"
+          style="font-size: 50px; color: white"
+          href="/"
+          >Kelor</a
+        >
+        <div class="sidenav-menu-heading">Dashboard</div>
+        <a
+          class="nav-link rounded-pill mx-3"
+          style="background-color: #b3e5c8"
+          href="/"
+        >
+          <div class="nav-link-icon"><i data-feather="activity"></i></div>
+          Statistik
+        </a>
+
+        <!-- Sidenav Accordion (Surat)-->
+        <a
+          class="nav-link collapsed rounded-pill mx-3 my-2"
+          href="/documents"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseApps"
+          aria-expanded="false"
+          aria-controls="collapseApps"
+          style="background-color: #b3e5c8"
+        >
+          <div class="nav-link-icon"><i data-feather="mail"></i></div>
+          Layanan Surat
+          <div class="sidenav-collapse-arrow">
+            <i class="fas fa-angle-down"></i>
+          </div>
+        </a>
+        <!-- Nested Sidenav Accordion (Apps -> KK)-->
+
+        <div
+          class="collapse"
+          id="collapseApps"
+          data-bs-parent="#accordionSidenav"
+        >
+          <nav
+            class="sidenav-menu-nested nav accordion"
+            id="accordionSidenavAppsMenu"
+          >
+            <a
+              class="nav-link collapsed"
+              href="javascript:void(0);"
+              data-bs-toggle="collapse"
+              data-bs-target="#appsCollapseKK"
+              aria-expanded="false"
+              aria-controls="appsCollapseKK"
+            >
+              KK (Kartu Keluarga)
+              <div class="sidenav-collapse-arrow">
+                <i class="fas fa-angle-down"></i>
+              </div>
+            </a>
+            <div
+              class="collapse"
+              id="appsCollapseKK"
+              data-bs-parent="#accordionSidenavAppsMenu"
+            >
+              <nav class="sidenav-menu-nested nav">
+                <a class="nav-link" href="/documents/surat-KK-f101/create"
+                  >F-1,01</a
+                >
+                <a class="nav-link" href="">F-1,06</a>
+              </nav>
+            </div>
+            <a
+              class="nav-link collapsed"
+              href="javascript:void(0);"
+              data-bs-toggle="collapse"
+              data-bs-target="#appsCollapseKTP"
+              aria-expanded="false"
+              aria-controls="appsCollapseKTP"
+            >
+              KTP (Kartu Tanda Penduduk)
+              <div class="sidenav-collapse-arrow">
+                <i class="fas fa-angle-down"></i>
+              </div>
+            </a>
+            <div
+              class="collapse"
+              id="appsCollapseKTP"
+              data-bs-parent="#accordionSidenavAppsMenu"
+            >
+              <nav class="sidenav-menu-nested nav">
+                <a class="nav-link rounded-pill" href="">F-1,07</a>
+                <a class="nav-link rounded-pill" href="">F-1,21</a>
+              </nav>
+            </div>
+            <!-- Nested Sidenav Accordion (Apps -> Pindah)-->
+            <a
+              class="nav-link collapsed"
+              href="javascript:void(0);"
+              data-bs-toggle="collapse"
+              data-bs-target="#appsCollapsePindah"
+              aria-expanded="false"
+              aria-controls="appsCollapsePindah"
+            >
+              Pindah
+              <div class="sidenav-collapse-arrow">
+                <i class="fas fa-angle-down"></i>
+              </div>
+            </a>
+            <div
+              class="collapse"
+              id="appsCollapsePindah"
+              data-bs-parent="#accordionSidenavAppsMenu"
+            >
+              <nav class="sidenav-menu-nested nav">
+                <a class="nav-link" href="">Satu Kecamatan</a>
+                <a class="nav-link" href="">Satu Kabupaten</a>
+                <a class="nav-link" href="">Luar Kabupaten</a>
+              </nav>
+            </div>
+            <!-- Nested Sidenav Accordion (Apps -> Pengantar Nikah)-->
+            <a
+              class="nav-link collapsed"
+              href="javascript:void(0);"
+              data-bs-toggle="collapse"
+              data-bs-target="#appsCollapsePengantarNikah"
+              aria-expanded="false"
+              aria-controls="appsCollapsePengantarNikah"
+            >
+              Pengantar Nikah
+              <div class="sidenav-collapse-arrow">
+                <i class="fas fa-angle-down"></i>
+              </div>
+            </a>
+            <div
+              class="collapse"
+              id="appsCollapsePengantarNikah"
+              data-bs-parent="#accordionSidenavAppsMenu"
+            >
+              <nav class="sidenav-menu-nested nav">
+                <a class="nav-link" href="/">Model 1</a>
+                <a class="nav-link" href="">Model 4</a>
+                <a class="nav-link" href="">Model 5</a>
+                <a class="nav-link" href="">Model 6</a>
+              </nav>
+            </div>
+            <!-- Nested Sidenav Accordion (Apps -> SKKM)-->
+            <a
+              class="nav-link collapsed"
+              href="javascript:void(0);"
+              data-bs-toggle="collapse"
+              data-bs-target="#appsCollapseSKKM"
+              aria-expanded="false"
+              aria-controls="appsCollapseSKKM"
+            >
+              SKKM
+              <div class="sidenav-collapse-arrow">
+                <i class="fas fa-angle-down"></i>
+              </div>
+            </a>
+            <div
+              class="collapse"
+              id="appsCollapseSKKM"
+              data-bs-parent="#accordionSidenavAppsMenu"
+            >
+              <nav class="sidenav-menu-nested nav">
+                <a class="nav-link" href="/documents/skkm-sekolah/create"
+                  >Sekolah</a
+                >
+                <a class="nav-link" href="/documents/skkm-rumah-sakit/create"
+                  >Rumah Sakit</a
+                >
+              </nav>
+            </div>
+            <a class="nav-link" href="">SKU</a>
+            <a class="nav-link" href="/documents/surat-pernyataan-SKU/create"
+              >PERNYATAAN SKU</a
+            >
+            <a class="nav-link" href="">KEMATIAN</a>
+            <a class="nav-link" href="">BELUM NIKAH</a>
+            <a class="nav-link" href="">SKCK</a>
+            <a class="nav-link" href="">SKTTS</a>
+            <a class="nav-link" href="">SOMISILI</a>
+            <a class="nav-link" href="">PERBEDAAN NAMA</a>
+            <a class="nav-link" href="">AHLI WARIS</a>
+            <a
+              class="nav-link"
+              href="/documents/surat-keterangan-domisili-usaha/create"
+              >SKDU</a
+            >
+          </nav>
+        </div>
+
+        <!-- Sidenav Accordion (Surat)-->
+        <div class="sidenav-menu-heading">Master</div>
+
+        <a
+          class="nav-link collapsed rounded-pill mx-3"
+          href="javascript:void(0);"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseData"
+          aria-expanded="false"
+          aria-controls="collapseData"
+          style="background-color: #b3e5c8"
+        >
+          <div class="nav-link-icon"><i data-feather="bar-chart"> </i></div>
+          Data
+          <div class="sidenav-collapse-arrow">
+            <i class="fas fa-angle-down"></i>
+          </div>
+        </a>
+        <div
+          class="collapse"
+          id="collapseData"
+          data-bs-parent="#accordionSidenav"
+        >
+          <nav class="sidenav-menu-nested nav">
+            <a class="nav-link" href="/dusun">Dusun</a>
+            <a class="nav-link" href="/rw">RW</a>
+            <a class="nav-link" href="/rt">RT</a>
+            <a class="nav-link" href="/families">Keluarga</a>
+            <a class="nav-link" href="/residents">Warga</a>
+          </nav>
+        </div>
+
+        <!-- Sidenav Accordion (Data)-->
+        <div class="sidenav-menu-heading">Utility</div>
+
+        <a
+          class="nav-link rounded-pill mb-2 mx-3"
+          style="background-color: #b3e5c8"
+          href="/"
+        >
+          <div class="nav-link-icon"><i data-feather="user"></i></div>
+          Akun
+        </a>
+        <a
+          class="nav-link rounded-pill mx-3"
+          style="background-color: #b3e5c8"
+          href="/authentication/logout"
+        >
+          <div class="nav-link-icon"><i data-feather="log-out"></i></div>
+          Logout
+        </a>
+      </div>
+      <!-- Sidenav Footer-->
+
+      <!-- </nav> -->
+    </div>
+    <div class="sidenav-footer">
+      <div class="sidenav-footer-content">
+        <div class="sidenav-footer-subtitle">Logged in as:</div>
+        <div class="sidenav-footer-title">Admin</div>
+      </div>
+    </div>
+    <!-- </div> -->
+  </nav>
+</div>
+<!-- </div> -->

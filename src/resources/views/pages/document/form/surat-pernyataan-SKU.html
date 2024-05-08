@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="id">
+  <%- include('../../../layouts/head.html', {pageTitle : formulir_judul } ) %>
+  <body class="nav-fixed">
+    <div id="layoutSidenav">
+      <%- include('../../components/sidebars.html'); -%>
+      <div id="layoutSidenav_content" style="top: 0">
+        <main>
+          <div class="container-xl px-4">
+            <div class="row justify-content-center">
+              <div class="col-lg-8">
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                  <div class="card-header justify-content-center">
+                    <h3 class="fw-light my-4"><%= formulir_judul %></h3>
+                  </div>
+                  <div class="card-body">
+                    <div class="mb-3 ms-3">
+                      <div class="row">
+                        <div class="form-check form-switch">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            role="switch"
+                            id="warga_cipayung"
+                            checked
+                          />
+                          <label class="form-check-label" for="warga_cipayung"
+                            >Warga Desa Cipayung (Terdaftar di Kelor)</label
+                          >
+                        </div>
+                      </div>
+                    </div>
+                    <h5 class="card-title">Data Warga</h5>
+                    <div class="mb-3">
+                      <label class="small mb-1" for="nik">No. KTP:</label>
+                      <input
+                        class="form-control"
+                        id="nik"
+                        type="number"
+                        placeholder="Masukkan No. KTP"
+                        list="nikList"
+                      />
+                      <datalist id="nikList"></datalist>
+                    </div>
+
+                    <form id="form-warga">
+                      <div class="mb-3">
+                        <label class="small mb-1" for="nama">Nama</label>
+                        <input class="form-control" id="nama" type="text" />
+                      </div>
+                      <div class="mb-3">
+                        <div class="row">
+                          <div class="col-6">
+                            <label class="small mb-1" for="tempat_lahir"
+                              >Tempat
+                            </label>
+                            <input
+                              class="form-control"
+                              id="tempat_lahir"
+                              type="text"
+                            />
+                          </div>
+
+                          <div class="col-6">
+                            <label class="small mb-1" for="tanggal_lahir"
+                              >Tgl. lahir</label
+                            >
+                            <input
+                              class="form-control"
+                              id="tanggal_lahir"
+                              type="date"
+                              onchange="validate_date(this);"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="mb-3">
+                        <div class="row">
+                          <div class="col-6">
+                            <label for="jenis_kelamin" class="small mb-1"
+                              >Jenis Kelamin</label
+                            >
+                            <select
+                              id="jenis_kelamin"
+                              class="form-select"
+                              disabled
+                              aria-label="Default select example"
+                            >
+                              <option value="pilih" selected disabled>
+                                Pilih Jenis Kelamin:
+                              </option>
+                              <option value="Laki-laki">Laki - laki</option>
+                              <option value="Perempuan">Perempuan</option>
+                            </select>
+                          </div>
+
+                          <div class="col-6">
+                            <label class="small mb-1" for="pekerjaan"
+                              >Pekerjaan</label
+                            >
+                            <input
+                              class="form-control"
+                              id="pekerjaan"
+                              type="text"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="mb-3">
+                        <label class="small mb-1" for="alamat">Alamat</label>
+                        <input class="form-control" id="alamat" type="text" />
+                      </div>
+                    </form>
+                    <h5 class="card-title">Data Usaha</h5>
+
+                    <div class="mb-3">
+                      <div class="row">
+                        <div class="col-6">
+                          <label class="small mb-1" for="jenis_usaha"
+                            >Jenis Usaha</label
+                          >
+                          <input
+                            class="form-control"
+                            id="jenis_usaha"
+                            type="text"
+                            placeholder="Masukkan Jenis Usaha"
+                          />
+                        </div>
+                        <div class="col-6">
+                          <label class="small mb-1" for="lokasi_usaha"
+                            >Lokasi Usaha
+                          </label>
+                          <input
+                            class="form-control"
+                            id="lokasi_usaha"
+                            type="text"
+                            placeholder="Masukkan Lokasi usaha "
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div
+                      class="d-flex align-items-center justify-content-between mt-4 mb-0"
+                    >
+                      <button
+                        id="submit-form"
+                        type="submit"
+                        class="btn btn-primary"
+                      >
+                        <span
+                          id="spinner"
+                          class="spinner spinner-border spinner-border-sm me-2"
+                          role="status"
+                          aria-hidden="true"
+                          hidden="true"
+                        ></span>
+                        Buat Surat
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+        <%- include('../../components/footer.html'); -%>
+      </div>
+    </div>
+    <%- include('../../../layouts/javascript.html') %>
+    <script src="/javascript/surat.js"></script>
+    <script>
+      const warga_cipayung = document.getElementById("warga_cipayung");
+      function warga_status() {
+        if (warga_cipayung.checked) {
+          changeInputForm("form-warga", true);
+        } else {
+          changeInputForm("form-warga", false);
+          document.getElementById("nik").value = "";
+          removeInputForm("form-warga");
+        }
+      }
+      window.onload = warga_status;
+      warga_cipayung.addEventListener("change", warga_status);
+
+      document
+        .querySelector("#submit-form")
+        .addEventListener("click", (event) => {
+          event.preventDefault();
+
+          document.querySelector("#submit-form").innerHTML = "Loading ...";
+          axios({
+            url: `${baseUrl}/api/documents/eb9ddbbf-d970-4c8f-9c87-800a3761a1d6`,
+            method: "post",
+            headers: { "content-type": "application/json" },
+            data: {
+              nik: document.getElementById("nik").value,
+              nama: capitalize(document.getElementById("nama").value),
+              tanggal_lahir: document.getElementById("tanggal_lahir").value,
+              tempat_lahir: document.getElementById("tempat_lahir").value,
+              jenis_kelamin: document.getElementById("jenis_kelamin").value,
+              pekerjaan: capitalize(document.getElementById("pekerjaan").value),
+              alamat: capitalize(document.getElementById("alamat").value),
+              jenis_usaha: capitalize(
+                document.getElementById("jenis_usaha").value
+              ),
+              lokasi_usaha: capitalize(
+                document.getElementById("lokasi_usaha").value
+              ),
+            },
+          })
+            .then((response) => {
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title:
+                  "Surat Pernyataan " +
+                  capitalize("<%= formulir_judul %>") +
+                  " Sudah Terbuat",
+                showConfirmButton: false,
+                timer: 1800,
+              });
+
+              setTimeout(() => {
+                window.location.href = "/documents/";
+              }, 2000);
+            })
+
+            .catch((error) => {
+              document.querySelector("#submit-form").innerHTML = "Buat Surat";
+
+              let resError = "";
+              for (const key in error.response.data.errorMessages) {
+                if (error.response.data.errorMessages.hasOwnProperty(key)) {
+                  resError += error.response.data.errorMessages[key] + "<br />";
+                }
+              }
+
+              Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: resError,
+                showConfirmButton: true,
+              });
+            });
+        });
+    </script>
+  </body>
+</html>

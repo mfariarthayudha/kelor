@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <title>Dashboard - Kelor</title>
+    <link href="/sb-admin-pro/css/styles.css" rel="stylesheet" />
+    <link href="/css/styles.css" rel="stylesheet" />
+
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="/sb-admin-pro/assets/img/favicon.png"
+    />
+
+    <script
+      data-search-pseudo-elements
+      defer
+      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/js/all.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body class="nav-fixed">
+    <div id="layoutSidenav">
+      <%- include('./components/sidebars.html'); -%>
+      <div id="layoutSidenav_content" style="top: 0">
+        <main>
+          <header
+            class="page-header page-header-compact page-header-light border-bottom bg-white"
+          >
+            <div class="container-xl px-4">
+              <div class="page-header-content">
+                <div
+                  class="row align-items-center justify-content-between pt-3"
+                >
+                  <div class="col-auto mb-3 rounded-pill bg-teal">
+                    <button
+                      class="btn btn-sm rounded-pill text-primary m-1"
+                      style="background-color: #fff; color: #000"
+                    >
+                      Hari ini
+                    </button>
+                    <button class="btn btn-sm rounded-pill text-primary m-1">
+                      Bulanan
+                    </button>
+                    <button class="btn btn-sm rounded-pill text-primary">
+                      Tahunan
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </header>
+          <div class="container-xl px-4 my-5">
+            <div class="row">
+              <div class="col-lg-6 col-xl-3 mb-4">
+                <div class="card bg-gray-600 text-white h-100">
+                  <div class="card-body">
+                    <div
+                      class="d-flex justify-content-between align-items-center"
+                    >
+                      <div class="me-3">
+                        <div class="text-white-75 small">DUSUN</div>
+                        <div class="text-lg fw-bold"><%= dusun %></div>
+                      </div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        fill="currentColor"
+                        class="bi bi-building"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M4 2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zM4 5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zM7.5 5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zM4.5 8a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5z"
+                        />
+                        <path
+                          d="M2 1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1zm11 0H3v14h3v-2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5V15h3z"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                  <div
+                    class="card-footer d-flex align-items-center justify-content-between small"
+                  >
+                    <a class="text-white stretched-link" href="/dusun"
+                      >View Report</a
+                    >
+                    <div class="text-white">
+                      <i class="fas fa-angle-right"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 col-xl-3 mb-4">
+                <div class="card bg-warning text-white h-100">
+                  <div class="card-body">
+                    <div
+                      class="d-flex justify-content-between align-items-center"
+                    >
+                      <div class="me-3">
+                        <div class="text-white-75 small">RW</div>
+                        <div class="text-lg fw-bold"><%= rw %></div>
+                      </div>
+                      <i data-feather="radio"></i>
+                    </div>
+                  </div>
+                  <div
+                    class="card-footer d-flex align-items-center justify-content-between small"
+                  >
+                    <a class="text-white stretched-link" href="/rw"
+                      >View Report</a
+                    >
+                    <div class="text-white">
+                      <i class="fas fa-angle-right"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 col-xl-3 mb-4">
+                <div
+                  class="card bg-gradient-primary-to-secondary text-white h-100"
+                >
+                  <div class="card-body">
+                    <div
+                      class="d-flex justify-content-between align-items-center"
+                    >
+                      <div class="me-3">
+                        <div class="text-white-75 small">RT</div>
+                        <div class="text-lg fw-bold"><%= rt %></div>
+                      </div>
+                      <i data-feather="message-circle"></i>
+                    </div>
+                  </div>
+                  <div
+                    class="card-footer d-flex align-items-center justify-content-between small"
+                  >
+                    <a class="text-white stretched-link" href="/rt"
+                      >View Report</a
+                    >
+                    <div class="text-white">
+                      <i class="fas fa-angle-right"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 col-xl-3 mb-4">
+                <div class="card bg-secondary text-white h-100">
+                  <div class="card-body">
+                    <div
+                      class="d-flex justify-content-between align-items-center"
+                    >
+                      <div class="me-3">
+                        <div class="text-white-75 small">WARGA</div>
+                        <div class="text-lg fw-bold"><%= warga %></div>
+                      </div>
+                      <i data-feather="users"></i>
+                    </div>
+                  </div>
+                  <div
+                    class="card-footer d-flex align-items-center justify-content-between small"
+                  >
+                    <a class="text-white stretched-link" href="/residents"
+                      >View Report</a
+                    >
+                    <div class="text-white">
+                      <i class="fas fa-angle-right"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6 col-xl-3 mb-4">
+                <div class="card bg-blue text-white h-100">
+                  <div class="card-body">
+                    <div
+                      class="d-flex justify-content-between align-items-center"
+                    >
+                      <div class="me-3">
+                        <div class="text-white-75 small">Permohonan Surat</div>
+                        <div class="text-lg fw-bold"><%= surat %></div>
+                      </div>
+                      <i data-feather="upload"></i>
+                    </div>
+                  </div>
+                  <div
+                    class="card-footer d-flex align-items-center justify-content-between small"
+                  >
+                    <a class="text-white stretched-link" href="/documents"
+                      >View Report</a
+                    >
+                    <div class="text-white">
+                      <i class="fas fa-angle-right"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 col-xl-3 mb-4">
+                <div class="card bg-pink text-white h-100">
+                  <div class="card-body">
+                    <div
+                      class="d-flex justify-content-between align-items-center"
+                    >
+                      <div class="me-3">
+                        <div class="text-white-75 small">Laporan</div>
+                        <div class="text-lg fw-bold">5</div>
+                      </div>
+                      <i data-feather="file"></i>
+                    </div>
+                  </div>
+                  <div
+                    class="card-footer d-flex align-items-center justify-content-between small"
+                  >
+                    <a class="text-white stretched-link" href="/"
+                      >View Report</a
+                    >
+                    <div class="text-white">
+                      <i class="fas fa-angle-right"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-6 col-xl-3 mb-4">
+                <div class="card bg-success text-white h-100">
+                  <div class="card-body">
+                    <div
+                      class="d-flex justify-content-between align-items-center"
+                    >
+                      <div class="me-3">
+                        <div class="text-white-75 small">Keuangan Desa</div>
+                        <div class="text-lg fw-bold">40</div>
+                      </div>
+                      <i data-feather="dollar-sign"></i>
+                    </div>
+                  </div>
+                  <div
+                    class="card-footer d-flex align-items-center justify-content-between small"
+                  >
+                    <a class="text-white stretched-link" href="/"
+                      >View Report</a
+                    >
+                    <div class="text-white">
+                      <i class="fas fa-angle-right"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+        <%- include('./components/footer.html'); -%>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="/sb-admin-pro/js/scripts.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="/sb-admin-pro/js/datatables/datatables-simple-demo.js"></script>
+    <script src="/axios/axios.min.js"></script>
+    <script src="/javascript/main.js"></script>
+  </body>
+</html>
