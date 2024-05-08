@@ -6,7 +6,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import { renderFile } from "ejs";
 
-dotenv.config({ path: path.join(__dirname, "./.env.kelor") });
+dotenv.config({ path: path.join(__dirname, "../.env.kelor") });
 
 import router from "./routes/router";
 
