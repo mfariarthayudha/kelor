@@ -8,7 +8,7 @@ import { renderFile } from "ejs";
 
 dotenv.config({ path: path.join(__dirname, "./.env.kelor") });
 
-import router from "./src/routes/router";
+import router from "./routes/router";
 
 const application = express();
 // application.use(Helmet());
