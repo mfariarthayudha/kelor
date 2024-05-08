@@ -17,9 +17,9 @@ application.locals.baseUrl = process.env.BASE_URL;
 application.engine("html", renderFile);
 
 application.set("view engine", "html");
-application.set("views", path.join(__dirname, "src/resources/views"));
+application.set("views", path.join(__dirname, "../resources/views"));
 
-application.use(express.static(path.join(__dirname, "public")));
+application.use(express.static(path.join(__dirname, "../public")));
 application.use(express.json());
 application.use(bodyParser.urlencoded({ extended: true }));
 application.use(function (req, res, next) {
