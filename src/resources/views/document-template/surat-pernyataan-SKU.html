@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SURAT PERNYATAAN KETERANGAN USAHA</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="https://kelor.id/css/print.css" />
+  </head>
+
+  <body>
+    <%- include('./kop-surat.html',{formulir_judul: formulir_judul ,nomor :
+    nomor_surat,kode_surat : kode_surat}); -%>
+    <main>
+      <div class="container">
+        <div class="row me-4">
+          <p class="mb-2">Yang bertanda tangan dibawah ini saya :</p>
+          <table>
+            <tr>
+              <td>Nama</td>
+              <td>: <%= nama %></td>
+            </tr>
+            <tr>
+              <td>Jenis Kelamin</td>
+              <td>: <%= jenis_kelamin %></td>
+            </tr>
+            <tr>
+              <td>Tempat .Tgl. lahir</td>
+              <td>: <%= tempat_tanggal_lahir %></td>
+            </tr>
+            <tr>
+              <td>Pekerjaan</td>
+              <td>: <%= pekerjaan %></td>
+            </tr>
+            <tr>
+              <td>Alamat</td>
+              <td>: <%= alamat %></td>
+            </tr>
+          </table>
+
+          <p class="my-4">
+            Dengan ini Menyatakan yang sebenarnya sebagai berikut :
+          </p>
+
+          <ol class="indent">
+            <li class="mb-3">
+              <p>Bahwa benar pada saat ini saya mempunyai usaha</p>
+              <table class="ms-2">
+                <tr>
+                  <td>Jenis Usaha</td>
+                  <td>: <%= jenis_usaha %></td>
+                </tr>
+                <tr>
+                  <td>Lokasi Usaha</td>
+                  <td>: <%= alamat_usaha %></td>
+                </tr>
+              </table>
+            </li>
+
+            <li class="my-3 pe-2">
+              Bahwa surat pernyataan ini saya buat dengan sebenarnya dalam
+              keadaan sehat jasmani dan rohani tanpa ada paksaan dari pihak
+              manapun juga dan menjadi tanggung jawab saya sepenuhnya apabila
+              terbukti tidak benar.
+            </li>
+          </ol>
+        </div>
+        <p class="my-2 mb-2">
+          Demikian surat pernyataan ini saya buat untuk melengkapi persyaratan
+          pembuatan surat pernyataan Keterangan
+        </p>
+        <!-- </div>-->
+        <div class="row text-center">
+          <div class="col">
+            <p>Mengetahui,</p>
+            <p>Ketua RT <%= rt_rw %></p>
+            <br />
+            <br />
+            <br />
+            <p><%= ketua_rt %></p>
+          </div>
+          <div class="col">
+            <p>Cipayung, <%= created_at %></p>
+            <p>Yang Menyatakan</p>
+            <br />
+            <p class="text-muted">Materai 10.000</p>
+            <br />
+            <p><%= nama %></p>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

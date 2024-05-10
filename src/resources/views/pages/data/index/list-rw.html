@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>RW - Kelor</title>
+    <link href="/sb-admin-pro/css/styles.css" rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.png" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css"
+      rel="stylesheet"
+    />
+    <script
+      data-search-pseudo-elements
+      defer
+      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/js/all.min.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body class="nav-fixed">
+    <div id="layoutSidenav">
+      <%- include('../../components/sidebars.html'); -%>
+      <div id="layoutSidenav_content" style="top: 0">
+        <main>
+          <!-- Main page content-->
+          <div class="container-xl px-4 mt-4">
+            <div class="card mb-4">
+              <div class="card-header">Daftar RW</div>
+              <div class="card-body">
+                <div class="d-flex justify-content-end">
+                  <a class="btn btn-primary btn-sm" href="/rw/create">
+                    <i data-feather="plus" class="me-2"></i>Tambah RW</a
+                  >
+                </div>
+                <table id="datatablesSimple">
+                  <thead>
+                    <tr>
+                      <th>No</th>
+                      <th>Dusun</th>
+                      <th>RW</th>
+                      <th>Ketua RW</th>
+                      <th>Jumlah Keluarga</th>
+                      <th>Jumlah Penduduk</th>
+                      <th>Aksi</th>
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                      <th>No</th>
+                      <th>Dusun</th>
+                      <th>RW</th>
+                      <th>Ketua RW</th>
+                      <th>Jumlah Keluarga</th>
+                      <th>Jumlah Penduduk</th>
+                      <th>Aksi</th>
+                    </tr>
+                  </tfoot>
+                  <tbody>
+                    <% rw.forEach((val, index)=>{ %>
+                    <tr>
+                      <td><%= index + 1 %></td>
+                      <td><%= val.nama_dusun %></td>
+                      <td><%= val.no_rw %></td>
+                      <td><%= val.ketua_rw %></td>
+                      <td><%= val.jumlah_keluarga%></td>
+                      <td><%= val.jumlah_warga %></td>
+                      <td>
+                        <a
+                          href="/rw/<%= val.rw_id %>/edit"
+                          class="btn btn-warning"
+                          >Edit</a
+                        >
+
+                        <button
+                          class="btn btn-danger"
+                          onclick="removeRW('<%= val.rw_id %>')"
+                        >
+                          Hapus
+                        </button>
+                      </td>
+                    </tr>
+                    <%}) %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </main>
+        <%- include('../../components/footer.html'); -%>
+      </div>
+    </div>
+    <%- include('./../../../layouts/javascript.html') %>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="/sb-admin-pro/js/datatables/datatables-simple-demo.js"></script>
+
+    <script>
+      function removeRW(id) {
+        axios
+          .delete(baseUrl + "/api/rw/" + id)
+          .then((res) => {
+            swal.fire({
+              icon: "success",
+              title: "Dihapus",
+              showConfirmButton: false,
+              timer: 1200,
+            });
+            setTimeout(() => {
+              location.reload();
+            }, 1500);
+          })
+          .catch((err) => {
+            swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: err.response.data.errorMessages,
+            });
+            console.log(err);
+          });
+      }
+    </script>
+  </body>
+</html>

@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost:3100";
+const baseUrl = "https://kelor.id";
 var res;
 function capitalize(text) {
   return text.replace(/\b\w/g, function (char) {

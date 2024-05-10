@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="https://kelor.id/css/print_vertical.css" />
+    <title>Surat KK 101 F</title>
+  </head>
+
+  <body>
+    <header class="d-flex justify-content-center my-1">
+      <img
+        src="https://kelor.id/logo_cipayung.png"
+        alt="logo_desa_cipayung"
+        class="me-2"
+        width="5%"
+        height="5%"
+      />
+      <div class="text-center my-auto">
+        <p class="mb-1">No Reg : 400.12.2.1 / <%= no_reg %> -pem</p>
+        <h5 class="fw-bold">
+          FORMULIR ISIAN BIODATA PENDUDUK UNTUK WNI ( PERKELUARGA )
+        </h5>
+      </div>
+      <p class="position-absolute top-0 end-0">F-1.01</p>
+    </header>
+    <main>
+      <div class="container-fluid">
+        <div class="row mb-1">
+          <div class="col-8">
+            <p class="my-1" style="font-size: x-small">
+              Perhatian : Isilah Formulir ini dengan huruf cetak dan jelas serta
+              mengikuti TATA CARA PENGISIAN FORMULIR PADA HALAMAN SEBALIKNYA
+            </p>
+            <p class="fw-bold">DATA KEPALA KELUARGA</p>
+            <!-- <p class="m-n1"></p> -->
+            <table class="no-border">
+              <tr>
+                <td>Nama Kepala Keluarga</td>
+                <td>: &nbsp;</td>
+                <td class="kotak"><%= kepala_keluarga %></td>
+              </tr>
+              <tr>
+                <td>Alamat</td>
+                <td>: &nbsp;</td>
+                <td class="kotak"><%= alamat %></td>
+              </tr>
+              <tr>
+                <td>Kode Pos</td>
+                <td>:</td>
+                <td>
+                  <% for (let i = 0; i < kode_pos.length; i++) { %>
+                  <span class="kotak"><%= kode_pos[i] %></span>
+                  <%} %>
+                  <span class="mx-3">RT</span>
+                  <span class="kotak"><%= no_rt[0] %></span>
+                  <span class="kotak"><%= no_rt[1] %></span>
+
+                  <span class="mx-3">RW</span>
+                  <span class="kotak"><%= no_rw[0] %></span>
+                  <span class="kotak"><%= no_rw[1] %></span>
+
+                  <span class="mx-3">Jumlah Anggota Keluarga</span>
+                  <span class="kotak"><%= jumlah_anggota[0] %></span>
+                  <span class="kotak"><%= jumlah_anggota[1] %></span>
+                  <span class="kotak">Orang</span>
+                </td>
+              </tr>
+            </table>
+          </div>
+
+          <div class="col-4">
+            <table>
+              <tr>
+                <td>Diisi oleh Petugas</td>
+                <td>:</td>
+                <td colspan="7"><%= petugas %></td>
+              </tr>
+              <tr>
+                <td>Kode Nama Propinsi</td>
+                <td>:</td>
+                <td class="kotak">3</td>
+                <td class="kotak">2</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td class="kotak">JAWA BARAT</td>
+              </tr>
+              <tr>
+                <td>Kode Nama Kabupaten/kota</td>
+                <td>:</td>
+                <td class="kotak">0</td>
+                <td class="kotak">1</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td class="kotak">BOGOR</td>
+              </tr>
+              <tr>
+                <td>Kode Nama Kecamatan</td>
+                <td>:</td>
+                <td class="kotak">2</td>
+                <td class="kotak">6</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td class="kotak">MEGAMENDUNG</td>
+              </tr>
+              <tr>
+                <td>Kode Nama Kelurahan/Desa</td>
+                <td>:</td>
+                <td class="kotak">2</td>
+                <td class="kotak">0</td>
+                <td class="kotak">0</td>
+                <td class="kotak">6</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td class="kotak">CIPAYUNG</td>
+              </tr>
+              <tr>
+                <td>Kode Dusun/Dukuh/Kp</td>
+                <td>: &nbsp;</td>
+                <td colspan="7" class="kotak"><%= nama_dusun %></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div class="row mx-auto mb-2">
+          <table class="nomor table-bordered border-dark">
+            <thead>
+              <tr>
+                <th>No.</th>
+                <th>Nama Lengkap</th>
+                <th>NIK</th>
+                <th>Alamat Sebelumnya</th>
+                <th>No Paspor</th>
+                <th>Tgl Berakhir Paspor</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% row1.forEach((val, index)=>{ %>
+              <tr>
+                <td><%= index + 1 %></td>
+                <td><%= val.nama %></td>
+                <td><%= val.nik %></td>
+                <td><%= val.alamat_sebelumnya %></td>
+                <td><%= val.no_paspor %></td>
+                <td><%= val.tanggal_berakhir_paspor %></td>
+              </tr>
+              <%}); %>
+            </tbody>
+          </table>
+        </div>
+        <div class="row mx-auto mb-2">
+          <table class="nomor table-bordered border-dark">
+            <thead>
+              <tr>
+                <th>No.</th>
+                <th>Jenis Kelamin</th>
+                <th>Tempat Lahir</th>
+                <th>Tgl Lahir</th>
+                <th>Umur</th>
+                <th>Akta Surat/ Surat Lahir</th>
+                <th>No. Akte Kelahiran / Surat Kanal lahir</th>
+                <th>Gol. Darah</th>
+                <th>Agama</th>
+                <th>Status</th>
+                <th>Akt perkawinan / buku nikah</th>
+                <th>No. Akt perkawinan / buku Nikah</th>
+                <th>Tgl perkawinan</th>
+                <th>Akt Cerai / Surat Cerai</th>
+                <th>No. Akta Cerai</th>
+                <th>Tgl. perceraian</th>
+              </tr>
+            </thead>
+            <tbody class="fit-content">
+              <% row2.forEach((val, index)=>{ %>
+              <tr>
+                <td><%= index + 1 %></td>
+                <td><%= val.jenis_kelamin %></td>
+                <td><%= val.tempat_lahir %></td>
+                <td width="100px"><%= val.tanggal_lahir %></td>
+                <td><%= val.umur %></td>
+                <td><%= val.akta_lahir %></td>
+                <td><%= val.no_akta_lahir %></td>
+                <td><%= val.golongan_darah %></td>
+                <td><%= val.agama %></td>
+                <td><%= val.status_pernikahan %></td>
+                <td><%= val.akta_nikah %></td>
+                <td><%= val.no_akta_nikah %></td>
+                <td><%= val.tanggal_perkawinan %></td>
+                <td><%= val.akta_cerai %></td>
+                <td><%= val.no_akta_cerai %></td>
+                <td><%= val.tanggal_perceraian %></td>
+              </tr>
+              <%}); %>
+            </tbody>
+          </table>
+        </div>
+        <div class="row mx-auto mb-2">
+          <table class="nomor table-bordered border-dark">
+            <thead>
+              <tr>
+                <th>No.</th>
+                <th>Status hubungan Dalam Keluarga</th>
+                <th>Kelainan Fisik & Mental</th>
+                <th>Penyandang Cacat</th>
+                <th>Pendidikan terakhir</th>
+                <th>Pekerjaan</th>
+                <th>NIK Ibu</th>
+                <th>Nama Lengkap Ibu</th>
+                <th>NIK Ayah</th>
+                <th>Nama Lengkap Ayah</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% row3.forEach((val, index)=>{ %>
+              <tr>
+                <td><%= index + 1 %></td>
+                <td><%= val.status_keluarga %></td>
+                <td><%= val.kelainan_fisik_mental %></td>
+                <td><%= val.penyandang_cacat %></td>
+                <td><%= val.pendidikan_terakhir %></td>
+                <td><%= val.pekerjaan %></td>
+                <td><%= val.nik_ibu %></td>
+                <td><%= val.nama_ibu %></td>
+                <td><%= val.nik_ayah %></td>
+                <td><%= val.nama_ayah %></td>
+              </tr>
+              <%}); %>
+            </tbody>
+          </table>
+        </div>
+        <div class="separately">
+          <div class="row mt-n3">
+            <div class="col-4">
+              <p>
+                Nama Ketua RT
+                <span class="kotak"> <%= no_rt[0] %></span>
+                <span class="kotak"><%= no_rt[1] %></span>
+                : <%= ketua_rt %>
+              </p>
+            </div>
+
+            <div class="col-2">&nbsp;</div>
+
+            <div class="col-4 text-center">
+              <p>Mengetahui</p>
+            </div>
+            <div class="col-2 text-center">
+              <p>Cipayung, <%= create_at %></p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-4">
+              <p>
+                Nama Ketua RW
+                <span class="kotak"><%= no_rw[0] %></span>
+                <span class="kotak"><%= no_rw[1] %></span>
+                : <%= ketua_rw %>
+              </p>
+            </div>
+            <div class="col-2">
+              <p class="text-center">Petugas Register</p>
+            </div>
+            <div class="col-2">
+              <p class="text-center">Camat Megamendung</p>
+            </div>
+            <div class="col-2">
+              <p class="text-center">Kepala Desa Cipayung</p>
+            </div>
+            <div class="col-2 text-center"><p>Kepala Keluarga</p></div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-4">
+              <p>Pernyataan</p>
+              <p>Demikian Formulir ini saya/kami isi dengan sesungguhnya,</p>
+              <p>Apabila keterangan tersebut tidak sesuai dengan keadaan</p>
+              <p>
+                yang sebenarnya, saya bersedia dikenakan sanksi sesuai ketentuan
+              </p>
+            </div>
+            <div class="col-2 text-center">
+              <img
+                src="https://kelor.id/signature.png"
+                alt="Tanda Tangan Petugas"
+                width="70%"
+                class="ms-3"
+              />
+            </div>
+            <div class="col-2">&nbsp;</div>
+            <div class="col-2 text-center">
+              <img
+                src="(village-chief-signature)"
+                alt="Tanda Tangan Kepala Desa"
+                width="70%"
+                class="ms-3"
+              />
+            </div>
+            <div class="col-2">&nbsp;</div>
+          </div>
+          <div class="row">
+            <div class="col-4">
+              <p>peraturan perundang-undangan yang berlaku</p>
+            </div>
+            <div class="col-2">
+              <p class="text-center"><%= petugas %></p>
+            </div>
+            <div class="col-2">
+              <p class="text-center">..................</p>
+              <p class="">Nip :</p>
+            </div>
+            <div class="col-2">
+              <p class="text-center">H. CACUH BUDIAWAN, SE</p>
+            </div>
+            <div class="col-2">
+              <p class="text-center"><%= kepala_keluarga %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
