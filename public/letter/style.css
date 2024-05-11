@@ -1,0 +1,74 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.content {
+  margin-bottom: 20px;
+}
+
+label {
+  display: inline-block;
+}
+
+.footer {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.header-tengah {
+  text-align: center;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.pojok-kanan {
+  float: right
+}
+
+.form {
+  margin-left: 10%;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.tanda-tangan p {
+  text-align: center;
+  margin: 0;
+  /* Menghilangkan margin bawaan */
+}
+
+.tanda-tangan p:last-child {
+  margin-top: 20px;
+  /* Menambahkan jarak atas antara paragraf pertama dan paragraf kedua */
+}
+
+/* .camat {
+  margin-top: 70px;
+} */
+
+.spasi {
+  display: inline-block;
+  width: 100px;
+
+}
+
+table {
+  border-style: hidden
+}

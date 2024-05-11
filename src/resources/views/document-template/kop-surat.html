@@ -1,0 +1,17 @@
+<header class="d-flex justify-content-center my-2 me-5">
+  <img
+    src="http://localhost:3100/logo_cipayung.png"
+    alt="logo_desa_cipayung"
+    class="me-2"
+    width="10%"
+  />
+  <div class="text-center my-auto">
+    <h5 class="fw-bold"><u><%= formulir_judul %></u></h5>
+    <% if(nomor) { %>
+    <p class="mb-1">Nomor : <%= nomor %></p>
+    <% } %>
+  </div>
+  <% if(kode_surat) { %>
+  <p class="position-absolute top-0 end-0"><%= kode_surat %></p>
+  <% } %>
+</header>

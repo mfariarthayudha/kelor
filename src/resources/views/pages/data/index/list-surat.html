@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Surat - Kelor</title>
+    <link href="/sb-admin-pro/css/styles.css" rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.png" />
+    <script
+      data-search-pseudo-elements
+      defer
+      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/js/all.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <link
+      href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body class="nav-fixed">
+    <div id="layoutSidenav">
+      <%- include('../../components/sidebars.html'); -%>
+      <div id="layoutSidenav_content" style="top: 0">
+        <main>
+          <!-- Main page content-->
+          <div class="container-xl px-4 mt-4">
+            <div class="card mb-4">
+              <div class="card-header">Daftar Surat Permohonan</div>
+              <div class="card-body">
+                <table
+                  id="daftar_surat"
+                  class="display table-responsive nowrap"
+                  width="100%"
+                >
+                  <thead>
+                    <tr>
+                      <th>No</th>
+                      <th>Surat</th>
+                      <th>Atas Nama</th>
+                      <th>Proses</th>
+                      <th>Dibuat</th>
+                      <th>Aksi</th>
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                      <th>No</th>
+                      <th>Surat</th>
+                      <th>Atas Nama</th>
+                      <th>Proses</th>
+                      <th>Dibuat</th>
+                      <th>Aksi</th>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+            </div>
+          </div>
+        </main>
+        <%- include('../../components/footer.html'); -%>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="/sb-admin-pro/js/scripts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js"></script>
+
+    <script>
+      $(document).ready(function () {
+        $("#daftar_surat").DataTable({
+          processing: true,
+          serverSide: true,
+          scrollX: true,
+          ajax: {
+            url: "/api/documents",
+            method: "POST",
+          },
+          order: [[4, "desc"]],
+          pagingType: "simple_numbers",
+          serverSide: true,
+          columnDefs: [
+            {
+              targets: "_all",
+              searchable: false,
+            },
+            {
+              targets: 0,
+              render: function (data, type, row, meta) {
+                return meta.row + 1; // Increment row number to start from 1
+              },
+            },
+          ],
+          columns: [
+            { data: null, orderable: false },
+            { data: "document_type" },
+            { data: "applicant_name" },
+            {
+              data: "signed",
+              render: function (data, type) {
+                if (type === "display") {
+                  if (data === 1) {
+                    color = "bg-success";
+                    text = "Sudah ";
+                  } else {
+                    color = "bg-yellow";
+                    text = "Belum ";
+                  }
+                  return (
+                    "<span class='badge " +
+                    color +
+                    "' >" +
+                    text +
+                    "di tanda tangani</span>"
+                  );
+                }
+
+                return data;
+              },
+            },
+            { data: "created_at" },
+            {
+              data: "document_result_id",
+              orderable: false,
+              render: function (data, type, row) {
+                if (type === "display") {
+                  btn_ttd = "";
+                  if (row["signed"] === 0) {
+                    btn_ttd =
+                      '<button class="btn btn-success"  onclick=signDocument("' +
+                      data +
+                      '") >Tanda Tangan</button>';
+                  }
+                  return (
+                    '<a class="btn btn-primary me-2" href="/documents/result/' +
+                    data +
+                    '"target="_blank">Lihat</a>' +
+                    '<button class="btn btn-danger me-2" onclick=removeDocument("' +
+                    data +
+                    '") >Hapus</button>' +
+                    btn_ttd
+                  );
+                }
+                return data;
+              },
+            },
+          ],
+        });
+      });
+
+      function removeDocument(id_surat) {
+        $.ajax({
+          url: `/api/documents/` + id_surat,
+          type: "DELETE",
+          success: function () {
+            $("#daftar_surat").DataTable().ajax.reload();
+            swal.fire({
+              icon: "success",
+              title: "Terhapus",
+              text: "Surat berhasil dihapus",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          },
+        });
+      }
+      function signDocument(id_surat) {
+        $.ajax({
+          url: `/api/documents/${id_surat}/sign`,
+          type: "PUT",
+          success: function () {
+            $("#daftar_surat").DataTable().ajax.reload();
+            swal.fire({
+              icon: "success",
+              title: "Tanda Tangan",
+              text: "Surat berhasil ditandangani",
+              showConfirmButton: false,
+              timer: 1800,
+            });
+          },
+        });
+      }
+    </script>
+  </body>
+</html>

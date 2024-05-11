@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Keluarga - Kelor</title>
+    <link href="/sb-admin-pro/css/styles.css" rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.png" />
+    <script
+      data-search-pseudo-elements
+      defer
+      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/js/all.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body class="nav-fixed">
+    <div id="layoutSidenav">
+      <%- include('../../components/sidebars.html'); -%>
+      <div id="layoutSidenav_content" style="top: 0">
+        <main>
+          <header
+            class="page-header page-header-compact page-header-light border-bottom bg-white mb-4"
+          >
+            <div class="container-xl px-4">
+              <div class="page-header-content">
+                <div
+                  class="row align-items-center justify-content-between pt-3"
+                >
+                  <div class="col-auto mb-3">
+                    <h1 class="page-header-title">
+                      <div class="page-header-icon">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          class="feather feather-user"
+                        >
+                          <path
+                            d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"
+                          ></path>
+                          <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                      </div>
+                      Tambah Data Keluarga
+                    </h1>
+                  </div>
+                  <div class="col-12 col-xl-auto mb-3">
+                    <a
+                      class="btn btn-sm btn-light text-primary"
+                      href="/families"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="feather feather-arrow-left me-1"
+                      >
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                      </svg>
+                      Kembali ke Dashboard
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </header>
+          <div class="container-xl px-4">
+            <div class="row justify-content-center">
+              <div class="col-lg-9">
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                  <div class="card-header justify-content-center">
+                    <h3 class="fw-light my-4">Data Keluarga</h3>
+                  </div>
+                  <div class="card-body">
+                    <div class="mb-3">
+                      <label class="small mb-1" for="no_kk">No KK :</label>
+                      <input
+                        class="form-control"
+                        id="no_kk"
+                        type="number"
+                        placeholder="Masukkan No Kartu Keluarga"
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label class="small mb-1" for="alamat">Alamat</label>
+                      <input
+                        class="form-control"
+                        id="alamat"
+                        type="text"
+                        placeholder="Masukkan Alamat"
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <div class="row">
+                        <div class="col-3">
+                          <label class="small mb-1" for="dusun">Dusun </label>
+                          <select
+                            class="form-select"
+                            aria-label="Default select example"
+                            id="dusun"
+                          >
+                            <option>Pilih Dusun</option>
+                          </select>
+                        </div>
+
+                        <div class="col-3">
+                          <label class="small mb-1" for="rw">No RW</label>
+                          <select
+                            class="form-select"
+                            aria-label="Default select example"
+                            id="rw"
+                          >
+                            <option>Pilih RW</option>
+                          </select>
+                        </div>
+
+                        <div class="col-3">
+                          <label class="small mb-1" for="rt">No RT</label>
+                          <select
+                            class="form-select"
+                            aria-label="Default select example"
+                            id="rt"
+                          >
+                            <option>Pilih RT</option>
+                          </select>
+                        </div>
+                        <div class="col-3">
+                          <label class="small mb-1" for="kode_pos"
+                            >Kode Pos
+                          </label>
+                          <input
+                            class="form-control"
+                            id="kode_pos"
+                            placeholder="Masukkan Kode Pos"
+                            type="number"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div
+                      class="d-flex align-items-center justify-content-between mt-4 mb-0"
+                    >
+                      <button
+                        type="submit"
+                        id="button-submit"
+                        class="btn btn-primary"
+                      >
+                        Tambah
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <%- include('./../../../layouts/javascript.html') %>
+    <script src="/javascript/familyAdd.js"></script>
+    <script src="/javascript/listDaerah.js"></script>
+
+    <script>
+      document
+        .querySelector("#button-submit")
+        .addEventListener("click", (event) => {
+          event.preventDefault();
+          axios({
+            url: `${baseUrl}/api/families/create`,
+            method: "post",
+            headers: { "content-type": "application/json" },
+            data: {
+              no_kk: document.getElementById("no_kk").value,
+              alamat: document.getElementById("alamat").value,
+              dusun: document.getElementById("dusun").value,
+              rt: document.getElementById("rt").value,
+              rw: document.getElementById("rw").value,
+              kode_pos: document.getElementById("kode_pos").value,
+            },
+          })
+            .then((response) => {
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title:
+                  "Data Nomor Kartu Keluarga " +
+                  response.data.no_kk +
+                  " sudah ditambahkan",
+                showConfirmButton: false,
+                timer: 1800,
+              });
+              console.log(response);
+              setTimeout(() => {
+                window.location.href = "/families/";
+              }, 1000);
+            })
+            .catch((error) => {
+              let resError = "";
+              if (typeof error.response.data.errorMessages === "object") {
+                for (const key in error.response.data.errorMessages) {
+                  if (error.response.data.errorMessages.hasOwnProperty(key)) {
+                    resError +=
+                      error.response.data.errorMessages[key] + "<br />";
+                  }
+                }
+              } else {
+                resError = error.response.data.errorMessages;
+                console.log(resError);
+              }
+
+              Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: resError,
+                showConfirmButton: true,
+              });
+            });
+        });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const authentication_route_1 = __importDefault(require("./authentication-route"));
+const dashboard_route_1 = __importDefault(require("./dashboard-route"));
+const document_route_1 = __importDefault(require("./document-route"));
+const resident_route_1 = __importDefault(require("./resident-route"));
+const family_route_1 = __importDefault(require("./family-route"));
+const dusun_route_1 = __importDefault(require("./dusun-route"));
+const rw_route_1 = __importDefault(require("./rw-route"));
+const rt_route_1 = __importDefault(require("./rt-route"));
+const must_authenticated_1 = __importDefault(require("../../middlewares/must-authenticated"));
+const error_route_1 = __importDefault(require("./error-route"));
+const router = express_1.default.Router();
+router.use("/authentication", authentication_route_1.default);
+router.use(must_authenticated_1.default);
+router.use("/", dashboard_route_1.default);
+router.use("/documents", document_route_1.default);
+router.use("/residents", resident_route_1.default);
+router.use("/families", family_route_1.default);
+router.use("/dusun", dusun_route_1.default);
+router.use("/rw", rw_route_1.default);
+router.use("/rt", rt_route_1.default);
+router.use("/error", error_route_1.default);
+exports.default = router;
