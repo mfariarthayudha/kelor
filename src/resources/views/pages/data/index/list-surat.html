@@ -11,7 +11,7 @@
     <meta name="author" content="" />
     <title>Surat - Kelor</title>
     <link href="/sb-admin-pro/css/styles.css" rel="stylesheet" />
-    <link rel="icon" type="image/x-icon" href="assets/img/favicon.png" />
+    <link rel="icon" type="image/x-icon" href="/kelor/favicon.png" />
     <script
       data-search-pseudo-elements
       defer
@@ -73,92 +73,93 @@
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
       crossorigin="anonymous"
     ></script>
-    <script src="/sb-admin-pro/js/scripts.js"></script>
+    <script src="/javascript/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js"></script>
 
     <script>
-      $(document).ready(function () {
-        $("#daftar_surat").DataTable({
-          processing: true,
-          serverSide: true,
-          scrollX: true,
-          ajax: {
-            url: "/api/documents",
-            method: "POST",
+      new DataTable("#daftar_surat", {
+        // $(document).ready(function () {
+        //   $("#daftar_surat").DataTable({
+        processing: true,
+        serverSide: true,
+        scrollX: true,
+        ajax: {
+          url: "/api/documents",
+          method: "POST",
+        },
+        order: [[4, "desc"]],
+        pagingType: "simple_numbers",
+        serverSide: true,
+        columnDefs: [
+          {
+            targets: "_all",
+            searchable: false,
           },
-          order: [[4, "desc"]],
-          pagingType: "simple_numbers",
-          serverSide: true,
-          columnDefs: [
-            {
-              targets: "_all",
-              searchable: false,
+          {
+            targets: 0,
+            render: function (data, type, row, meta) {
+              return meta.row + 1; // Increment row number to start from 1
             },
-            {
-              targets: 0,
-              render: function (data, type, row, meta) {
-                return meta.row + 1; // Increment row number to start from 1
-              },
-            },
-          ],
-          columns: [
-            { data: null, orderable: false },
-            { data: "document_type" },
-            { data: "applicant_name" },
-            {
-              data: "signed",
-              render: function (data, type) {
-                if (type === "display") {
-                  if (data === 1) {
-                    color = "bg-success";
-                    text = "Sudah ";
-                  } else {
-                    color = "bg-yellow";
-                    text = "Belum ";
-                  }
-                  return (
-                    "<span class='badge " +
-                    color +
-                    "' >" +
-                    text +
-                    "di tanda tangani</span>"
-                  );
+          },
+        ],
+        columns: [
+          { data: null, orderable: false },
+          { data: "document_type" },
+          { data: "applicant_name" },
+          {
+            data: "signed",
+            render: function (data, type) {
+              if (type === "display") {
+                if (data === 1) {
+                  color = "bg-success";
+                  text = "Sudah ";
+                } else {
+                  color = "bg-yellow";
+                  text = "Belum ";
                 }
+                return (
+                  "<span class='badge " +
+                  color +
+                  "' >" +
+                  text +
+                  "di tanda tangani</span>"
+                );
+              }
 
-                return data;
-              },
+              return data;
             },
-            { data: "created_at" },
-            {
-              data: "document_result_id",
-              orderable: false,
-              render: function (data, type, row) {
-                if (type === "display") {
-                  btn_ttd = "";
-                  if (row["signed"] === 0) {
-                    btn_ttd =
-                      '<button class="btn btn-success"  onclick=signDocument("' +
-                      data +
-                      '") >Tanda Tangan</button>';
-                  }
-                  return (
-                    '<a class="btn btn-primary me-2" href="/documents/result/' +
+          },
+          { data: "created_at" },
+          {
+            data: "document_result_id",
+            orderable: false,
+            render: function (data, type, row) {
+              if (type === "display") {
+                btn_ttd = "";
+                if (row["signed"] === 0) {
+                  btn_ttd =
+                    '<button class="btn btn-success"  onclick=signDocument("' +
                     data +
-                    '"target="_blank">Lihat</a>' +
-                    '<button class="btn btn-danger me-2" onclick=removeDocument("' +
-                    data +
-                    '") >Hapus</button>' +
-                    btn_ttd
-                  );
+                    '") >Tanda Tangan</button>';
                 }
-                return data;
-              },
+                return (
+                  '<a class="btn btn-primary me-2" href="/documents/result/' +
+                  data +
+                  '"target="_blank">Lihat</a>' +
+                  '<button class="btn btn-danger me-2" onclick=removeDocument("' +
+                  data +
+                  '") >Hapus</button>' +
+                  btn_ttd
+                );
+              }
+              return data;
             },
-          ],
-        });
+          },
+        ],
       });
+      // });
 
       function removeDocument(id_surat) {
         $.ajax({
@@ -171,7 +172,7 @@
               title: "Terhapus",
               text: "Surat berhasil dihapus",
               showConfirmButton: false,
-              timer: 1500,
+              timer: 1200,
             });
           },
         });

@@ -12,19 +12,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// import { format } from "path";
-const puppeteer_1 = __importDefault(require("puppeteer"));
-function htmlToPdf(html, 
-// name: string,
-landscape = false) {
+const puppeteer_core_1 = __importDefault(require("puppeteer-core"));
+function htmlToPdf(html, landscape = false) {
     return __awaiter(this, void 0, void 0, function* () {
-        // let options = { format: "A4" };
-        // Example of options with args //
-        // let options = { format: 'A4', args: ['--no-sandbox', '--disable-setuid-sandbox'] };
-        // let file = { content: html.replace(/(\r|\n)/g, "") };
-        const browser = yield puppeteer_1.default.launch();
+        const browser = yield puppeteer_core_1.default.launch({
+            headless: true,
+            args: ["--no-sandbox", "--disable-setuid-sandbox"],
+        });
         const page = yield browser.newPage();
-        // //   await page.setViewport({ width: 1024, height: 768 });
         yield page.setContent(html, { waitUntil: "load" });
         yield page.emulateMediaType("print");
         const pdf = yield page.pdf({
@@ -35,7 +30,6 @@ landscape = false) {
         });
         yield browser.close();
         return pdf;
-        // return html_to_pdf.generatePdf(file, options);
     });
 }
 exports.default = htmlToPdf;

@@ -28,7 +28,3 @@ function convertIntoAge(birth) {
     return ageInYears;
 }
 exports.convertIntoAge = convertIntoAge;
-// exports = {
-//   convertEmptyStringsOrNullToStripe,
-//   convertEmptyStringsToNull,
-// };

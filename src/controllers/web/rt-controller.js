@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.tesAja = exports.rtUpdate = exports.rtAdd = exports.getAllRt = void 0;
 const knex_1 = __importDefault(require("../../utilities/knex"));
 const moment_1 = __importDefault(require("moment"));
+(0, moment_1.default)().local();
 moment_1.default.locale("id");
 const getAllRt = (request, response) => __awaiter(void 0, void 0, void 0, function* () {
     const rt = yield (0, knex_1.default)("rt")

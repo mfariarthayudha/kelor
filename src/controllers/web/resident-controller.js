@@ -16,15 +16,6 @@ exports.getresidentAll = exports.residentUpdate = exports.residentAdd = void 0;
 const knex_1 = __importDefault(require("../../utilities/knex"));
 const moment_1 = __importDefault(require("moment"));
 const resident_repository_1 = require("../../repository/resident-repository");
-// import { getResidentMain } from "../../repository/resident-repository";
-// export const getAccountById = async (request: Request, response: Response) => {
-//   const getUser = await knex("users")
-//     .where("user_id", request.session.user.userId)
-//     .then((res) => {
-//       return res[0]
-//     })
-//   return response.render("pages/home/account", { user: getUser })
-// }
 const residentAdd = (request, response) => {
     return response.render("pages/data/add/resident");
 };
@@ -50,24 +41,10 @@ const residentUpdate = (request, response) => __awaiter(void 0, void 0, void 0, 
         return response.render("pages/data/edit/resident", residentMore[0]);
     }
     catch (error) {
-        //console.log(error);
         return response.redirect("/error/404");
     }
 });
 exports.residentUpdate = residentUpdate;
-// export const getResidentByNik = async (request: Request, response: Response) => {
-//   const getResident = await knex("residents")
-//     .where("nik", request.params.nik)
-//     .then((result: any) => {
-//       return result.map((document: any) => {
-//         return {
-//           ...document,
-//           tanggal_lahir: moment(document.tanggal_lahir).format("yyyy-MM-DD"),
-//         }
-//       })
-//     })
-//   return response.render("pages/data/resident", { resident: getResident[0] })
-// }
 const getresidentAll = (request, response) => __awaiter(void 0, void 0, void 0, function* () {
     const resident = yield (0, knex_1.default)("residents")
         .select("nik", "nama", "tanggal_lahir", "jenis_kelamin", "pekerjaan")
@@ -76,7 +53,6 @@ const getresidentAll = (request, response) => __awaiter(void 0, void 0, void 0, 
             return Object.assign(Object.assign({}, document), { tanggal_lahir: (0, moment_1.default)(document.tanggal_lahir).format("DD MMMM YYYY") });
         });
     });
-    // console.log(resident);
     return response.render("pages/data/index/list-resident", {
         resident: resident,
     });

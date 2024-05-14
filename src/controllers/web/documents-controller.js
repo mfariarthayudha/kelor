@@ -14,10 +14,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createSuratKKf101 = exports.createSuratPernyataanSKU = exports.createSKKMSekolah = exports.createSKKMRumahSakit = exports.createSuratKeteranganDomisiliUsaha = exports.viewSurat = exports.getDocumentAll = void 0;
 const knex_1 = __importDefault(require("../../utilities/knex"));
-// import convertToTitleCase from "../../utilities/convert";
-// import checkFileExists from "../../utilities/existfile";
 const htmlToPdf_1 = __importDefault(require("../../utilities/htmlToPdf"));
 const moment_1 = __importDefault(require("moment"));
+(0, moment_1.default)().local();
 moment_1.default.locale("id");
 const getDocumentAll = (request, response) => {
     return response.render("pages/data/index/list-surat");
@@ -25,7 +24,6 @@ const getDocumentAll = (request, response) => {
 exports.getDocumentAll = getDocumentAll;
 const viewSurat = (request, response) => __awaiter(void 0, void 0, void 0, function* () {
     const document_result_id = request.params.documentResultId;
-    var pdf;
     try {
         const surat = yield (0, knex_1.default)("document_results")
             .select("document_result_id", "document_type_id", "content", "signed")
@@ -33,13 +31,12 @@ const viewSurat = (request, response) => __awaiter(void 0, void 0, void 0, funct
             .then((res) => {
             return res[0];
         });
-        // console.log(surat);
-        pdf = yield (0, htmlToPdf_1.default)(surat["content"]);
-        response.contentType("application/pdf");
-        return response.status(200).send(pdf);
+        const pdf = yield (0, htmlToPdf_1.default)(surat["content"]);
+        response.status(200).send(pdf);
     }
     catch (error) {
-        //console.log(error);
+        console.log(error);
+        response.status(500).send({ errorMessage: error });
     }
 });
 exports.viewSurat = viewSurat;

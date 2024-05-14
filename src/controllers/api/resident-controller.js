@@ -42,6 +42,7 @@ const moment_1 = __importDefault(require("moment"));
 const convert_1 = require("../../utilities/convert");
 const residentRepository = __importStar(require("../../repository/resident-repository"));
 const family_repository_1 = require("../../repository/family-repository");
+(0, moment_1.default)().local();
 moment_1.default.locale("id");
 const addResident = (request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {

@@ -37,7 +37,7 @@ router.get("/:documentResultId/sign", documentController.signDocument);
 router.post("/eb9ddbbf-d970-4c8f-9c87-800a3761a1d6", documentController.createSuratPernyataanSKU);
 router.post("/8b963d84-b2a2-43cb-9e9a-e7892905d7f3", documentController.createSKKMRumahSakit);
 router.post("/bde3a863-a632-4d63-b155-3c2896d3e989", documentController.createSKKMSekolah);
-router.post("/", documentController.getDocumentApi);
+router.post("/", documentController.getDocument);
 router.post("/cde25fb3-ad23-463c-863a-a6f068e3bf6b", documentController.createSuratkkF101);
 router.delete("/:documentResultId", documentController.removeDocumentResult);
 // router.get("/tes", documentController.tesGetDocument);

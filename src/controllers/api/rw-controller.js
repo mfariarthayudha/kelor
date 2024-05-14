@@ -18,6 +18,7 @@ const validatorjs_1 = __importDefault(require("../../utilities/validatorjs"));
 const moment_1 = __importDefault(require("moment"));
 const uuid_1 = require("uuid");
 const resident_repository_1 = require("../../repository/resident-repository");
+(0, moment_1.default)().local();
 moment_1.default.locale("id");
 const getRwName = (request, response) => __awaiter(void 0, void 0, void 0, function* () {
     try {

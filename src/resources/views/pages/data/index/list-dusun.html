@@ -11,7 +11,7 @@
     <meta name="author" content="" />
     <title>Dusun - Kelor</title>
     <link href="/sb-admin-pro/css/styles.css" rel="stylesheet" />
-    <link rel="icon" type="image/x-icon" href="assets/img/favicon.png" />
+    <link rel="icon" type="image/x-icon" href="/kelor/favicon.png" />
     <script
       data-search-pseudo-elements
       defer
@@ -23,7 +23,7 @@
       crossorigin="anonymous"
     ></script>
     <link
-      href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css"
+      href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.css"
       rel="stylesheet"
     />
   </head>
@@ -44,7 +44,7 @@
                     >Tambah Dusun</a
                   >
                 </div>
-                <table class="table align-middle" id="datatablesSimple">
+                <table id="daftar_dusun" class="display">
                   <thead>
                     <tr>
                       <th>No</th>
@@ -52,6 +52,7 @@
                       <th>Nama Kepala Dusun</th>
                       <th>Luas Wilayah</th>
                       <th>Jumlah Penduduk</th>
+                      <th>Dibuat</th>
                       <th>Aksi</th>
                     </tr>
                   </thead>
@@ -62,6 +63,7 @@
                       <th>Nama Kepala Dusun</th>
                       <th>Luas Wilayah</th>
                       <th>Jumlah Penduduk</th>
+                      <th>Dibuat</th>
                       <th>Aksi</th>
                     </tr>
                   </tfoot>
@@ -73,6 +75,8 @@
                       <td><%= val.nama %></td>
                       <td><%= val.luas_wilayah%></td>
                       <td><%= val.jumlah_warga %></td>
+                      <td><%= val.create_at %></td>
+
                       <td>
                         <a
                           href="/dusun/<%= val.dusun_id %>/edit"
@@ -98,16 +102,13 @@
       </div>
     </div>
     <%- include('./../../../layouts/javascript.html') %>
-
-    <script
-      src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
-      crossorigin="anonymous"
-    ></script>
-    <script src="/sb-admin-pro/js/datatables/datatables-simple-demo.js"></script>
-
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js"></script>
     <script>
+      new DataTable("#daftar_dusun", {
+        columnDefs: [{ targets: "_all", className: "dt-right" }],
+      });
       function removeDusun(id) {
-        // console.log(baseUrl + "/dusun/" + id);
         axios
           .delete(baseUrl + "/api/dusun/" + id)
           .then((res) => {

@@ -16,6 +16,7 @@ exports.getFamilyAll = exports.familyUpdate = exports.familyAdd = void 0;
 const knex_1 = __importDefault(require("../../utilities/knex"));
 const family_repository_1 = require("../../repository/family-repository");
 const moment_1 = __importDefault(require("moment"));
+(0, moment_1.default)().local();
 moment_1.default.locale("id");
 const familyAdd = (request, response) => {
     return response.render("pages/data/add/family");

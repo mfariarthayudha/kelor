@@ -19,6 +19,7 @@ const moment_1 = __importDefault(require("moment"));
 const rt_repository_1 = require("../../repository/rt-repository");
 const uuid_1 = require("uuid");
 const resident_repository_1 = require("../../repository/resident-repository");
+(0, moment_1.default)().local();
 moment_1.default.locale("id");
 const getRtName = (request, response) => __awaiter(void 0, void 0, void 0, function* () {
     try {

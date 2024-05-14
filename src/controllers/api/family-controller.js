@@ -41,6 +41,7 @@ const knex_1 = __importDefault(require("../../utilities/knex"));
 const resident_repository_1 = require("../../repository/resident-repository");
 const familyRepository = __importStar(require("../../repository/family-repository"));
 const moment_1 = __importDefault(require("moment"));
+(0, moment_1.default)().local();
 moment_1.default.locale("id");
 const createFamily = (request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {

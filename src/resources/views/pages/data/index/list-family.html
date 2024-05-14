@@ -11,7 +11,7 @@
     <meta name="author" content="" />
     <title>Keluarga - Kelor</title>
     <link href="/sb-admin-pro/css/styles.css" rel="stylesheet" />
-    <link rel="icon" type="image/x-icon" href="assets/img/favicon.png" />
+    <link rel="icon" type="image/x-icon" href="/kelor/favicon.png" />
     <script
       data-search-pseudo-elements
       defer
@@ -23,7 +23,7 @@
       crossorigin="anonymous"
     ></script>
     <link
-      href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css"
+      href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.css"
       rel="stylesheet"
     />
   </head>
@@ -43,7 +43,7 @@
                     <i data-feather="plus" class="me-2"></i>Tambah Keluarga</a
                   >
                 </div>
-                <table id="datatablesSimple">
+                <table id="daftar_keluarga" class="display">
                   <thead>
                     <tr>
                       <th>No</th>
@@ -105,12 +105,12 @@
     </div>
     <%- include('./../../../layouts/javascript.html') %>
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
-      crossorigin="anonymous"
-    ></script>
-    <script src="/sb-admin-pro/js/datatables/datatables-simple-demo.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js"></script>
     <script>
+      new DataTable("#daftar_keluarga", {
+        columnDefs: [{ targets: "_all", className: "dt-left" }],
+      });
       function removeFamily(no_kk) {
         axios
           .delete(baseUrl + "/api/families/" + no_kk)
@@ -119,7 +119,7 @@
               icon: "success",
               title: "Berhasil dihapus",
               showConfirmButton: false,
-              timer: 1800,
+              timer: 1200,
             });
             location.reload();
           })

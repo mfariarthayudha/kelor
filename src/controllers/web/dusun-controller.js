@@ -15,15 +15,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.dusunAdd = exports.dusunUpdate = exports.getAllDusun = void 0;
 const knex_1 = __importDefault(require("../../utilities/knex"));
 const moment_1 = __importDefault(require("moment"));
+(0, moment_1.default)().local();
 moment_1.default.locale("id");
-function splitObj(obj) {
-    const key = Object.keys(obj);
-    return key;
-}
+// function splitObj(obj: object) {
+//   const key = Object.keys(obj);
+//   return key;
+// }
 const getAllDusun = (request, response) => __awaiter(void 0, void 0, void 0, function* () {
     const dusun = yield (0, knex_1.default)("dusun")
-        .select("dusun.dusun_id", "dusun.nama_dusun", "dusun.luas_wilayah", "dusun.jumlah_warga", "residents.nama")
-        .innerJoin("residents", "dusun.kepala_dusun_nik", "residents.nik");
+        .select("dusun.dusun_id", "dusun.nama_dusun", "dusun.luas_wilayah", "dusun.jumlah_warga", "dusun.create_at", "residents.nama")
+        .innerJoin("residents", "dusun.kepala_dusun_nik", "residents.nik")
+        .then((result) => {
+        return result.map((dusun) => {
+            return Object.assign(Object.assign({}, dusun), { create_at: (0, moment_1.default)(dusun.create_at).format("DD MMMM YYYY") });
+        });
+    });
     // console.log(dusun);
     return response.render("pages/data/index/list-dusun", { dusun: dusun });
 });

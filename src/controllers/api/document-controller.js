@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createSKKMSekolah = exports.createSKKMRumahSakit = exports.createSuratKeteranganUsaha = exports.createSuratPernyataanSKU = exports.createSuratkkF101 = exports.signDocument = exports.createSuratKeteranganDomisiliUsaha = exports.getDocumentApi = exports.removeDocumentResult = exports.updateDocumentType = exports.addDocumentType = void 0;
+exports.createSKKMSekolah = exports.createSKKMRumahSakit = exports.createSuratKeteranganUsaha = exports.createSuratPernyataanSKU = exports.createSuratkkF101 = exports.signDocument = exports.createSuratKeteranganDomisiliUsaha = exports.getDocument = exports.removeDocumentResult = exports.updateDocumentType = exports.addDocumentType = void 0;
 const lodash_1 = __importDefault(require("lodash"));
 const uuid_1 = require("uuid");
 const zod_1 = require("zod");
@@ -23,6 +23,7 @@ const convert_1 = require("../../utilities/convert");
 const resident_repository_1 = require("../../repository/resident-repository");
 const rt_repository_1 = require("../../repository/rt-repository");
 const moment_1 = __importDefault(require("moment"));
+(0, moment_1.default)().local();
 moment_1.default.locale("id");
 function addDocumentType(request, response, next) {
     var _a;
@@ -224,40 +225,44 @@ const removeDocumentResult = (request, response) => __awaiter(void 0, void 0, vo
     }
 });
 exports.removeDocumentResult = removeDocumentResult;
-const getDocumentApi = (request, response) => __awaiter(void 0, void 0, void 0, function* () {
+const getDocument = (request, response) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        let draw = request.body.draw;
-        let start = +request.body.start;
-        let length = +request.body.length;
-        let order_data = request.body.order;
-        var search_value = request.body.search["value"];
+        const { draw, columns, order, start, length, search } = request.body;
+        const search_value = search["value"];
         const total_records = yield (0, knex_1.default)("document_results")
             .count("document_result_id as jumlah")
             .then((res) => {
-            return res[0].jumlah;
+            return Number(res[0].jumlah);
         });
-        const total_records_with_filter = yield (0, knex_1.default)("document_types")
-            .whereILike("document_types.document_type", `%${search_value}%`)
-            .orWhereILike("document_results.applicant_name", `%${search_value}%`)
-            .orWhereILike("document_results.created_at", `%${search_value}%`)
-            .innerJoin("document_results", "document_types.document_type_id", "document_results.document_type_id")
+        const query = (0, knex_1.default)("document_types")
+            .where((builder) => {
+            if (search_value != "") {
+                builder
+                    .whereRaw("LOWER(document_types.document_type) LIKE LOWER(?)", [
+                    `%${search_value}%`,
+                ])
+                    .orWhereRaw("LOWER(document_results.applicant_name) LIKE LOWER(?)", [`%${search_value}%`])
+                    .orWhereRaw("LOWER(document_results.created_at) LIKE LOWER(?)", [
+                    `%${search_value}%`,
+                ]);
+            }
+        })
+            .innerJoin("document_results", "document_types.document_type_id", "document_results.document_type_id");
+        const total_records_with_filter = yield query
+            .clone()
             .count("document_results.document_result_id as jumlah")
             .then((res) => {
-            return res[0].jumlah;
+            return Number(res[0].jumlah);
         });
-        const query = (0, knex_1.default)("document_types");
-        if (order_data !== undefined) {
-            var column_index = request.body.order[0]["column"];
-            var column_name = request.body.columns[column_index]["data"];
-            var column_sort_order = request.body.order[0]["dir"];
+        if (order !== undefined) {
+            const column_index = order[0]["column"];
+            const column_name = columns[column_index]["data"];
+            const column_sort_order = order[0]["dir"];
             query.orderBy(column_name, column_sort_order);
         }
         const data_arr = yield query
+            .clone()
             .select("document_results.document_result_id as document_result_id", "document_types.document_type as document_type", "document_results.applicant_name as applicant_name", "document_results.signed as signed", "document_results.created_at as created_at")
-            .whereILike("document_types.document_type", `%${search_value}%`)
-            .orWhereILike("document_results.applicant_name", `%${search_value}%`)
-            .orWhereILike("document_results.created_at", `%${search_value}%`)
-            .innerJoin("document_results", "document_types.document_type_id", "document_results.document_type_id")
             .limit(length)
             .offset(start)
             .then((result) => {
@@ -265,7 +270,7 @@ const getDocumentApi = (request, response) => __awaiter(void 0, void 0, void 0, 
                 return Object.assign(Object.assign({}, document), { created_at: (0, moment_1.default)(document.created_at).format("HH:mm <br> DD MMMM YYYY") });
             });
         });
-        let output = {
+        const output = {
             draw: draw,
             iTotalRecords: total_records,
             iTotalDisplayRecords: total_records_with_filter,
@@ -274,12 +279,12 @@ const getDocumentApi = (request, response) => __awaiter(void 0, void 0, void 0, 
         return response.status(200).send(output);
     }
     catch (error) {
-        //console.log(error);
+        console.log(error);
         response.status(400).send(error);
     }
 });
-exports.getDocumentApi = getDocumentApi;
-const createSuratKeteranganDomisiliUsaha = (request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
+exports.getDocument = getDocument;
+const createSuratKeteranganDomisiliUsaha = (request, response) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         yield (0, validatorjs_1.default)({
             nomor_surat: request.body.nomor_surat,
@@ -598,7 +603,7 @@ const createSuratkkF101 = (request, response, next) => __awaiter(void 0, void 0,
     }
 });
 exports.createSuratkkF101 = createSuratkkF101;
-const createSuratPernyataanSKU = (request, response, next) => __awaiter(void 0, void 0, void 0, function* () {
+const createSuratPernyataanSKU = (request, response) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         yield (0, validatorjs_1.default)({
             nik: request.body.nik,
