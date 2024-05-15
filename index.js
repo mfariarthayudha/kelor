@@ -37,7 +37,7 @@ const router_1 = __importDefault(require("./src/routes/router"));
 const application = (0, express_1.default)();
 application.use(helmet_1.default.frameguard({ action: "deny" }));
 application.use(helmet_1.default.xssFilter());
-application.locals.baseUrl = process.env.BASE_URL;
+application.locals.baseUrl = process.env.BASE_URL_LOCAL;
 application.engine("html", ejs_1.renderFile);
 application.set("view engine", "html");
 application.set("views", path_1.default.join(__dirname, "src/resources/views"));
@@ -50,5 +50,5 @@ application.use(function (req, res, next) {
 });
 application.use(router_1.default);
 application.listen(process.env.PORT, () => {
-    console.log(`Url : http://${process.env.BASE_URL}:${process.env.PORT}`);
+    console.log(`Url : http://${process.env.BASE_URL_LOCAL}:${process.env.PORT}`);
 });
