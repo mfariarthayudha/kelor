@@ -100,7 +100,7 @@
                           type="text"
                           readonly
                           placeholder="Enter your Nama"
-                          value="<%= user.username %>"
+                          value="<%= username %>"
                         />
                       </div>
                       <div class="mb-3">
@@ -112,7 +112,7 @@
                           id="inputEmailAddress"
                           type="email"
                           readonly
-                          value="<%= user.email %>"
+                          value="<%= email %>"
                         />
                       </div>
 
@@ -123,20 +123,18 @@
                           class="form-control"
                           id="role"
                           readonly
-                          value="<%= user.role %>"
+                          value="<%= role %>"
                         />
                       </div>
                       <div class="mt-4">
-                        <p class="text-muted">
-                          Awal dibuat : <%= user.create_at %>
-                        </p>
+                        <p class="text-muted">Awal dibuat : <%= create_at %></p>
                         <p class="mt-n4 text-muted">
-                          Terakhir diubah : <%= user.update_at %>
+                          Terakhir diubah : <%= update_at %>
                         </p>
                       </div>
                       <div class="mb-3">
                         <label class="small mb-1" id="ttd">Tanda Tangan</label>
-                        <img src="/photos/signature.png" alt="" srcset="" />
+                        <img src="<% =signature %>" alt="" srcset="" />
                       </div>
                       <!-- Submit button-->
                     </form>

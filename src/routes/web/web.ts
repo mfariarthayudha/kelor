@@ -9,7 +9,7 @@ import dusunRoute from "./dusun-route";
 import rwRoute from "./rw-route";
 import rtRoute from "./rt-route";
 import accountRoute from "./account-route";
-import signatureRoute from "./signature-route";
+
 import mustAuthenticated from "../../middlewares/must-authenticated";
 
 import errorRoute from "./error-route";
@@ -19,7 +19,6 @@ router.use("/authentication", authenticationRoute);
 
 router.use(mustAuthenticated);
 
-router.use("/signature", signatureRoute);
 router.use("/", dashboardRoute);
 router.use("/account", accountRoute);
 router.use("/documents", documentRoute);

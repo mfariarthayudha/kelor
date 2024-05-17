@@ -1,7 +1,5 @@
-class User {
-  userId: string = "";
-  username: string = "";
-  role: string = "";
+export default interface User {
+  userId: string;
+  username: string;
+  role: string;
 }
-
-export = User;
