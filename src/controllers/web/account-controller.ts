@@ -16,7 +16,7 @@ export const viewAccount = async (request: Request, response: Response) => {
       "users.create_at",
       "users.update_at"
     )
-    .where("user_id", request.session.user?.userId)
+    .where("user_id", request.session.user!.userId)
     .then((result: any) => {
       return result.map((user: any) => {
         return {
