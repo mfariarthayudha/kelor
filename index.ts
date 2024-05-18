@@ -24,6 +24,12 @@ application.use(
           "cdn.datatables.net",
           "code.jquery.com",
         ],
+        styleSrc: [
+          String(process.env.BASE_URL_ONLINE),
+          "cdn.jsdelivr.net",
+          "cdnjs.cloudflare.com",
+          "cdn.datatables.net",
+        ],
       },
     },
   })
