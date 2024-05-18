@@ -14,24 +14,7 @@ const application = express();
 application.disable("x-powered-by");
 application.use(
   Helmet({
-    contentSecurityPolicy: {
-      directives: {
-        defaultSrc: [String(process.env.BASE_URL_ONLINE)],
-        scriptSrc: [
-          String(process.env.BASE_URL_ONLINE),
-          "cdn.jsdelivr.net",
-          "cdnjs.cloudflare.com",
-          "cdn.datatables.net",
-          "code.jquery.com",
-        ],
-        styleSrc: [
-          String(process.env.BASE_URL_ONLINE),
-          "cdn.jsdelivr.net",
-          "cdnjs.cloudflare.com",
-          "cdn.datatables.net",
-        ],
-      },
-    },
+    contentSecurityPolicy: false,
   })
 );
 application.use(Helmet.frameguard({ action: "deny" }));
