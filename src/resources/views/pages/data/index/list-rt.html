@@ -30,7 +30,7 @@
 
   <body class="nav-fixed">
     <div id="layoutSidenav">
-      <%- include('../../components/sidebars.html'); -%>
+      <%- include('../../components/sidebars.html',{role: role}); -%>
       <div id="layoutSidenav_content" style="top: 0">
         <main>
           <!-- Main page content-->
@@ -43,59 +43,61 @@
                     <i data-feather="plus" class="me-2"></i>Tambah RT</a
                   >
                 </div>
-                <table id="daftar_rt" class="display">
-                  <thead>
-                    <tr>
-                      <th>No</th>
-                      <th>Dusun</th>
-                      <th>RW</th>
-                      <th>RT</th>
-                      <th>Ketua RT</th>
-                      <th>Jumlah Keluarga</th>
-                      <th>Jumlah Penduduk</th>
-                      <th>Aksi</th>
-                    </tr>
-                  </thead>
-                  <tfoot>
-                    <tr>
-                      <th>No</th>
-                      <th>Dusun</th>
-                      <th>RW</th>
-                      <th>RT</th>
-                      <th>Ketua RT</th>
-                      <th>Jumlah Keluarga</th>
-                      <th>Jumlah Penduduk</th>
-                      <th>Aksi</th>
-                    </tr>
-                  </tfoot>
-                  <tbody>
-                    <% rt.forEach((val, index)=>{ %>
-                    <tr>
-                      <td><%= index + 1 %></td>
-                      <td><%= val.nama_dusun %></td>
-                      <td><%= val.no_rw %></td>
-                      <td><%= val.no_rt %></td>
-                      <td><%= val.nama %></td>
-                      <td><%= val.jumlah_keluarga %></td>
-                      <td><%= val.jumlah_warga %></td>
-                      <td>
-                        <a
-                          href="/rt/<%= val.rt_id %>/edit"
-                          class="btn btn-warning"
-                          >Edit</a
-                        >
+                <div class="table-responsive">
+                  <table id="daftar_rt" class="display">
+                    <thead>
+                      <tr>
+                        <th>No</th>
+                        <th>Dusun</th>
+                        <th>RW</th>
+                        <th>RT</th>
+                        <th>Ketua RT</th>
+                        <th>Jumlah Keluarga</th>
+                        <th>Jumlah Penduduk</th>
+                        <th>Aksi</th>
+                      </tr>
+                    </thead>
+                    <tfoot>
+                      <tr>
+                        <th>No</th>
+                        <th>Dusun</th>
+                        <th>RW</th>
+                        <th>RT</th>
+                        <th>Ketua RT</th>
+                        <th>Jumlah Keluarga</th>
+                        <th>Jumlah Penduduk</th>
+                        <th>Aksi</th>
+                      </tr>
+                    </tfoot>
+                    <tbody>
+                      <% rt.forEach((val, index)=>{ %>
+                      <tr>
+                        <td><%= index + 1 %></td>
+                        <td><%= val.nama_dusun %></td>
+                        <td><%= val.no_rw %></td>
+                        <td><%= val.no_rt %></td>
+                        <td><%= val.nama %></td>
+                        <td><%= val.jumlah_keluarga %></td>
+                        <td><%= val.jumlah_warga %></td>
+                        <td>
+                          <a
+                            href="/rt/<%= val.rt_id %>/edit"
+                            class="btn btn-primary"
+                            >Lihat</a
+                          >
 
-                        <button
-                          class="btn btn-danger"
-                          onclick="removeRT('<%= val.rt_id %>')"
-                        >
-                          Hapus
-                        </button>
-                      </td>
-                    </tr>
-                    <%}) %>
-                  </tbody>
-                </table>
+                          <button
+                            class="btn btn-danger"
+                            onclick="removeRT('<%= val.rt_id %>')"
+                          >
+                            Hapus
+                          </button>
+                        </td>
+                      </tr>
+                      <%}) %>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>

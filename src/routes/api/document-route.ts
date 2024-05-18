@@ -1,4 +1,5 @@
 import express from "express";
+import { checkRole } from "../../middlewares/auth-role";
 
 import * as documentController from "../../controllers/api/document-controller";
 
@@ -14,8 +15,12 @@ router.post(
   "/2b76a6b5-6c9e-4dea-90f8-6eec0183530a",
   documentController.createSuratKeteranganDomisiliUsaha
 );
-router.put("/:documentResultId/sign", documentController.signDocument);
-router.get("/:documentResultId/sign", documentController.signDocument);
+router.put(
+  "/:documentResultId/sign",
+  checkRole("Kepala Desa"),
+  documentController.signDocument
+);
+// router.get("/:documentResultId/sign", documentController.signDocument);
 router.post(
   "/eb9ddbbf-d970-4c8f-9c87-800a3761a1d6",
   documentController.createSuratPernyataanSKU

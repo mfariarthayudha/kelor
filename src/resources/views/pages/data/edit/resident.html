@@ -32,7 +32,7 @@
   </head>
   <body class="nav-fixed">
     <div id="layoutSidenav">
-      <%- include('../../components/sidebars.html'); -%>
+      <%- include('../../components/sidebars.html',{role: role}); -%>
       <div id="layoutSidenav_content" style="top: 0">
         <main>
           <header
@@ -712,7 +712,6 @@
               }
 
               Swal.fire({
-                position: "top-end",
                 icon: "error",
                 title: resError,
                 showConfirmButton: true,

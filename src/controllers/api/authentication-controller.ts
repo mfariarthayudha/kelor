@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import bcrypt from "bcrypt";
+import { setRole } from "../../..";
 
 import validatorjs from "../../utilities/validatorjs";
 import knex from "../../utilities/knex";
@@ -45,7 +46,7 @@ export const login = async (
       username: user.username,
       role: user.role,
     };
-
+    setRole(user.role);
     return response.status(204).send();
   } catch (error: any) {
     switch (error.code) {

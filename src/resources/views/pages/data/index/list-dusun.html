@@ -44,56 +44,58 @@
                     >Tambah Dusun</a
                   >
                 </div>
-                <table id="daftar_dusun" class="display">
-                  <thead>
-                    <tr>
-                      <th>No</th>
-                      <th>Dusun</th>
-                      <th>Nama Kepala Dusun</th>
-                      <th>Luas Wilayah</th>
-                      <th>Jumlah Penduduk</th>
-                      <th>Dibuat</th>
-                      <th>Aksi</th>
-                    </tr>
-                  </thead>
-                  <tfoot>
-                    <tr>
-                      <th>No</th>
-                      <th>Dusun</th>
-                      <th>Nama Kepala Dusun</th>
-                      <th>Luas Wilayah</th>
-                      <th>Jumlah Penduduk</th>
-                      <th>Dibuat</th>
-                      <th>Aksi</th>
-                    </tr>
-                  </tfoot>
-                  <tbody>
-                    <% dusun.forEach((val, index)=>{ %>
-                    <tr>
-                      <td><%= index + 1 %></td>
-                      <td><%= val.nama_dusun %></td>
-                      <td><%= val.nama %></td>
-                      <td><%= val.luas_wilayah%></td>
-                      <td><%= val.jumlah_warga %></td>
-                      <td><%= val.create_at %></td>
+                <div class="table-responsive">
+                  <table id="daftar_dusun" class="display">
+                    <thead>
+                      <tr>
+                        <th>No</th>
+                        <th>Dusun</th>
+                        <th>Nama Kepala Dusun</th>
+                        <th>Luas Wilayah</th>
+                        <th>Jumlah Penduduk</th>
+                        <th>Dibuat</th>
+                        <th>Aksi</th>
+                      </tr>
+                    </thead>
+                    <tfoot>
+                      <tr>
+                        <th>No</th>
+                        <th>Dusun</th>
+                        <th>Nama Kepala Dusun</th>
+                        <th>Luas Wilayah</th>
+                        <th>Jumlah Penduduk</th>
+                        <th>Dibuat</th>
+                        <th>Aksi</th>
+                      </tr>
+                    </tfoot>
+                    <tbody>
+                      <% dusun.forEach((val, index)=>{ %>
+                      <tr>
+                        <td><%= index + 1 %></td>
+                        <td><%= val.nama_dusun %></td>
+                        <td><%= val.nama %></td>
+                        <td><%= val.luas_wilayah%></td>
+                        <td><%= val.jumlah_warga %></td>
+                        <td><%= val.create_at %></td>
 
-                      <td>
-                        <a
-                          href="/dusun/<%= val.dusun_id %>/edit"
-                          class="btn btn-warning"
-                          >Edit</a
-                        >
-                        <button
-                          class="btn btn-danger"
-                          onclick="removeDusun('<%= val.dusun_id %>')"
-                        >
-                          Hapus
-                        </button>
-                      </td>
-                    </tr>
-                    <%}) %>
-                  </tbody>
-                </table>
+                        <td>
+                          <a
+                            href="/dusun/<%= val.dusun_id %>/edit"
+                            class="btn btn-primary"
+                            >Lihat</a
+                          >
+                          <button
+                            class="btn btn-danger"
+                            onclick="removeDusun('<%= val.dusun_id %>')"
+                          >
+                            Hapus
+                          </button>
+                        </td>
+                      </tr>
+                      <%}) %>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>
@@ -107,6 +109,7 @@
     <script>
       new DataTable("#daftar_dusun", {
         columnDefs: [{ targets: "_all", className: "dt-right" }],
+        // scrollX: true,
       });
       function removeDusun(id) {
         axios

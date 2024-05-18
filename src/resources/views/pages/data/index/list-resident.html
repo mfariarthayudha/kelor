@@ -43,57 +43,59 @@
                     <i data-feather="plus" class="me-2"></i>Tambah Warga</a
                   >
                 </div>
-                <table id="daftar_warga" class="display">
-                  <thead>
-                    <tr>
-                      <th>No</th>
-                      <th>NIK</th>
-                      <th>Nama</th>
-                      <th>Tanggal Lahir</th>
-                      <th>Jenis Kelamin</th>
-                      <th>Pekerjaan</th>
-                      <th>Aksi</th>
-                    </tr>
-                  </thead>
-                  <tfoot>
-                    <tr>
-                      <th>No</th>
-                      <th>NIK</th>
-                      <th>Nama</th>
-                      <th>Tanggal Lahir</th>
-                      <th>Jenis Kelamin</th>
-                      <th>Pekerjaan</th>
-                      <th>Aksi</th>
-                    </tr>
-                  </tfoot>
-                  <tbody>
-                    <% resident.forEach((val, index)=>{ %>
-                    <tr>
-                      <td><%= index + 1 %></td>
-                      <td><%= val.nik %></td>
-                      <td><%= val.nama %></td>
-                      <td><%= val.tanggal_lahir %></td>
-                      <td><%= val.jenis_kelamin %></td>
-                      <td><%= val.pekerjaan %></td>
+                <div class="table-responsive">
+                  <table id="daftar_warga" class="display">
+                    <thead>
+                      <tr>
+                        <th>No</th>
+                        <th>NIK</th>
+                        <th>Nama</th>
+                        <th>Tanggal Lahir</th>
+                        <th>Jenis Kelamin</th>
+                        <th>Pekerjaan</th>
+                        <th>Aksi</th>
+                      </tr>
+                    </thead>
+                    <tfoot>
+                      <tr>
+                        <th>No</th>
+                        <th>NIK</th>
+                        <th>Nama</th>
+                        <th>Tanggal Lahir</th>
+                        <th>Jenis Kelamin</th>
+                        <th>Pekerjaan</th>
+                        <th>Aksi</th>
+                      </tr>
+                    </tfoot>
+                    <tbody>
+                      <% resident.forEach((val, index)=>{ %>
+                      <tr>
+                        <td><%= index + 1 %></td>
+                        <td><%= val.nik %></td>
+                        <td><%= val.nama %></td>
+                        <td><%= val.tanggal_lahir %></td>
+                        <td><%= val.jenis_kelamin %></td>
+                        <td><%= val.pekerjaan %></td>
 
-                      <td>
-                        <a
-                          href="/residents/<%= val.nik %>/edit"
-                          class="btn btn-warning"
-                          >Edit</a
-                        >
+                        <td>
+                          <a
+                            href="/residents/<%= val.nik %>/edit"
+                            class="btn btn-primary"
+                            >Lihat</a
+                          >
 
-                        <button
-                          class="btn btn-danger"
-                          onclick="removeResident('<%= val.nik %>')"
-                        >
-                          Hapus
-                        </button>
-                      </td>
-                    </tr>
-                    <%}); %>
-                  </tbody>
-                </table>
+                          <button
+                            class="btn btn-danger"
+                            onclick="removeResident('<%= val.nik %>')"
+                          >
+                            Hapus
+                          </button>
+                        </td>
+                      </tr>
+                      <%}); %>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>

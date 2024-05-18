@@ -22,7 +22,7 @@
   </head>
   <body class="nav-fixed">
     <div id="layoutSidenav">
-      <%- include('../../components/sidebars.html'); -%>
+      <%- include('../../components/sidebars.html',{role: role}); -%>
       <div id="layoutSidenav_content" style="top: 0">
         <main>
           <header
@@ -57,7 +57,7 @@
                       Edit Data Keluarga
                     </h1>
                   </div>
-                  <div class="col-12 col-xl-auto mb-3">
+                  <div class="col-md-12 col-xl-auto mb-3">
                     <a
                       class="btn btn-sm btn-light text-primary"
                       href="/families"
@@ -96,15 +96,15 @@
                 <div class="card-body">
                   <div class="mb-3">
                     <div class="row">
-                      <div class="col-9">
+                      <div class="col-md-9">
                         <label class="small mb-1" for="no_kk">No KK :</label>
                       </div>
-                      <div class="col-3">
+                      <div class="col-md-3">
                         <label class="small mb-1" for="status">Status:</label>
                       </div>
                     </div>
                     <div class="row">
-                      <div class="col-9">
+                      <div class="col-md-9">
                         <input
                           class="form-control"
                           id="no_kk"
@@ -113,7 +113,7 @@
                           value="<%= no_kk %>"
                         />
                       </div>
-                      <div class="col-3">
+                      <div class="col-md-3">
                         <div class="m-2">
                           <input
                             class="form-check-input"
@@ -139,7 +139,7 @@
                   </div>
                   <div class="mb-3">
                     <div class="row">
-                      <div class="col-3">
+                      <div class="col-md-3">
                         <label class="small mb-1" for="dusun">Dusun </label>
                         <select
                           class="form-select"
@@ -148,7 +148,7 @@
                         ></select>
                       </div>
 
-                      <div class="col-3">
+                      <div class="col-md-3">
                         <p id="rw-info" class="bg-warning" hidden>
                           *Pilih dusun
                         </p>
@@ -160,7 +160,7 @@
                         ></select>
                       </div>
 
-                      <div class="col-3">
+                      <div class="col-md-3">
                         <p id="dusun-info" class="bg-warning" hidden>
                           *Pilih rw
                         </p>
@@ -171,7 +171,7 @@
                           id="rt"
                         ></select>
                       </div>
-                      <div class="col-3">
+                      <div class="col-md-3">
                         <label class="small mb-1" for="kode_pos"
                           >Kode Pos
                         </label>
@@ -192,37 +192,38 @@
                       >Tambah</a
                     >
                   </div>
-                  <table class="table table-hover">
-                    <thead class="table-light">
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Nama</th>
-                        <th scope="col">NIK</th>
-                        <th scope="col">Status hubungan keluarga</th>
-                        <th scope="col">Aksi</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <% member.forEach((val, index)=>{ %>
-                      <tr>
-                        <td><%= index + 1 %></td>
-                        <td><%= val.nama %></td>
-                        <td><%= val.nik %></td>
-                        <td><%= val.status_keluarga %></td>
-                        <td>
-                          <a
-                            class="btn btn-warning"
-                            href="/residents/<%= val.nik %>/edit"
-                          >
-                            Edit
-                          </a>
-                        </td>
-                      </tr>
+                  <div class="table-responsive-md">
+                    <table class="table table-hover">
+                      <thead class="table-light">
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">Nama</th>
+                          <th scope="col">NIK</th>
+                          <th scope="col">Status hubungan keluarga</th>
+                          <th scope="col">Aksi</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% member.forEach((val, index)=>{ %>
+                        <tr>
+                          <td><%= index + 1 %></td>
+                          <td><%= val.nama %></td>
+                          <td><%= val.nik %></td>
+                          <td><%= val.status_keluarga %></td>
+                          <td>
+                            <a
+                              class="btn btn-warning"
+                              href="/residents/<%= val.nik %>/edit"
+                            >
+                              Edit
+                            </a>
+                          </td>
+                        </tr>
 
-                      <%}) %>
-                    </tbody>
-                  </table>
-
+                        <%}) %>
+                      </tbody>
+                    </table>
+                  </div>
                   <div
                     class="d-flex align-items-center justify-content-between mt-4 mb-0"
                   >
@@ -339,7 +340,6 @@
                 resError = error.response.data.errorMessages;
               }
               Swal.fire({
-                position: "top-end",
                 icon: "error",
                 title: resError,
                 showConfirmButton: true,

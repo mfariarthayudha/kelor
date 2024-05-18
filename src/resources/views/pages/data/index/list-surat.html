@@ -27,7 +27,7 @@
 
   <body class="nav-fixed">
     <div id="layoutSidenav">
-      <%- include('../../components/sidebars.html'); -%>
+      <%- include('../../components/sidebars.html',{role: role}); -%>
       <div id="layoutSidenav_content" style="top: 0">
         <main>
           <!-- Main page content-->
@@ -131,6 +131,7 @@
               return data;
             },
           },
+
           { data: "created_at" },
           {
             data: "document_result_id",
@@ -138,12 +139,15 @@
             render: function (data, type, row) {
               if (type === "display") {
                 btn_ttd = "";
-                if (row["signed"] === 0) {
-                  btn_ttd =
-                    '<button class="btn btn-success"  onclick=signDocument("' +
-                    data +
-                    '") >Tanda Tangan</button>';
+                if ("Kepala Desa" === "<%= role %>") {
+                  if (row["signed"] === 0) {
+                    btn_ttd =
+                      '<button class="btn btn-success"  onclick=signDocument("' +
+                      data +
+                      '") >Tanda Tangan</button>';
+                  }
                 }
+
                 return (
                   '<a class="btn btn-primary me-2" href="/documents/result/' +
                   data +

@@ -21,7 +21,10 @@ application.set("view engine", "html");
 application.set("views", path.join(__dirname, "src/resources/views"));
 
 application.use(express.static(path.join(__dirname, "public")));
-application.use("/photos", express.static(path.join(__dirname, "signature")));
+// application.use(express.static(path.join(__dirname, "signature")));
+export function setRole(role: string) {
+  application.locals.role = role;
+}
 application.use(express.json());
 application.use(bodyParser.urlencoded({ extended: true }));
 application.use(function (req, res, next) {
@@ -32,7 +35,6 @@ application.use(function (req, res, next) {
   next();
 });
 application.use(router);
-
 application.listen(process.env.PORT, () => {
   console.log(`Url : http://${process.env.BASE_URL_LOCAL}:${process.env.PORT}`);
 });

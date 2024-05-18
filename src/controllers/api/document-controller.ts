@@ -475,10 +475,9 @@ export const signDocument = async (
 
         return result[0];
       });
-
     document.content = document.content.replace(
       "(village-chief-signature)",
-      villageChief.signature
+      "(base_url)/signature/" + villageChief.signature
     );
     document.content = document.content.replace(
       "(village-chief-name)",

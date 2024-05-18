@@ -43,59 +43,61 @@
                     <i data-feather="plus" class="me-2"></i>Tambah Keluarga</a
                   >
                 </div>
-                <table id="daftar_keluarga" class="display">
-                  <thead>
-                    <tr>
-                      <th>No</th>
-                      <th>No Kartu Keluarga</th>
-                      <th>Alamat</th>
-                      <th>Dusun</th>
-                      <th>RT/RW</th>
-                      <!-- <th>Status</th> -->
-                      <th>Dibuat</th>
-                      <th>Aksi</th>
-                    </tr>
-                  </thead>
-                  <tfoot>
-                    <tr>
-                      <th>No</th>
-                      <th>No Kartu Keluarga</th>
-                      <th>Alamat</th>
-                      <th>Dusun</th>
-                      <th>RT/RW</th>
-                      <!-- <th>Status</th> -->
-                      <th>Dibuat</th>
-                      <th>Aksi</th>
-                    </tr>
-                  </tfoot>
-                  <tbody>
-                    <% family.forEach((val, index)=>{ %>
-                    <tr>
-                      <td><%= index + 1 %></td>
-                      <td><%= val.no_kk %></td>
-                      <td><%= val.alamat %></td>
-                      <td><%= val.dusun %></td>
-                      <td><%= val.rt %>/<%= val.rw %></td>
+                <div class="table-responsive">
+                  <table id="daftar_keluarga" class="display nowrap">
+                    <thead>
+                      <tr>
+                        <th>No</th>
+                        <th>No Kartu Keluarga</th>
+                        <th>Alamat</th>
+                        <th>Dusun</th>
+                        <th>RT/RW</th>
+                        <!-- <th>Status</th> -->
+                        <th>Dibuat</th>
+                        <th>Aksi</th>
+                      </tr>
+                    </thead>
+                    <tfoot>
+                      <tr>
+                        <th>No</th>
+                        <th>No Kartu Keluarga</th>
+                        <th>Alamat</th>
+                        <th>Dusun</th>
+                        <th>RT/RW</th>
+                        <!-- <th>Status</th> -->
+                        <th>Dibuat</th>
+                        <th>Aksi</th>
+                      </tr>
+                    </tfoot>
+                    <tbody>
+                      <% family.forEach((val, index)=>{ %>
+                      <tr>
+                        <td><%= index + 1 %></td>
+                        <td><%= val.no_kk %></td>
+                        <td><%= val.alamat %></td>
+                        <td><%= val.dusun %></td>
+                        <td><%= val.rt %>/<%= val.rw %></td>
 
-                      <td><%= val.create_at %></td>
-                      <td>
-                        <a
-                          href="/families/<%= val.no_kk %>/edit"
-                          class="btn btn-warning"
-                          >Edit</a
-                        >
+                        <td><%= val.create_at %></td>
+                        <td>
+                          <a
+                            href="/families/<%= val.no_kk %>/edit"
+                            class="btn btn-primary"
+                            >Lihat</a
+                          >
 
-                        <button
-                          class="btn btn-danger"
-                          onclick="removeFamily('<%= val.no_kk %>')"
-                        >
-                          Hapus
-                        </button>
-                      </td>
-                    </tr>
-                    <%}); %>
-                  </tbody>
-                </table>
+                          <button
+                            class="btn btn-danger"
+                            onclick="removeFamily('<%= val.no_kk %>')"
+                          >
+                            Hapus
+                          </button>
+                        </td>
+                      </tr>
+                      <%}); %>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>

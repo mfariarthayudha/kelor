@@ -6,17 +6,22 @@ moment().local();
 moment.locale("id");
 
 export const viewAccount = async (request: Request, response: Response) => {
-  // const user = request.session.user;
+  const userId = request.session.user!.userId;
   const user = await knex("users")
     .select(
       "users.email",
       "users.role",
-      "village_chiefs.fullname",
-      "village_chiefs.signature",
       "users.create_at",
-      "users.update_at"
+      "users.update_at",
+      "village_chiefs.full_name",
+      "village_chiefs.signature"
     )
-    .where("user_id", request.session.user!.userId)
+    .innerJoin(
+      "village_chiefs",
+      "users.village_chief_id",
+      "village_chiefs.village_chief_id"
+    )
+    .where("user_id", userId)
     .then((result: any) => {
       return result.map((user: any) => {
         return {
@@ -27,6 +32,6 @@ export const viewAccount = async (request: Request, response: Response) => {
         };
       });
     });
-
-  return response.render("pages/data/edit/account", { user: user[0] });
+  // console.log("user ", user[0]);
+  return response.render("pages/data/edit/account", user[0]);
 };

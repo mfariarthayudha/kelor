@@ -32,7 +32,7 @@
 
   <body class="nav-fixed">
     <div id="layoutSidenav">
-      <%- include('../../components/sidebars.html'); -%>
+      <%- include('../../components/sidebars.html',{role: role}); -%>
       <div id="layoutSidenav_content" style="top: 0">
         <main>
           <!-- Main page content-->
@@ -45,60 +45,62 @@
                     <i data-feather="plus" class="me-2"></i>Tambah RW</a
                   >
                 </div>
-                <table id="daftar_rw" class="display">
-                  <thead>
-                    <tr>
-                      <th>No</th>
-                      <th>Dusun</th>
-                      <th>RW</th>
-                      <th>Ketua RW</th>
-                      <th>Jumlah Keluarga</th>
-                      <th>Jumlah Penduduk</th>
-                      <th>Dibuat</th>
-                      <th>Aksi</th>
-                    </tr>
-                  </thead>
-                  <tfoot>
-                    <tr>
-                      <th>No</th>
-                      <th>Dusun</th>
-                      <th>RW</th>
-                      <th>Ketua RW</th>
-                      <th>Jumlah Keluarga</th>
-                      <th>Jumlah Penduduk</th>
-                      <th>Dibuat</th>
-                      <th>Aksi</th>
-                    </tr>
-                  </tfoot>
-                  <tbody>
-                    <% rw.forEach((val, index)=>{ %>
-                    <tr>
-                      <td><%= index + 1 %></td>
-                      <td><%= val.nama_dusun %></td>
-                      <td><%= val.no_rw %></td>
-                      <td><%= val.ketua_rw %></td>
-                      <td><%= val.jumlah_keluarga%></td>
-                      <td><%= val.jumlah_warga %></td>
-                      <td><%= val.create_at %></td>
+                <div class="table-responsive">
+                  <table id="daftar_rw" class="display">
+                    <thead>
+                      <tr>
+                        <th>No</th>
+                        <th>Dusun</th>
+                        <th>RW</th>
+                        <th>Ketua RW</th>
+                        <th>Jumlah Keluarga</th>
+                        <th>Jumlah Penduduk</th>
+                        <th>Dibuat</th>
+                        <th>Aksi</th>
+                      </tr>
+                    </thead>
+                    <tfoot>
+                      <tr>
+                        <th>No</th>
+                        <th>Dusun</th>
+                        <th>RW</th>
+                        <th>Ketua RW</th>
+                        <th>Jumlah Keluarga</th>
+                        <th>Jumlah Penduduk</th>
+                        <th>Dibuat</th>
+                        <th>Aksi</th>
+                      </tr>
+                    </tfoot>
+                    <tbody>
+                      <% rw.forEach((val, index)=>{ %>
+                      <tr>
+                        <td><%= index + 1 %></td>
+                        <td><%= val.nama_dusun %></td>
+                        <td><%= val.no_rw %></td>
+                        <td><%= val.ketua_rw %></td>
+                        <td><%= val.jumlah_keluarga%></td>
+                        <td><%= val.jumlah_warga %></td>
+                        <td><%= val.create_at %></td>
 
-                      <td>
-                        <a
-                          href="/rw/<%= val.rw_id %>/edit"
-                          class="btn btn-warning"
-                          >Edit</a
-                        >
+                        <td>
+                          <a
+                            href="/rw/<%= val.rw_id %>/edit"
+                            class="btn btn-primary"
+                            >Lihat</a
+                          >
 
-                        <button
-                          class="btn btn-danger"
-                          onclick="removeRW('<%= val.rw_id %>')"
-                        >
-                          Hapus
-                        </button>
-                      </td>
-                    </tr>
-                    <%}) %>
-                  </tbody>
-                </table>
+                          <button
+                            class="btn btn-danger"
+                            onclick="removeRW('<%= val.rw_id %>')"
+                          >
+                            Hapus
+                          </button>
+                        </td>
+                      </tr>
+                      <%}) %>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>

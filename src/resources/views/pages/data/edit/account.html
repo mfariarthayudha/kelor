@@ -9,8 +9,9 @@
     />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>RW - Kelor</title>
+    <title>Akun - Kelor</title>
     <link href="/sb-admin-pro/css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/image.css" />
     <link rel="icon" type="image/x-icon" href="/kelor/favicon.png" />
     <script
       data-search-pseudo-elements
@@ -25,7 +26,7 @@
   </head>
   <body class="nav-fixed">
     <div id="layoutSidenav">
-      <%- include('../../components/sidebars.html'); -%>
+      <%- include('../../components/sidebars.html',{role: role}); -%>
       <div id="layoutSidenav_content" style="top: 0">
         <main>
           <header
@@ -57,7 +58,7 @@
                           <circle cx="12" cy="7" r="4"></circle>
                         </svg>
                       </div>
-                      Edit User
+                      User
                     </h1>
                   </div>
                   <div class="col-12 col-xl-auto mb-3">
@@ -91,53 +92,56 @@
                 <div class="card mb-4">
                   <div class="card-header">Detail Akun</div>
                   <div class="card-body">
-                    <form>
-                      <div class="mb-3">
-                        <label class="small mb-1" for="nama">Nama</label>
-                        <input
-                          class="form-control"
-                          id="nama"
-                          type="text"
-                          readonly
-                          placeholder="Enter your Nama"
-                          value="<%= username %>"
-                        />
-                      </div>
-                      <div class="mb-3">
-                        <label class="small mb-1" for="inputEmailAddress"
-                          >Email address</label
-                        >
-                        <input
-                          class="form-control"
-                          id="inputEmailAddress"
-                          type="email"
-                          readonly
-                          value="<%= email %>"
-                        />
-                      </div>
+                    <div class="mb-3">
+                      <label class="small mb-1" for="nama">Nama</label>
+                      <input
+                        class="form-control"
+                        id="nama"
+                        type="text"
+                        readonly
+                        value="<%= full_name %>"
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <label class="small mb-1" for="inputEmailAddress"
+                        >Email address</label
+                      >
+                      <input
+                        class="form-control"
+                        id="inputEmailAddress"
+                        type="email"
+                        readonly
+                        value="<%= email %>"
+                      />
+                    </div>
 
-                      <div class="mb-3">
-                        <label class="small mb-1" id="role">Role</label>
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="role"
-                          readonly
-                          value="<%= role %>"
-                        />
-                      </div>
-                      <div class="mt-4">
-                        <p class="text-muted">Awal dibuat : <%= create_at %></p>
-                        <p class="mt-n4 text-muted">
-                          Terakhir diubah : <%= update_at %>
-                        </p>
-                      </div>
-                      <div class="mb-3">
-                        <label class="small mb-1" id="ttd">Tanda Tangan</label>
-                        <img src="<% =signature %>" alt="" srcset="" />
-                      </div>
-                      <!-- Submit button-->
-                    </form>
+                    <div class="mb-3">
+                      <label class="small mb-1" id="role">Role</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="role"
+                        readonly
+                        value="<%= role %>"
+                      />
+                    </div>
+
+                    <div class="mb-3">
+                      <label class="small mb-1" id="ttd">Tanda Tangan</label>
+                      <br />
+                      <img
+                        src="<%= signature %>"
+                        class="img-thumbnail image"
+                        alt="Tanda Tangan"
+                      />
+                    </div>
+                    <div class="mt-4">
+                      <p class="text-muted">Awal dibuat : <%= create_at %></p>
+                      <p class="mt-n4 text-muted">
+                        Terakhir diubah : <%= update_at %>
+                      </p>
+                    </div>
+                    <!-- Submit button-->
                   </div>
                 </div>
               </div>
@@ -152,6 +156,5 @@
       crossorigin="anonymous"
     ></script>
     <script src="/javascript/script.js"></script>
-    <script src="/javascript/scripts.js"></script>
   </body>
 </html>
