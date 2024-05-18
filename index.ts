@@ -12,11 +12,6 @@ import router from "./src/routes/router";
 
 const application = express();
 application.disable("x-powered-by");
-application.use(
-  Helmet({
-    contentSecurityPolicy: false,
-  })
-);
 application.use(Helmet.frameguard({ action: "deny" }));
 application.use(Helmet.xssFilter());
 application.locals.baseUrl = process.env.BASE_URL_LOCAL;

@@ -42,7 +42,11 @@ router.post(
   "/cde25fb3-ad23-463c-863a-a6f068e3bf6b",
   documentController.createSuratkkF101
 );
-router.delete("/:documentResultId", documentController.removeDocumentResult);
+router.delete(
+  "/:documentResultId",
+  checkRole("admin"),
+  documentController.removeDocumentResult
+);
 
 // router.get("/tes", documentController.tesGetDocument);
 export default router;
