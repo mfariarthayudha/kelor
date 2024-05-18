@@ -139,12 +139,13 @@
             render: function (data, type, row) {
               if (type === "display") {
                 btn_ttd = "";
-
-                if (row["signed"] === 0) {
-                  btn_ttd =
-                    '<button class="btn btn-success"  onclick=signDocument("' +
-                    data +
-                    '") >Tanda Tangan</button>';
+                if ("Kepala Desa" === "<%= role %>") {
+                  if (row["signed"] === 0) {
+                    btn_ttd =
+                      '<button class="btn btn-success"  onclick=signDocument("' +
+                      data +
+                      '") >Tanda Tangan</button>';
+                  }
                 }
 
                 return (

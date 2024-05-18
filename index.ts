@@ -11,6 +11,23 @@ dotenv.config({ path: path.join(__dirname, "./.env.kelor") });
 import router from "./src/routes/router";
 
 const application = express();
+application.disable("x-powered-by");
+application.use(
+  Helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: [String(process.env.BASE_URL_ONLINE)],
+        scriptSrc: [
+          String(process.env.BASE_URL_ONLINE),
+          "cdn.jsdelivr.net",
+          "cdnjs.cloudflare.com",
+          "cdn.datatables.net",
+          "code.jquery.com",
+        ],
+      },
+    },
+  })
+);
 application.use(Helmet.frameguard({ action: "deny" }));
 application.use(Helmet.xssFilter());
 application.locals.baseUrl = process.env.BASE_URL_LOCAL;

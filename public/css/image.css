@@ -1,5 +1,5 @@
 .image {
   pointer-events: none;
-  max-width: 20%;
+  width: 20%;
   height: auto;
 }
