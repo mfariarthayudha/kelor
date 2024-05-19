@@ -1,4 +1,4 @@
-@media print {
+@media screen, print {
   * {
     font-family: "Times New Roman", Times, serif;
   }
@@ -25,7 +25,19 @@
     margin-left: 10%;
   }
   body {
+    margin: 0;
+  }
+}
+
+@media screen {
+  body {
     margin: 5%;
-    /* padding-right: 5%; */
+  }
+  html {
+    border: solid black;
+    border-width: thin;
+    margin: 0 auto;
+    width: 216mm;
+    height: 279mm;
   }
 }
