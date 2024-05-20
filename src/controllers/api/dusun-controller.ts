@@ -47,7 +47,7 @@ export const dusunAdd = async (request: Request, response: Response) => {
         keterangan: "required|string|max:512",
       }
     );
-    const checkDusun = await knex("Dusun")
+    const checkDusun = await knex("dusun")
       .select("nama_dusun")
       .where("nama_dusun", request.body.nama_dusun)
       .then((res) => {

@@ -44,7 +44,7 @@ router.post(
 );
 router.delete(
   "/:documentResultId",
-  checkRole("admin"),
+  checkRole("Admin"),
   documentController.removeDocumentResult
 );
 
