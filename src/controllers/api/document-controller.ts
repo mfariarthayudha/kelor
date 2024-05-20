@@ -90,7 +90,7 @@ export async function addDocumentType(
         document_type_id: documentTypeId,
         document_type: requestInput.documentType,
         requirements: requirements.join(";"),
-        created_at: currentDatetime,
+        create_at: currentDatetime,
         updated_at: currentDatetime,
       })
       .into("document_types");
@@ -108,7 +108,7 @@ export async function addDocumentType(
         label: inputField.label,
         variable_name: inputField.variableName,
         show_order: index + 1,
-        created_at: currentDatetime,
+        create_at: currentDatetime,
         updated_at: currentDatetime,
       };
     });
@@ -275,7 +275,7 @@ export const getDocument = async (request: Request, response: Response) => {
               "LOWER(document_results.applicant_name) LIKE LOWER(?)",
               [`%${search_value}%`]
             )
-            .orWhereRaw("LOWER(document_results.created_at) LIKE LOWER(?)", [
+            .orWhereRaw("LOWER(document_results.create_at) LIKE LOWER(?)", [
               `%${search_value}%`,
             ]);
         }
@@ -307,7 +307,7 @@ export const getDocument = async (request: Request, response: Response) => {
         "document_types.document_type as document_type",
         "document_results.applicant_name as applicant_name",
         "document_results.signed as signed",
-        "document_results.created_at as created_at"
+        "document_results.create_at as create_at"
       )
       .limit(length)
       .offset(start)
@@ -315,7 +315,7 @@ export const getDocument = async (request: Request, response: Response) => {
         return result.map((document: any) => {
           return {
             ...document,
-            created_at: moment(document.created_at).format(
+            create_at: moment(document.create_at).format(
               "HH:mm <br> DD MMMM YYYY"
             ),
           };
@@ -416,7 +416,7 @@ export const createSuratKeteranganDomisiliUsaha = async (
         kode_surat: false,
         formulir_judul: "SURAT KETERANGAN DOMISILI USAHA",
         nomor_reg: request.body.nomor_reg,
-        created_at: moment().format("DD MMMM YYYY"),
+        create_at: moment().format("DD MMMM YYYY"),
       },
       async (error, html) => {
         if (error) throw error;
@@ -431,7 +431,7 @@ export const createSuratKeteranganDomisiliUsaha = async (
           applicant_name: request.body.nama,
           content: html.replace(/(\r|\n)/g, ""),
           signed: false,
-          created_at: moment().format("YYYY-MM-DD HH:mm:ss"),
+          create_at: moment().format("YYYY-MM-DD HH:mm:ss"),
         });
 
         return response.status(201).send({ documentId: documentId });
@@ -735,7 +735,7 @@ export const createSuratkkF101 = async (
           applicant_name: kepala_keluarga,
           content: html.replace(/(\r|\n)/g, ""),
           signed: false,
-          created_at: moment().format("YYYY-MM-DD HH:mm:ss"),
+          create_at: moment().format("YYYY-MM-DD HH:mm:ss"),
         });
         return response.status(201).send({ documentId: documentId });
       }
@@ -839,7 +839,7 @@ export const createSuratPernyataanSKU = async (
           jenis_usaha: request.body.jenis_usaha,
           rt_rw: rt_rw,
           ketua_rt: ketua_rt,
-          created_at: moment().format("DD MMM YYYY"),
+          create_at: moment().format("DD MMM YYYY"),
         },
         async (error, html) => {
           if (error) throw error;
@@ -853,7 +853,7 @@ export const createSuratPernyataanSKU = async (
             nik: request.body.nik,
             content: html.replace(/(\r|\n)/g, ""),
             signed: true,
-            created_at: moment().format("YYYY-MM-DD HH:mm:ss"),
+            create_at: moment().format("YYYY-MM-DD HH:mm:ss"),
           });
 
           return response.status(201).send({ documentId: documentId });
@@ -921,7 +921,7 @@ export const createSuratKeteranganUsaha = async (
         alamat: request.body.alamat,
         alamat_usaha: request.body.lokasi_usaha,
         jenis_usaha: request.body.jenis_usaha,
-        created_at: moment().format("DD MMMM YYYY"),
+        create_at: moment().format("DD MMMM YYYY"),
       },
       async (error, html) => {
         if (error) throw error;
@@ -934,7 +934,7 @@ export const createSuratKeteranganUsaha = async (
           applicant_name: request.body.nama,
           content: html.replace(/(\r|\n)/g, ""),
           signed: true,
-          created_at: moment().format("YYYY-MM-DD HH:mm:ss"),
+          create_at: moment().format("YYYY-MM-DD HH:mm:ss"),
         });
 
         return response.status(201).send({ documentId: documentId });
@@ -1035,7 +1035,7 @@ export const createSKKMRumahSakit = async (
         alamat: request.body.alamat,
         nik: request.body.nik,
         hari_tanggal_keterangan: tanggal_surat_keterangan,
-        created_at: moment().format("DD MMM YYYY"),
+        create_at: moment().format("DD MMM YYYY"),
       },
       async (error, html) => {
         if (error) throw error;
@@ -1050,7 +1050,7 @@ export const createSKKMRumahSakit = async (
           applicant_name: request.body.nama,
           content: html.replace(/(\r|\n)/g, ""),
           signed: false,
-          created_at: moment().format("YYYY-MM-DD HH:mm:ss"),
+          create_at: moment().format("YYYY-MM-DD HH:mm:ss"),
         });
 
         return response.status(201).send({ documentId: documentId });
@@ -1132,7 +1132,7 @@ export const createSKKMSekolah = async (
         status_agama: request.body.status_keluarga + "/" + request.body.agama,
         kode_surat: false,
         formulir_judul: request.body.formulir_judul,
-        created_at: moment().format("DD MMMM YYYY"),
+        create_at: moment().format("DD MMMM YYYY"),
       },
       async (error, html) => {
         if (error) throw error;
@@ -1147,7 +1147,7 @@ export const createSKKMSekolah = async (
           applicant_name: request.body.nama,
           content: html.replace(/(\r|\n)/g, ""),
           signed: false,
-          created_at: moment().format("YYYY-MM-DD HH:mm:ss"),
+          create_at: moment().format("YYYY-MM-DD HH:mm:ss"),
         });
 
         return response.status(201).send({ documentId: documentId });

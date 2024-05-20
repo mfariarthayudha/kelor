@@ -122,17 +122,22 @@ function checkNik(nik) {
       });
     });
 }
-document.getElementById("nik").addEventListener("input", (event) => {
-  if (document.getElementById("warga_cipayung").checked) {
-    if (event.target.value != "") {
-      getResidentName(
-        event.target.value, //value nik
-        "nikList" // idlist
-      );
-      document.getElementById("nik").addEventListener("change", (event) => {
-        checkNik(event.target.value); //value nik
-        event.target.blur();
-      });
+document.getElementById("nik").addEventListener(
+  "input",
+  debounce((event) => {
+    if (document.getElementById("warga_cipayung").checked) {
+      if (event.target.value != "") {
+        getResidentName(
+          event.target.value, // value nik
+          "nikList" // idlist
+        );
+      }
     }
-  }
+  }, 300)
+); // Adjust the delay as needed (300ms in this case)
+
+// Add change event listener
+document.getElementById("nik").addEventListener("change", (event) => {
+  checkNik(event.target.value); // value nik
+  event.target.blur();
 });

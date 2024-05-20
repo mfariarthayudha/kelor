@@ -6,6 +6,7 @@
       <%- include('../../components/sidebars.html',{role: role}); -%>
       <div id="layoutSidenav_content" style="top: 0">
         <main>
+          <%- include('../../components/loading.html'); -%>
           <header
             class="page-header page-header-compact page-header-light border-bottom bg-white mb-4"
           >
@@ -134,7 +135,7 @@
     </div>
     <%- include('../../../layouts/javascript.html') %>
     <script src="/javascript/suratKK.js"></script>
-    <script src="/javascript/listDaerah.js"></script>
+    <script src="/javascript/area/listArea.js"></script>
     <script src="/javascript/familyAdd.js"></script>
     <script>
       function handleEvent(event) {
@@ -185,7 +186,9 @@
         .getElementById("btn-buat-surat")
         .addEventListener("click", (event) => {
           document.getElementById("btn-buat-surat").textContent = "Loading...";
+          loadingInit();
           check_data();
+          loadingDestroy();
         });
     </script>
   </body>

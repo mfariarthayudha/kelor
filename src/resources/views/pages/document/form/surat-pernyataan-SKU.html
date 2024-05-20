@@ -6,6 +6,7 @@
       <%- include('../../components/sidebars.html',{role: role}); -%>
       <div id="layoutSidenav_content" style="top: 0">
         <main>
+          <%- include('../../components/loading.html'); -%>
           <div class="container-xl px-4">
             <div class="row justify-content-center">
               <div class="col-lg-8">
@@ -149,13 +150,6 @@
                         type="submit"
                         class="btn btn-primary"
                       >
-                        <span
-                          id="spinner"
-                          class="spinner spinner-border spinner-border-sm me-2"
-                          role="status"
-                          aria-hidden="true"
-                          hidden="true"
-                        ></span>
                         Buat Surat
                       </button>
                     </div>
@@ -187,8 +181,9 @@
       document
         .querySelector("#submit-form")
         .addEventListener("click", (event) => {
-          event.preventDefault();
+          loadingInit();
 
+          event.preventDefault();
           document.querySelector("#submit-form").innerHTML = "Loading ...";
           axios({
             url: `${baseUrl}/api/documents/eb9ddbbf-d970-4c8f-9c87-800a3761a1d6`,
@@ -243,6 +238,9 @@
                 title: resError,
                 showConfirmButton: true,
               });
+            })
+            .finally(() => {
+              loadingDestroy();
             });
         });
     </script>

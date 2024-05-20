@@ -6,6 +6,7 @@
       <%- include('../../components/sidebars.html',{role: role}); -%>
       <div id="layoutSidenav_content" style="top: 0">
         <main>
+          <%- include('../../components/loading.html'); -%>
           <div class="container-xl px-4">
             <div class="row justify-content-center">
               <div class="col-lg-8">
@@ -304,6 +305,7 @@
         .querySelector("#submit-form")
         .addEventListener("click", (event) => {
           document.querySelector("#submit-form").innerHTML = "Loading ...";
+          loadingInit();
           event.preventDefault();
 
           axios({
@@ -372,6 +374,9 @@
                 title: resError,
                 showConfirmButton: true,
               });
+            })
+            .finally(() => {
+              loadingDestroy();
             });
         });
     </script>

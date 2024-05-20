@@ -1,12 +1,32 @@
 const baseUrl = "http://localhost:3100";
 var res;
+function debounce(func, delay) {
+  let timeoutId;
+  return function (...args) {
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
+    timeoutId = setTimeout(() => {
+      func.apply(this, args);
+    }, delay);
+  };
+}
+function loadingInit() {
+  console.log("loading init");
+  const loadingOverlay = document.getElementById("loading-overlay");
+  loadingOverlay.classList.add("active");
+}
+function loadingDestroy() {
+  const loadingOverlay = document.getElementById("loading-overlay");
+  loadingOverlay.classList.remove("active");
+  console.log("loading destroy");
+}
 function capitalize(text) {
   return text.replace(/\b\w/g, function (char) {
     return char.toUpperCase();
   });
 }
 
-// uppercase only first char
 function capitalizeFirstLetter(text) {
   return text.charAt(0).toUpperCase() + text.slice(1);
 }
@@ -26,12 +46,12 @@ function validate_date(e) {
   }
 }
 
-function setName(idNama, data, nik) {
+function setName(idNama, nik) {
   // search nama in response using nik
   document.getElementById(idNama).focus();
-  for (let i = 0; i < data.length; i++) {
-    if (data[i].nik === nik) {
-      document.getElementById(idNama).value = data[i].nama;
+  for (let i = 0; i < res.length; i++) {
+    if (res[i].nik === nik) {
+      document.getElementById(idNama).value = res[i].nama;
     }
   }
 }

@@ -132,13 +132,14 @@
             },
           },
 
-          { data: "created_at" },
+          { data: "create_at" },
           {
             data: "document_result_id",
             orderable: false,
             render: function (data, type, row) {
               if (type === "display") {
                 btn_ttd = "";
+                btn_remove = "";
                 if ("Kepala Desa" === "<%= role %>") {
                   if (row["signed"] === 0) {
                     btn_ttd =
@@ -146,15 +147,18 @@
                       data +
                       '") >Tanda Tangan</button>';
                   }
+                } else {
+                  btn_remove =
+                    '<button class="btn btn-danger me-2" onclick=removeDocument("' +
+                    data +
+                    '") >Hapus</button>';
                 }
 
                 return (
                   '<a class="btn btn-primary me-2" href="/documents/result/' +
                   data +
                   '"target="_blank">Lihat</a>' +
-                  '<button class="btn btn-danger me-2" onclick=removeDocument("' +
-                  data +
-                  '") >Hapus</button>' +
+                  btn_remove +
                   btn_ttd
                 );
               }

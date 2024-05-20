@@ -1,40 +1,13 @@
 <!DOCTYPE html>
 <html lang="id">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>Warga - Kelor</title>
-    <link href="/sb-admin-pro/css/styles.css" rel="stylesheet" />
+  <%- include('../../../layouts/head.html', {pageTitle : "Warga - Kelor" } )%>
 
-    <link
-      rel="icon"
-      required
-      type="image/x-icon"
-      href="/sb-admin-pro/assets/img/favicon.png"
-    />
-    <script
-      data-search-pseudo-elements
-      defer
-      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/js/all.min.js"
-      crossorigin="anonymous"
-    ></script>
-
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js"
-      crossorigin="anonymous"
-    ></script>
-  </head>
   <body class="nav-fixed">
     <div id="layoutSidenav">
       <%- include('../../components/sidebars.html',{role: role}); -%>
       <div id="layoutSidenav_content" style="top: 0">
         <main>
+          <%- include('../../components/loading.html') -%>
           <header
             class="page-header page-header-compact page-header-light border-bottom bg-white mb-4"
           >
@@ -51,7 +24,7 @@
                       Edit Data Warga
                     </h1>
                   </div>
-                  <div class="col-12 col-xl-auto mb-3">
+                  <div class="col-md-12 col-md-xl-auto mb-3">
                     <a
                       class="btn btn-sm btn-light text-primary"
                       href="/residents"
@@ -78,7 +51,7 @@
                     <form id="form-warga">
                       <div class="mb-3">
                         <div class="row">
-                          <div class="col-6">
+                          <div class="col-md-6">
                             <label class="small mb-1" for="nik">NIK</label
                             ><input
                               class="form-control"
@@ -89,7 +62,7 @@
                               value="<%= nik %>"
                             />
                           </div>
-                          <div class="col-6">
+                          <div class="col-md-6">
                             <label class="small mb-1" for="nama"
                               >Nama Lengkap</label
                             ><input
@@ -114,7 +87,7 @@
                       </div>
                       <div class="mb-3">
                         <div class="row">
-                          <div class="col-3">
+                          <div class="col-md-3">
                             <label class="small mb-1" for="tempat_lahir"
                               >Tempat Lahir </label
                             ><input
@@ -125,7 +98,7 @@
                               value="<%= tempat_lahir %>"
                             />
                           </div>
-                          <div class="col-3">
+                          <div class="col-md-3">
                             <label class="small mb-1" for="tanggal_lahir"
                               >Tgl. lahir</label
                             ><input
@@ -137,7 +110,7 @@
                               value="<%= tanggal_lahir %>"
                             />
                           </div>
-                          <div class="col-3">
+                          <div class="col-md-3">
                             <label for="jenis_kelamin" class="small mb-1"
                               >Jenis Kelamin</label
                             ><select
@@ -152,7 +125,7 @@
                               <option value="Perempuan">Perempuan</option>
                             </select>
                           </div>
-                          <div class="col-3">
+                          <div class="col-md-3">
                             <label for="agama" class="small mb-1">Agama</label
                             ><select name="agama" class="form-select">
                               <option>Pilih Agama:</option>
@@ -168,7 +141,7 @@
                       </div>
                       <div class="mb-3">
                         <div class="row">
-                          <div class="col-3">
+                          <div class="col-md-3">
                             <label class="small mb-1" for="golongan_darah"
                               >Golongan darah </label
                             ><select class="form-select" name="golongan_darah">
@@ -187,7 +160,7 @@
                               <option value="O-">O-</option>
                             </select>
                           </div>
-                          <div class="col-3">
+                          <div class="col-md-3">
                             <label class="small mb-1" for="status_keluarga"
                               >Status hubungan dlm keluarga </label
                             ><select class="form-select" name="status_keluarga">
@@ -206,7 +179,7 @@
                               <option value="Lainnya">Lainnya</option>
                             </select>
                           </div>
-                          <div class="col-3">
+                          <div class="col-md-3">
                             <label class="small mb-1" for="pekerjaan"
                               >Pekerjaan</label
                             ><input
@@ -217,7 +190,7 @@
                               value="<%= pekerjaan %>"
                             />
                           </div>
-                          <div class="col-3">
+                          <div class="col-md-3">
                             <label class="small mb-1" for="pendidikan_terakhir"
                               >Pendidikan terakhir</label
                             >
@@ -260,7 +233,7 @@
                       <h5 class="card-title">Data Surat</h5>
                       <div class="mb-3">
                         <div class="row">
-                          <div class="col-6">
+                          <div class="col-md-6">
                             <label class="small mb-1" for="no_paspor"
                               >No. Paspor </label
                             ><input
@@ -270,7 +243,7 @@
                               value="<%= no_paspor %>"
                             />
                           </div>
-                          <div class="col-6">
+                          <div class="col-md-6">
                             <label
                               class="small mb-1"
                               for="tanggal_berakhir_paspor"
@@ -286,7 +259,7 @@
                       </div>
                       <div class="mb-3">
                         <div class="row">
-                          <div class="col-6">
+                          <div class="col-md-6">
                             <label class="small mb-1" for="akta_lahir"
                               >Akta lahir/Surat lahir </label
                             ><input
@@ -296,7 +269,7 @@
                               value="<%= akta_lahir %>"
                             />
                           </div>
-                          <div class="col-6">
+                          <div class="col-md-6">
                             <label class="small mb-1" for="no_akta_lahir"
                               >Akte kelahiran/Surat Knal lhir
                             </label>
@@ -381,7 +354,7 @@
 
                       <div class="mb-3" id="kawin" hidden>
                         <div class="row">
-                          <div class="col-4">
+                          <div class="col-md-4">
                             <label class="small mb-1" for="no_akta_nikah">
                               No. Akt perkawinan / Buku Nikah </label
                             ><input
@@ -391,7 +364,7 @@
                               value="<%= no_akta_nikah %>"
                             />
                           </div>
-                          <div class="col-5">
+                          <div class="col-md-5">
                             <label class="small mb-1" for="akta_nikah"
                               >Akt perkawinan / buku nikah</label
                             ><select name="akta_nikah" class="form-select">
@@ -399,7 +372,7 @@
                               <option value="Ada">Ada</option>
                             </select>
                           </div>
-                          <div class="col-3">
+                          <div class="col-md-3">
                             <label class="small mb-1" for="tanggal_perkawinan"
                               >Tgl perkawinan</label
                             ><input
@@ -413,7 +386,7 @@
                       </div>
                       <div class="mb-3" id="cerai" hidden>
                         <div class="row">
-                          <div class="col-4">
+                          <div class="col-md-4">
                             <label class="small mb-1" for="no_akt_cerai">
                               No. Akt Cerai </label
                             ><input
@@ -423,7 +396,7 @@
                               value="<%= no_akta_cerai %>"
                             />
                           </div>
-                          <div class="col-5">
+                          <div class="col-md-5">
                             <label class="small mb-1" for="akta_cerai"
                               >Akt Cerai / Surat cerai</label
                             >
@@ -432,7 +405,7 @@
                               <option value="Ada">Ada</option>
                             </select>
                           </div>
-                          <div class="col-3">
+                          <div class="col-md-3">
                             <label class="small mb-1" for="tanggal_perceraian"
                               >Tgl perceraian</label
                             ><input
@@ -447,7 +420,7 @@
                       <div class="mb-3">
                         <h5 class="card-title">Data Kelainan</h5>
                         <div class="row">
-                          <div class="col-6">
+                          <div class="col-md-6">
                             <label class="small mb-1" for="penyandang_cacat"
                               >Penyandang Cacat </label
                             ><select
@@ -473,7 +446,7 @@
                               </option>
                             </select>
                           </div>
-                          <div class="col-6">
+                          <div class="col-md-6">
                             <label
                               class="small mb-1"
                               for="kelainan_fisik_mental"
@@ -491,19 +464,19 @@
                       <div class="mb-3">
                         <h5 class="card-title">Data Ayah & Ibu</h5>
                         <div class="row">
-                          <div class="col-6">
+                          <div class="col-md-6">
                             <label class="small mb-1" for="nik_ayah"
                               >NIK Ayah</label
                             >
                           </div>
-                          <div class="col-6">
+                          <div class="col-md-6">
                             <label class="small mb-1" for="nama_ayah"
                               >Nama Ayah</label
                             >
                           </div>
                         </div>
                         <div class="row">
-                          <div class="col-6">
+                          <div class="col-md-6">
                             <input
                               class="form-control"
                               name="nik_ayah"
@@ -512,7 +485,7 @@
                               value="<%= nik_ayah %>"
                             />
                           </div>
-                          <div class="col-6">
+                          <div class="col-md-6">
                             <input
                               class="form-control"
                               name="nama_ayah"
@@ -525,19 +498,19 @@
                       </div>
                       <div class="mb-3">
                         <div class="row">
-                          <div class="col-6">
+                          <div class="col-md-6">
                             <label class="small mb-1" for="nik_ibu"
                               >NIK Ibu</label
                             >
                           </div>
-                          <div class="col-6">
+                          <div class="col-md-6">
                             <label class="small mb-1" for="nama_ibu"
                               >Nama Ibu</label
                             >
                           </div>
                         </div>
                         <div class="row">
-                          <div class="col-6">
+                          <div class="col-md-6">
                             <input
                               class="form-control"
                               name="nik_ibu"
@@ -546,7 +519,7 @@
                               value="<%= nik_ibu %>"
                             />
                           </div>
-                          <div class="col-6">
+                          <div class="col-md-6">
                             <input
                               class="form-control"
                               name="nama_ibu"
@@ -613,12 +586,7 @@
 
       const radioGroup = document.querySelector('[role="group"]');
       const radios = radioGroup.querySelectorAll('[type="radio"]');
-      // const arr_status_pernikahan = [
-      //   "Belum kawin",
-      //   "Kawin",
-      //   "Cerai hidup",
-      //   "Cerai mati",
-      // ];
+
       function changeStatus(selectedValue) {
         // console.log();
         document.querySelector(
@@ -660,6 +628,7 @@
       document
         .querySelector("#button-submit")
         .addEventListener("click", (event) => {
+          loadingInit();
           event.preventDefault();
           document.querySelector("#button-submit").innerHTML = "Loading...";
 
@@ -716,6 +685,9 @@
                 title: resError,
                 showConfirmButton: true,
               });
+            })
+            .finally(() => {
+              loadingDestroy();
             });
         });
     </script>

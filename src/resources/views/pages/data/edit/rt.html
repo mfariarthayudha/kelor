@@ -1,34 +1,13 @@
 <!DOCTYPE html>
 <html lang="id">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>RT - Kelor</title>
-    <link href="/sb-admin-pro/css/styles.css" rel="stylesheet" />
-    <link rel="icon" type="image/x-icon" href="/kelor/favicon.png" />
-    <script
-      data-search-pseudo-elements
-      defer
-      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/js/all.min.js"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js"
-      crossorigin="anonymous"
-    ></script>
-  </head>
+  <%- include('../../../layouts/head.html', {pageTitle : "RT - Kelor" } )%>
 
   <body class="nav-fixed">
     <div id="layoutSidenav">
       <%- include('../../components/sidebars.html',{role: role}); -%>
       <div id="layoutSidenav_content" style="top: 0">
         <main>
+          <%- include('../../components/loading.html') -%>
           <header
             class="page-header page-header-compact page-header-light border-bottom bg-white mb-4"
           >
@@ -211,7 +190,8 @@
       </div>
     </div>
     <%- include('./../../../layouts/javascript.html') %>
-    <script src="/javascript/listDaerah.js"></script>
+    <script src="/javascript/area/listArea.js"></script>
+    <script src="/javascript/area/rt.js"></script>
 
     <script>
       function checkFalsyValue(value) {
@@ -220,24 +200,7 @@
         // Test if the value matches the regex pattern
         return !regexPattern.test(value);
       }
-      document
-        .getElementById("nikKetuaRT")
-        .addEventListener("input", (event) => {
-          if (event.target.value !== "") {
-            getResidentName(
-              event.target.value, //value nik
-              "ketuaRtList" // idlist
-            );
-            document
-              .getElementById("nikKetuaRT")
-              .addEventListener("change", (event) => {
-                currentValue = event.target.value;
-                setName("namaKetuaRT", res, currentValue);
-              });
-          } else {
-            document.getElementById("namaKetuaRT").value = "";
-          }
-        });
+
       window.onload = getDusun("dusun", "<%= dusun_id %>");
       window.onload = getRW("<%= dusun_id %>", "rw", "<%= rw_id %>");
 
@@ -250,6 +213,7 @@
       document
         .querySelector("#button-submit")
         .addEventListener("click", (event) => {
+          loadingInit();
           event.preventDefault();
           const rt_id = "<%= rt_id %>";
           axios({
@@ -306,6 +270,9 @@
                 title: resError,
                 showConfirmButton: true,
               });
+            })
+            .finally(() => {
+              loadingDestroy();
             });
         });
     </script>

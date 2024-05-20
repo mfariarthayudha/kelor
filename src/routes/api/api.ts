@@ -7,6 +7,7 @@ import familyRoute from "./family-route";
 import rtRoute from "./rt-route";
 import rwRoute from "./rw-route";
 import dusunRoute from "./dusun-route";
+import dashboardRoute from "./dashboard-route";
 import mustAuthenticated from "../../middlewares/must-authenticated";
 const router = express.Router();
 
@@ -18,6 +19,7 @@ router.use("/families", familyRoute);
 router.use("/rt", rtRoute);
 router.use("/rw", rwRoute);
 router.use("/dusun", dusunRoute);
+router.use("/dashboard", dashboardRoute);
 
 router.use(
   (error: any, request: Request, response: Response, next: NextFunction) => {

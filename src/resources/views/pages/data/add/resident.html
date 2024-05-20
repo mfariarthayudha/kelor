@@ -1,40 +1,13 @@
 <!DOCTYPE html>
 <html lang="id">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>Warga - Kelor</title>
-    <link href="/sb-admin-pro/css/styles.css" rel="stylesheet" />
+  <%- include('../../../layouts/head.html', {pageTitle : "Warga - Kelor" } )%>
 
-    <link
-      rel="icon"
-      required
-      type="image/x-icon"
-      href="/sb-admin-pro/assets/img/favicon.png"
-    />
-    <script
-      data-search-pseudo-elements
-      defer
-      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/js/all.min.js"
-      crossorigin="anonymous"
-    ></script>
-
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js"
-      crossorigin="anonymous"
-    ></script>
-  </head>
   <body class="nav-fixed">
     <div id="layoutSidenav">
       <%- include('../../components/sidebars.html',{role: role}); -%>
       <div id="layoutSidenav_content" style="top: 0">
         <main>
+          <%- include('../../components/loading.html') -%>
           <header
             class="page-header page-header-compact page-header-light border-bottom bg-white mb-4"
           >
@@ -43,7 +16,7 @@
                 <div
                   class="row align-items-center justify-content-between pt-3"
                 >
-                  <div class="col-auto mb-3">
+                  <div class="col-md-auto mb-3">
                     <h1 class="page-header-title">
                       <div class="page-header-icon">
                         <i data-feather="user"></i>
@@ -51,7 +24,7 @@
                       Tambah Data Warga
                     </h1>
                   </div>
-                  <div class="col-12 col-xl-auto mb-3">
+                  <div class="col-md-12 col-xl-auto mb-3">
                     <a
                       class="btn btn-sm btn-light text-primary"
                       href="/residents"
@@ -68,523 +41,516 @@
           </header>
           <div class="container-xl px-4">
             <div class="row justify-content-center">
-              <div class="col">
-                <div class="card shadow-lg border-0 rounded-lg mt-5">
-                  <div class="card-header justify-content-center">
-                    <h3 class="fw-light my-4">Data Warga</h3>
+              <div class="card shadow-lg border-0 rounded-lg mt-5">
+                <div class="card-header justify-content-center">
+                  <h3 class="fw-light my-4">Data Warga</h3>
+                </div>
+                <div class="card-body">
+                  <div class="mb-3">
+                    <div class="row">
+                      <label class="small mb-1" for="no_kk"
+                        >No Kartu Keluarga:</label
+                      >
+                      <div class="col-md-9">
+                        <input
+                          class="form-control"
+                          id="no_kk"
+                          type="number"
+                          placeholder="Masukkan No Kartu Keluarga"
+                        />
+                      </div>
+
+                      <div class="col-md-3">
+                        <button
+                          class="btn btn-warning"
+                          id="btn-check-noKK"
+                          type="submit"
+                        >
+                          Check
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                  <div class="card-body">
+                  <form id="form-warga">
                     <div class="mb-3">
                       <div class="row">
-                        <label class="small mb-1" for="no_kk"
-                          >No Kartu Keluarga:</label
-                        >
-                        <div class="col-9">
-                          <input
+                        <div class="col-md-6">
+                          <label class="small mb-1" for="nik">NIK</label
+                          ><input
                             class="form-control"
-                            id="no_kk"
+                            id="nik"
+                            required
                             type="number"
-                            placeholder="Masukkan No Kartu Keluarga"
+                            placeholder="cth :"
                           />
                         </div>
-
-                        <div class="col-3">
-                          <button
-                            class="btn btn-warning"
-                            id="btn-check-noKK"
-                            type="submit"
-                          >
-                            Check
-                          </button>
+                        <div class="col-md-6">
+                          <label class="small mb-1" for="nama"
+                            >Nama Lengkap</label
+                          ><input
+                            class="form-control"
+                            id="nama"
+                            required
+                            type="text"
+                            placeholder="cth :"
+                          />
                         </div>
                       </div>
                     </div>
-                    <form id="form-warga">
-                      <div class="mb-3">
-                        <div class="row">
-                          <div class="col-6">
-                            <label class="small mb-1" for="nik">NIK</label
-                            ><input
-                              class="form-control"
-                              id="nik"
-                              required
-                              type="number"
-                              placeholder="cth :"
-                            />
-                          </div>
-                          <div class="col-6">
-                            <label class="small mb-1" for="nama"
-                              >Nama Lengkap</label
-                            ><input
-                              class="form-control"
-                              id="nama"
-                              required
-                              type="text"
-                              placeholder="cth :"
-                            />
-                          </div>
+                    <div class="mb-3">
+                      <label class="small mb-1" for="alamat_sebelum"
+                        >Alamat sebelumnya</label
+                      ><input
+                        class="form-control"
+                        id="alamat_sebelumnya"
+                        required
+                        type="text"
+                        placeholder="cth :"
+                      />
+                    </div>
+                    <div class="mb-3">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <label class="small mb-1" for="tempat_lahir"
+                            >Tempat Lahir </label
+                          ><input
+                            class="form-control"
+                            id="tempat_lahir"
+                            required
+                            type="text"
+                            placeholder="cth :"
+                          />
+                        </div>
+                        <div class="col-md-3">
+                          <label class="small mb-1" for="tanggal_lahir"
+                            >Tgl. lahir</label
+                          ><input
+                            class="form-control"
+                            id="tanggal_lahir"
+                            required
+                            type="date"
+                            onchange="validate_date(this)"
+                            placeholder="cth :"
+                          />
+                        </div>
+                        <div class="col-md-3">
+                          <label for="jenis_kelamin" class="small mb-1"
+                            >Jenis Kelamin</label
+                          ><select
+                            id="jenis_kelamin"
+                            class="form-select"
+                            aria-label="Default select example"
+                          >
+                            <option selected disabled>
+                              Pilih Jenis Kelamin:
+                            </option>
+                            <option value="Laki-laki">Laki - laki</option>
+                            <option value="Perempuan">Perempuan</option>
+                          </select>
+                        </div>
+                        <div class="col-md-3">
+                          <label for="agama" class="small mb-1">Agama</label
+                          ><select id="agama" class="form-select">
+                            <option>Pilih Agama:</option>
+                            <option value="Islam">Islam</option>
+                            <option value="Kristen">Kristen</option>
+                            <option value="Katolik">Katolik</option>
+                            <option value="Hindu">Hindu</option>
+                            <option value="Buddha">Buddha</option>
+                            <option value="Konghucu">Konghucu</option>
+                          </select>
                         </div>
                       </div>
-                      <div class="mb-3">
-                        <label class="small mb-1" for="alamat_sebelum"
-                          >Alamat sebelumnya</label
-                        ><input
-                          class="form-control"
-                          id="alamat_sebelumnya"
-                          required
-                          type="text"
-                          placeholder="cth :"
-                        />
-                      </div>
-                      <div class="mb-3">
-                        <div class="row">
-                          <div class="col-3">
-                            <label class="small mb-1" for="tempat_lahir"
-                              >Tempat Lahir </label
-                            ><input
-                              class="form-control"
-                              id="tempat_lahir"
-                              required
-                              type="text"
-                              placeholder="cth :"
-                            />
-                          </div>
-                          <div class="col-3">
-                            <label class="small mb-1" for="tanggal_lahir"
-                              >Tgl. lahir</label
-                            ><input
-                              class="form-control"
-                              id="tanggal_lahir"
-                              required
-                              type="date"
-                              onchange="validate_date(this)"
-                              placeholder="cth :"
-                            />
-                          </div>
-                          <div class="col-3">
-                            <label for="jenis_kelamin" class="small mb-1"
-                              >Jenis Kelamin</label
-                            ><select
-                              id="jenis_kelamin"
-                              class="form-select"
-                              aria-label="Default select example"
+                    </div>
+                    <div class="mb-3">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <label class="small mb-1" for="golongan_darah"
+                            >Golongan darah
+                          </label>
+                          <select id="golongan_darah" class="form-select">
+                            <option value="-">-</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="AB">AB</option>
+                            <option value="O">O</option>
+                            <option value="A+">A+</option>
+                            <option value="A-">A-</option>
+                            <option value="B+">B+</option>
+                            <option value="B-">B-</option>
+                            <option value="AB+">AB+</option>
+                            <option value="AB-">AB-</option>
+                            <option value="O+">O+</option>
+                            <option value="O-">O-</option>
+                          </select>
+                        </div>
+                        <div class="col-md-3">
+                          <label class="small mb-1" for="status_keluarga"
+                            >Status hubungan dlm keluarga </label
+                          ><select class="form-select" id="status_keluarga">
+                            <option value="Kepala Keluarga">
+                              Kepala Keluarga
+                            </option>
+                            <option value="Suami">Suami</option>
+                            <option value="Istri">Istri</option>
+                            <option value="Anak">Anak</option>
+                            <option value="Menantu">Menantu</option>
+                            <option value="Cucu">Cucu</option>
+                            <option value="Orangtua">Orangtua</option>
+                            <option value="Mertua">Mertua</option>
+                            <option value="Famili Lain">Famili Lain</option>
+                            <option value="Pembantu">Pembantu</option>
+                            <option value="Lainnya">Lainnya</option>
+                          </select>
+                        </div>
+                        <div class="col-md-3">
+                          <label class="small mb-1" for="pekerjaan"
+                            >Pekerjaan</label
+                          ><input
+                            class="form-control"
+                            id="pekerjaan"
+                            required
+                            type="text"
+                            placeholder="cth :"
+                          />
+                        </div>
+                        <div class="col-md-3">
+                          <label class="small mb-1" for="pendidikan_terakhir"
+                            >Pendidikan terakhir</label
+                          >
+                          <select class="form-select" id="pendidikan_terakhir">
+                            <option value="Tidak / Belum Sekolah">
+                              Tidak / Belum Sekolah
+                            </option>
+                            <option value="Belum Tamat SD / Sederajat">
+                              Belum Tamat SD / Sederajat
+                            </option>
+                            <option value="Tamat SD / Sederajat">
+                              Tamat SD / Sederajat
+                            </option>
+                            <option value="SLTP / Sederajat">
+                              SLTP / Sederajat
+                            </option>
+                            <option value="SLTA / Sederajat">
+                              SLTA / Sederajat
+                            </option>
+                            <option value="Diploma I / II">
+                              Diploma I / II
+                            </option>
+                            <option
+                              value="Akademi / Diploma III / Sarjana Muda"
                             >
-                              <option selected disabled>
-                                Pilih Jenis Kelamin:
-                              </option>
-                              <option value="Laki-laki">Laki - laki</option>
-                              <option value="Perempuan">Perempuan</option>
-                            </select>
-                          </div>
-                          <div class="col-3">
-                            <label for="agama" class="small mb-1">Agama</label
-                            ><select id="agama" class="form-select">
-                              <option>Pilih Agama:</option>
-                              <option value="Islam">Islam</option>
-                              <option value="Kristen">Kristen</option>
-                              <option value="Katolik">Katolik</option>
-                              <option value="Hindu">Hindu</option>
-                              <option value="Buddha">Buddha</option>
-                              <option value="Konghucu">Konghucu</option>
-                            </select>
-                          </div>
+                              Akademi / Diploma III / Sarjana Muda
+                            </option>
+                            <option value="Diploma IV / Strata I">
+                              Diploma IV / Strata I
+                            </option>
+                            <option value="Strata II">Strata II</option>
+                            <option value="Strata III">Strata III</option>
+                          </select>
                         </div>
                       </div>
-                      <div class="mb-3">
-                        <div class="row">
-                          <div class="col-3">
-                            <label class="small mb-1" for="golongan_darah"
-                              >Golongan darah
-                            </label>
-                            <select id="golongan_darah" class="form-select">
-                              <option value="-">-</option>
-                              <option value="A">A</option>
-                              <option value="B">B</option>
-                              <option value="AB">AB</option>
-                              <option value="O">O</option>
-                              <option value="A+">A+</option>
-                              <option value="A-">A-</option>
-                              <option value="B+">B+</option>
-                              <option value="B-">B-</option>
-                              <option value="AB+">AB+</option>
-                              <option value="AB-">AB-</option>
-                              <option value="O+">O+</option>
-                              <option value="O-">O-</option>
-                            </select>
-                          </div>
-                          <div class="col-3">
-                            <label class="small mb-1" for="status_keluarga"
-                              >Status hubungan dlm keluarga </label
-                            ><select class="form-select" id="status_keluarga">
-                              <option value="Kepala Keluarga">
-                                Kepala Keluarga
-                              </option>
-                              <option value="Suami">Suami</option>
-                              <option value="Istri">Istri</option>
-                              <option value="Anak">Anak</option>
-                              <option value="Menantu">Menantu</option>
-                              <option value="Cucu">Cucu</option>
-                              <option value="Orangtua">Orangtua</option>
-                              <option value="Mertua">Mertua</option>
-                              <option value="Famili Lain">Famili Lain</option>
-                              <option value="Pembantu">Pembantu</option>
-                              <option value="Lainnya">Lainnya</option>
-                            </select>
-                          </div>
-                          <div class="col-3">
-                            <label class="small mb-1" for="pekerjaan"
-                              >Pekerjaan</label
-                            ><input
-                              class="form-control"
-                              id="pekerjaan"
-                              required
-                              type="text"
-                              placeholder="cth :"
-                            />
-                          </div>
-                          <div class="col-3">
-                            <label class="small mb-1" for="pendidikan_terakhir"
-                              >Pendidikan terakhir</label
-                            >
-                            <select
-                              class="form-select"
-                              id="pendidikan_terakhir"
-                            >
-                              <option value="Tidak / Belum Sekolah">
-                                Tidak / Belum Sekolah
-                              </option>
-                              <option value="Belum Tamat SD / Sederajat">
-                                Belum Tamat SD / Sederajat
-                              </option>
-                              <option value="Tamat SD / Sederajat">
-                                Tamat SD / Sederajat
-                              </option>
-                              <option value="SLTP / Sederajat">
-                                SLTP / Sederajat
-                              </option>
-                              <option value="SLTA / Sederajat">
-                                SLTA / Sederajat
-                              </option>
-                              <option value="Diploma I / II">
-                                Diploma I / II
-                              </option>
-                              <option
-                                value="Akademi / Diploma III / Sarjana Muda"
-                              >
-                                Akademi / Diploma III / Sarjana Muda
-                              </option>
-                              <option value="Diploma IV / Strata I">
-                                Diploma IV / Strata I
-                              </option>
-                              <option value="Strata II">Strata II</option>
-                              <option value="Strata III">Strata III</option>
-                            </select>
-                          </div>
+                    </div>
+                    <h5 class="card-title">Data Surat</h5>
+                    <div class="mb-3">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <label class="small mb-1" for="no_paspor"
+                            >No. Paspor </label
+                          ><input
+                            class="form-control"
+                            id="no_paspor"
+                            type="text"
+                            placeholder="cth :"
+                          />
+                        </div>
+                        <div class="col-md-6">
+                          <label
+                            class="small mb-1"
+                            for="tanggal_berakhir_paspor"
+                            >Tgl. berakhir Paspor</label
+                          ><input
+                            class="form-control"
+                            id="tanggal_berakhir_paspor"
+                            type="date"
+                            placeholder="cth :"
+                          />
                         </div>
                       </div>
-                      <h5 class="card-title">Data Surat</h5>
-                      <div class="mb-3">
-                        <div class="row">
-                          <div class="col-6">
-                            <label class="small mb-1" for="no_paspor"
-                              >No. Paspor </label
-                            ><input
-                              class="form-control"
-                              id="no_paspor"
-                              type="text"
-                              placeholder="cth :"
-                            />
-                          </div>
-                          <div class="col-6">
-                            <label
-                              class="small mb-1"
-                              for="tanggal_berakhir_paspor"
-                              >Tgl. berakhir Paspor</label
-                            ><input
-                              class="form-control"
-                              id="tanggal_berakhir_paspor"
-                              type="date"
-                              placeholder="cth :"
-                            />
-                          </div>
+                    </div>
+                    <div class="mb-3">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <label class="small mb-1" for="akta_lahir"
+                            >Akta lahir/Surat lahir </label
+                          ><input
+                            class="form-control"
+                            id="akta_lahir"
+                            type="text"
+                            placeholder="cth :"
+                          />
+                        </div>
+                        <div class="col-md-6">
+                          <label class="small mb-1" for="no_akte"
+                            >Akte kelahiran/Surat Knal lhir
+                          </label>
+                          <select
+                            name="no_akta_lahir"
+                            id="no_akta_lahir"
+                            class="form-select"
+                          >
+                            <option value="Tidak Ada">Tidak Ada</option>
+                            <option value="Ada">Ada</option>
+                          </select>
                         </div>
                       </div>
-                      <div class="mb-3">
-                        <div class="row">
-                          <div class="col-6">
-                            <label class="small mb-1" for="akta_lahir"
-                              >Akta lahir/Surat lahir </label
-                            ><input
-                              class="form-control"
-                              id="akta_lahir"
-                              type="text"
-                              placeholder="cth :"
-                            />
-                          </div>
-                          <div class="col-6">
-                            <label class="small mb-1" for="no_akte"
-                              >Akte kelahiran/Surat Knal lhir
-                            </label>
-                            <select
-                              name="no_akta_lahir"
-                              id="no_akta_lahir"
-                              class="form-select"
-                            >
-                              <option value="Tidak Ada">Tidak Ada</option>
-                              <option value="Ada">Ada</option>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
+                    </div>
 
-                      <h5 class="card-title">Data Status pernikahan</h5>
+                    <h5 class="card-title">Data Status pernikahan</h5>
 
-                      <div class="mb-3">
-                        <div
-                          class="btn-group d-flex justify-content-evenly"
-                          role="group"
-                          aria-label="Basic radio toggle button group"
-                        >
-                          <div>
-                            <input
-                              type="radio"
-                              class="form-check-input"
-                              name="status_pernikahan"
-                              value="Belum kawin"
-                              autocomplete="off"
-                              checked
-                            />
-                            <label class="form-check-label" for="belumKawin"
-                              >Belum kawin</label
-                            >
-                          </div>
-                          <div>
-                            <input
-                              type="radio"
-                              class="form-check-input"
-                              name="status_pernikahan"
-                              value="Kawin"
-                              autocomplete="off"
-                            />
-                            <label class="form-check-label" for="kawin"
-                              >Kawin</label
-                            >
-                          </div>
-
-                          <div>
-                            <input
-                              type="radio"
-                              class="form-check-input"
-                              name="status_pernikahan"
-                              value="Cerai hidup"
-                              autocomplete="off"
-                            />
-                            <label class="form-check-label" for="ceraiHidup"
-                              >Cerai hidup</label
-                            >
-                          </div>
-                          <div>
-                            <input
-                              type="radio"
-                              class="form-check-input"
-                              name="status_pernikahan"
-                              value="Cerai mati"
-                              autocomplete="off"
-                            />
-                            <label class="form-check-label" for="ceraiMati"
-                              >Cerai mati</label
-                            >
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="mb-3" id="kawin" hidden>
-                        <div class="row">
-                          <div class="col-4">
-                            <label class="small mb-1" for="no_akta_nikah">
-                              No. Akt perkawinan / Buku Nikah </label
-                            ><input
-                              class="form-control"
-                              id="no_akta_nikah"
-                              type="text"
-                              placeholder="cth :"
-                            />
-                          </div>
-                          <div class="col-5">
-                            <label class="small mb-1" for="akta_nikah"
-                              >Akt perkawinan / buku nikah</label
-                            >
-                            <select class="form-select" id="akta_nikah">
-                              <option value="Tidak Ada">Tidak Ada</option>
-                              <option value="Ada">Ada</option>
-                            </select>
-                          </div>
-                          <div class="col-3">
-                            <label class="small mb-1" for="tanggal_perkawinan"
-                              >Tgl perkawinan</label
-                            ><input
-                              class="form-control"
-                              id="tanggal_perkawinan"
-                              onchange="validate_date(this)"
-                              type="date"
-                              placeholder="cth :"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <div class="mb-3" id="cerai" hidden>
-                        <div class="row">
-                          <div class="col-4">
-                            <label class="small mb-1" for="no_akt_cerai">
-                              No. Akt Cerai </label
-                            ><input
-                              class="form-control"
-                              id="no_akt_cerai"
-                              type="text"
-                              placeholder="cth :"
-                            />
-                          </div>
-                          <div class="col-5">
-                            <label class="small mb-1" for="akta_cerai"
-                              >Akt Cerai / Surat cerai</label
-                            >
-                            <select id="akta_cerai" class="form-select">
-                              <option value="Tidak Ada">Tidak Ada</option>
-                              <option value="Ada">Ada</option>
-                            </select>
-                          </div>
-                          <div class="col-3">
-                            <label class="small mb-1" for="tanggal_perceraian"
-                              >Tgl perceraian</label
-                            ><input
-                              class="form-control"
-                              id="tanggal_perceraian"
-                              onchange="validate_date(this)"
-                              type="date"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <div class="mb-3">
-                        <h5 class="card-title">Data Kelainan</h5>
-                        <div class="row">
-                          <div class="col-6">
-                            <label class="small mb-1" for="penyandang_cacat"
-                              >Penyandang Cacat </label
-                            ><select id="penyandang_cacat" class="form-select">
-                              <option value="Tidak Ada">Tidak Ada</option>
-                              <option value="Cacat Fisik">Cacat Fisik</option>
-                              <option value="Cacat Netra/Buta">
-                                Cacat Netra/Buta
-                              </option>
-                              <option value="Cacat Rungu/Wicara">
-                                Cacat Rungu/Wicara
-                              </option>
-                              <option value="Cacat Mental/Jiwa">
-                                Cacat Mental/Jiwa
-                              </option>
-                              <option value="Cacat Fisik dan Mental">
-                                Cacat Fisik dan Mental
-                              </option>
-                              <option value="Cacat Lainnya">
-                                Cacat Lainnya
-                              </option>
-                            </select>
-                          </div>
-                          <div class="col-6">
-                            <label class="small mb-1" for="kelainan_fisik"
-                              >Kelainan Fisik & Mental </label
-                            ><select id="kelainan_fisik" class="form-select">
-                              <option value="Tidak Ada">Tidak Ada</option>
-                              <option value="Ada">Ada</option>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="mb-3">
-                        <h5 class="card-title">Data Ayah & Ibu</h5>
-                        <div class="row">
-                          <div class="col-6">
-                            <label class="small mb-1" for="nik_ayah"
-                              >NIK Ayah</label
-                            >
-                          </div>
-                          <div class="col-6">
-                            <label class="small mb-1" for="nama_ayah"
-                              >Nama Ayah</label
-                            >
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-6">
-                            <input
-                              class="form-control"
-                              id="nik_ayah"
-                              required
-                              type="number"
-                              placeholder="cth :"
-                            />
-                          </div>
-                          <div class="col-6">
-                            <input
-                              class="form-control"
-                              id="nama_ayah"
-                              required
-                              type="text"
-                              placeholder="cth :"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <div class="mb-3">
-                        <div class="row">
-                          <div class="col-6">
-                            <label class="small mb-1" for="nik_ibu"
-                              >NIK Ibu</label
-                            >
-                          </div>
-                          <div class="col-6">
-                            <label class="small mb-1" for="nama_ibu"
-                              >Nama Ibu</label
-                            >
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-6">
-                            <input
-                              class="form-control"
-                              id="nik_ibu"
-                              required
-                              type="number"
-                              placeholder="cth :"
-                            />
-                          </div>
-                          <div class="col-6">
-                            <input
-                              class="form-control"
-                              id="nama_ibu"
-                              required
-                              type="text"
-                              placeholder="cth :"
-                            />
-                          </div>
-                        </div>
-                      </div>
-
+                    <div class="mb-3">
                       <div
-                        class="d-flex align-items-center justify-content-between mt-4 mb-0"
+                        class="btn-group d-flex justify-content-evenly"
+                        role="group"
+                        aria-label="Basic radio toggle button group"
                       >
-                        <button
-                          required
-                          type="submit"
-                          id="button-submit"
-                          class="btn btn-primary"
-                        >
-                          Tambah
-                        </button>
+                        <div>
+                          <input
+                            type="radio"
+                            class="form-check-input"
+                            name="status_pernikahan"
+                            value="Belum kawin"
+                            autocomplete="off"
+                            checked
+                          />
+                          <label class="form-check-label" for="belumKawin"
+                            >Belum kawin</label
+                          >
+                        </div>
+                        <div>
+                          <input
+                            type="radio"
+                            class="form-check-input"
+                            name="status_pernikahan"
+                            value="Kawin"
+                            autocomplete="off"
+                          />
+                          <label class="form-check-label" for="kawin"
+                            >Kawin</label
+                          >
+                        </div>
+
+                        <div>
+                          <input
+                            type="radio"
+                            class="form-check-input"
+                            name="status_pernikahan"
+                            value="Cerai hidup"
+                            autocomplete="off"
+                          />
+                          <label class="form-check-label" for="ceraiHidup"
+                            >Cerai hidup</label
+                          >
+                        </div>
+                        <div>
+                          <input
+                            type="radio"
+                            class="form-check-input"
+                            name="status_pernikahan"
+                            value="Cerai mati"
+                            autocomplete="off"
+                          />
+                          <label class="form-check-label" for="ceraiMati"
+                            >Cerai mati</label
+                          >
+                        </div>
                       </div>
-                    </form>
-                  </div>
+                    </div>
+
+                    <div class="mb-3" id="kawin" hidden>
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label class="small mb-1" for="no_akta_nikah">
+                            No. Akt perkawinan / Buku Nikah </label
+                          ><input
+                            class="form-control"
+                            id="no_akta_nikah"
+                            type="text"
+                            placeholder="cth :"
+                          />
+                        </div>
+                        <div class="col-md-5">
+                          <label class="small mb-1" for="akta_nikah"
+                            >Akt perkawinan / buku nikah</label
+                          >
+                          <select class="form-select" id="akta_nikah">
+                            <option value="Tidak Ada">Tidak Ada</option>
+                            <option value="Ada">Ada</option>
+                          </select>
+                        </div>
+                        <div class="col-md-3">
+                          <label class="small mb-1" for="tanggal_perkawinan"
+                            >Tgl perkawinan</label
+                          ><input
+                            class="form-control"
+                            id="tanggal_perkawinan"
+                            onchange="validate_date(this)"
+                            type="date"
+                            placeholder="cth :"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="mb-3" id="cerai" hidden>
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label class="small mb-1" for="no_akt_cerai">
+                            No. Akt Cerai </label
+                          ><input
+                            class="form-control"
+                            id="no_akt_cerai"
+                            type="text"
+                            placeholder="cth :"
+                          />
+                        </div>
+                        <div class="col-md-5">
+                          <label class="small mb-1" for="akta_cerai"
+                            >Akt Cerai / Surat cerai</label
+                          >
+                          <select id="akta_cerai" class="form-select">
+                            <option value="Tidak Ada">Tidak Ada</option>
+                            <option value="Ada">Ada</option>
+                          </select>
+                        </div>
+                        <div class="col-md-3">
+                          <label class="small mb-1" for="tanggal_perceraian"
+                            >Tgl perceraian</label
+                          ><input
+                            class="form-control"
+                            id="tanggal_perceraian"
+                            onchange="validate_date(this)"
+                            type="date"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      <h5 class="card-title">Data Kelainan</h5>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <label class="small mb-1" for="penyandang_cacat"
+                            >Penyandang Cacat </label
+                          ><select id="penyandang_cacat" class="form-select">
+                            <option value="Tidak Ada">Tidak Ada</option>
+                            <option value="Cacat Fisik">Cacat Fisik</option>
+                            <option value="Cacat Netra/Buta">
+                              Cacat Netra/Buta
+                            </option>
+                            <option value="Cacat Rungu/Wicara">
+                              Cacat Rungu/Wicara
+                            </option>
+                            <option value="Cacat Mental/Jiwa">
+                              Cacat Mental/Jiwa
+                            </option>
+                            <option value="Cacat Fisik dan Mental">
+                              Cacat Fisik dan Mental
+                            </option>
+                            <option value="Cacat Lainnya">Cacat Lainnya</option>
+                          </select>
+                        </div>
+                        <div class="col-md-6">
+                          <label class="small mb-1" for="kelainan_fisik"
+                            >Kelainan Fisik & Mental </label
+                          ><select id="kelainan_fisik" class="form-select">
+                            <option value="Tidak Ada">Tidak Ada</option>
+                            <option value="Ada">Ada</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      <h5 class="card-title">Data Ayah & Ibu</h5>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <label class="small mb-1" for="nik_ayah"
+                            >NIK Ayah</label
+                          >
+                        </div>
+                        <div class="col-md-6">
+                          <label class="small mb-1" for="nama_ayah"
+                            >Nama Ayah</label
+                          >
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <input
+                            class="form-control"
+                            id="nik_ayah"
+                            required
+                            type="number"
+                            placeholder="cth :"
+                          />
+                        </div>
+                        <div class="col-md-6">
+                          <input
+                            class="form-control"
+                            id="nama_ayah"
+                            required
+                            type="text"
+                            placeholder="cth :"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <label class="small mb-1" for="nik_ibu"
+                            >NIK Ibu</label
+                          >
+                        </div>
+                        <div class="col-md-6">
+                          <label class="small mb-1" for="nama_ibu"
+                            >Nama Ibu</label
+                          >
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <input
+                            class="form-control"
+                            id="nik_ibu"
+                            required
+                            type="number"
+                            placeholder="cth :"
+                          />
+                        </div>
+                        <div class="col-md-6">
+                          <input
+                            class="form-control"
+                            id="nama_ibu"
+                            required
+                            type="text"
+                            placeholder="cth :"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div
+                      class="d-flex align-items-center justify-content-between mt-4 mb-0"
+                    >
+                      <button
+                        required
+                        type="submit"
+                        id="button-submit"
+                        class="btn btn-primary"
+                      >
+                        Tambah
+                      </button>
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>
@@ -701,6 +667,7 @@
       document
         .querySelector("#button-submit")
         .addEventListener("click", (event) => {
+          loadingInit();
           event.preventDefault();
           axios({
             url: `${baseUrl}/api/residents/create`,
@@ -786,6 +753,9 @@
                 title: resError,
                 showConfirmButton: true,
               });
+            })
+            .finally(() => {
+              loadingDestroy();
             });
         });
     </script>

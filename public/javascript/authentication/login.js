@@ -13,11 +13,11 @@ const loginButton = document.querySelector("#login-button");
 
 loginForm.addEventListener("submit", async (event) => {
   try {
+    loadingInit();
     event.preventDefault();
 
     usernameInputErrorMessage.textContent = "";
     passwordInputErrorMessage.textContent = "";
-
     await axios({
       url: `${baseUrl}/api/authentication/login`,
       method: "post",
@@ -26,33 +26,37 @@ loginForm.addEventListener("submit", async (event) => {
         username: usernameInput.value,
         password: passwordInput.value,
       },
-    }).catch((error) => {
-      switch (error?.response?.data?.code) {
-        case "validation-fails":
-          Object.entries(error.response.data.errorMessages).forEach(
-            ([field, errorMessage]) => {
-              document.querySelector(
-                `#${field}-input-error-message`
-              ).textContent = errorMessage;
-            }
-          );
+    })
+      .catch((error) => {
+        switch (error?.response?.data?.code) {
+          case "validation-fails":
+            Object.entries(error.response.data.errorMessages).forEach(
+              ([field, errorMessage]) => {
+                document.querySelector(
+                  `#${field}-input-error-message`
+                ).textContent = errorMessage;
+              }
+            );
 
-          break;
+            break;
 
-        case "user-not-found":
-          usernameInputErrorMessage.textContent =
-            "Nama Pengguna tidak ditemukan";
+          case "user-not-found":
+            usernameInputErrorMessage.textContent =
+              "Nama Pengguna tidak ditemukan";
 
-          break;
+            break;
 
-        case "invalid-password":
-          passwordInputErrorMessage.textContent = "Kata Sandi salah";
+          case "invalid-password":
+            passwordInputErrorMessage.textContent = "Kata Sandi salah";
 
-          break;
-      }
+            break;
+        }
 
-      throw "error";
-    });
+        throw "error";
+      })
+      .finally(() => {
+        loadingDestroy();
+      });
 
     window.location.href = `${baseUrl}/`;
   } catch (error) {

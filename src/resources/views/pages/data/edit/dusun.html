@@ -1,34 +1,14 @@
 <!DOCTYPE html>
 <html lang="id">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>Dusun - Kelor</title>
-    <link href="/sb-admin-pro/css/styles.css" rel="stylesheet" />
-    <link rel="icon" type="image/x-icon" href="/kelor/favicon.png" />
-    <script
-      data-search-pseudo-elements
-      defer
-      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/js/all.min.js"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.js"
-      crossorigin="anonymous"
-    ></script>
-  </head>
+  <%- include('../../../layouts/head.html', {pageTitle : "Dusun - Kelor" } )%>
 
   <body class="nav-fixed">
     <div id="layoutSidenav">
       <%- include('../../components/sidebars.html',{role: role}); -%>
       <div id="layoutSidenav_content" style="top: 0">
         <main>
+          <%- include('../../components/loading.html') -%>
+
           <header
             class="page-header page-header-compact page-header-light border-bottom bg-white mb-4"
           >
@@ -190,29 +170,13 @@
       </div>
     </div>
     <%- include('./../../../layouts/javascript.html') %>
-    <script>
-      document
-        .getElementById("nikKepalaDusun")
-        .addEventListener("input", (event) => {
-          if (event.target.value !== "") {
-            getResidentName(
-              event.target.value, //value nik
-              "kepalaDusunList" // idlist
-            );
-            document
-              .getElementById("nikKepalaDusun")
-              .addEventListener("change", (event) => {
-                currentValue = event.target.value;
-                setName("namaKepalaDusun", res, currentValue);
-              });
-          } else {
-            document.getElementById("namaKepalaDusun").value = "";
-          }
-        });
+    <script src="/javascript/area/dusun.js"></script>
 
+    <script>
       document
         .querySelector("#button-submit")
         .addEventListener("click", (event) => {
+          loadingInit();
           event.preventDefault();
           const dusunId = "<%= dusun_id %>";
           axios({
@@ -260,6 +224,9 @@
                 title: resError,
                 showConfirmButton: true,
               });
+            })
+            .finally(() => {
+              loadingDestroy();
             });
         });
     </script>
