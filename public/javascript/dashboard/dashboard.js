@@ -9,10 +9,10 @@ class ButtonHandler {
 
   handleButtonClick(event) {
     const button = event.target;
-    const isActive = button.classList.contains("btn-clicked");
+    const isActive = button.classList.contains("btn-light");
 
     if (isActive) {
-      button.classList.remove("btn-clicked");
+      button.classList.remove("btn-light");
       location.reload();
     } else {
       this.toggleButton(button);
@@ -22,13 +22,13 @@ class ButtonHandler {
   }
 
   toggleButton(button) {
-    button.classList.toggle("btn-clicked");
+    button.classList.toggle("btn-light");
   }
 
   deactivateOtherButtons(activeButton) {
     this.buttons.forEach((button) => {
       if (button !== activeButton) {
-        button.classList.remove("btn-clicked");
+        button.classList.remove("btn-light");
       }
     });
   }
