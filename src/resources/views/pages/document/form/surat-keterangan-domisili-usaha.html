@@ -2,9 +2,10 @@
 <html lang="id">
   <%- include('../../../layouts/head.html', {pageTitle : formulir_judul } ) %>
   <body class="nav-fixed">
+    <%- include('../../components/nav.html'); -%>
     <div id="layoutSidenav">
       <%- include('../../components/sidebars.html',{role: role}); -%>
-      <div id="layoutSidenav_content" style="top: 0">
+      <div id="layoutSidenav_content">
         <main>
           <%- include('../../components/loading.html'); -%>
           <div class="container-xl px-4">
@@ -286,7 +287,7 @@
       </div>
     </div>
     <%- include('../../../layouts/javascript.html') %>
-    <script src="/javascript/surat.js"></script>
+    <script src="/javascript/document/document.js"></script>
 
     <script>
       const warga_cipayung = document.getElementById("warga_cipayung");

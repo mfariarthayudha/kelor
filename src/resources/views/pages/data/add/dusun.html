@@ -3,9 +3,10 @@
   <%- include('../../../layouts/head.html', {pageTitle : "Dusun - Kelor" } )%>
 
   <body class="nav-fixed">
+    <%- include('../../components/nav.html'); -%>
     <div id="layoutSidenav">
       <%- include('../../components/sidebars.html',{role: role}); -%>
-      <div id="layoutSidenav_content" style="top: 0">
+      <div id="layoutSidenav_content">
         <main>
           <%- include('../../components/loading.html') -%>
           <header

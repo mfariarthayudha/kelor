@@ -11,8 +11,6 @@ class ButtonHandler {
     const button = event.target;
     const isActive = button.classList.contains("btn-clicked");
 
-    loadingInit();
-
     if (isActive) {
       button.classList.remove("btn-clicked");
       location.reload();
@@ -21,8 +19,6 @@ class ButtonHandler {
       this.deactivateOtherButtons(button);
       this.callback(button.id);
     }
-
-    loadingDestroy();
   }
 
   toggleButton(button) {
@@ -42,6 +38,7 @@ class ButtonHandler {
 class DataFetcher {
   async fetchCounts(period) {
     try {
+      loadingInit();
       let response;
       switch (period) {
         case "today":
@@ -62,6 +59,8 @@ class DataFetcher {
       this.updateCounts(counts);
     } catch (error) {
       console.error("Error fetching counts:", error);
+    } finally {
+      loadingDestroy();
     }
   }
 

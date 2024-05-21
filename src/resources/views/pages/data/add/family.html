@@ -24,9 +24,10 @@
     ></script>
   </head>
   <body class="nav-fixed">
+    <%- include('../../components/nav.html'); -%>
     <div id="layoutSidenav">
       <%- include('../../components/sidebars.html',{role: role}); -%>
-      <div id="layoutSidenav_content" style="top: 0">
+      <div id="layoutSidenav_content">
         <main>
           <header
             class="page-header page-header-compact page-header-light border-bottom bg-white mb-4"
@@ -60,7 +61,7 @@
                       Tambah Data Keluarga
                     </h1>
                   </div>
-                  <div class="col-12 col-xl-auto mb-3">
+                  <div class="col-md-12 col-xl-auto mb-3">
                     <a
                       class="btn btn-sm btn-light text-primary"
                       href="/families"
@@ -89,7 +90,7 @@
           </header>
           <div class="container-xl px-4">
             <div class="row justify-content-center">
-              <div class="col-lg-9">
+              <div class="col-md-lg-9">
                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                   <div class="card-header justify-content-center">
                     <h3 class="fw-light my-4">Data Keluarga</h3>
@@ -115,7 +116,7 @@
                     </div>
                     <div class="mb-3">
                       <div class="row">
-                        <div class="col-3">
+                        <div class="col-md-3">
                           <label class="small mb-1" for="dusun">Dusun </label>
                           <select
                             class="form-select"
@@ -126,7 +127,7 @@
                           </select>
                         </div>
 
-                        <div class="col-3">
+                        <div class="col-md-3">
                           <label class="small mb-1" for="rw">No RW</label>
                           <select
                             class="form-select"
@@ -137,7 +138,7 @@
                           </select>
                         </div>
 
-                        <div class="col-3">
+                        <div class="col-md-3">
                           <label class="small mb-1" for="rt">No RT</label>
                           <select
                             class="form-select"
@@ -147,7 +148,7 @@
                             <option>Pilih RT</option>
                           </select>
                         </div>
-                        <div class="col-3">
+                        <div class="col-md-3">
                           <label class="small mb-1" for="kode_pos"
                             >Kode Pos
                           </label>
@@ -182,7 +183,7 @@
     </div>
 
     <%- include('./../../../layouts/javascript.html') %>
-    <script src="/javascript/familyAdd.js"></script>
+    <script src="/javascript/family/familyAdd.js"></script>
     <script src="/javascript/area/listArea.js"></script>
 
     <script>

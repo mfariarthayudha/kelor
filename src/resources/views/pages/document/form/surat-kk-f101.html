@@ -2,9 +2,10 @@
 <html>
   <%- include('../../../layouts/head.html', {pageTitle : formulir_judul } ) %>
   <body class="nav-fixed">
+    <%- include('../../components/nav.html'); -%>
     <div id="layoutSidenav">
       <%- include('../../components/sidebars.html',{role: role}); -%>
-      <div id="layoutSidenav_content" style="top: 0">
+      <div id="layoutSidenav_content">
         <main>
           <%- include('../../components/loading.html'); -%>
           <header
@@ -134,9 +135,9 @@
       </div>
     </div>
     <%- include('../../../layouts/javascript.html') %>
-    <script src="/javascript/suratKK.js"></script>
+    <script src="/javascript/document/documentKK.js"></script>
     <script src="/javascript/area/listArea.js"></script>
-    <script src="/javascript/familyAdd.js"></script>
+    <script src="/javascript/family/familyAdd.js"></script>
     <script>
       function handleEvent(event) {
         var target = event.target;

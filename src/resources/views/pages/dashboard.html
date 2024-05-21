@@ -22,9 +22,10 @@
   </head>
 
   <body class="nav-fixed">
+    <%- include('./components/nav.html'); -%>
     <div id="layoutSidenav">
       <%- include('./components/sidebars.html',{role: role}); -%>
-      <div id="layoutSidenav_content" style="top: 0">
+      <div id="layoutSidenav_content">
         <main>
           <%- include('./components/loading.html'); -%>
           <header
@@ -272,6 +273,6 @@
       </div>
     </div>
     <%- include('../layouts/javascript.html'); -%>
-    <script src="/javascript/dashboard.js"></script>
+    <script src="/javascript/dashboard/dashboard.js"></script>
   </body>
 </html>

@@ -3,12 +3,12 @@
   <%- include('../../../layouts/head.html', {pageTitle : "RW - Kelor" } )%>
 
   <body class="nav-fixed">
+    <%- include('../../components/nav.html'); -%>
     <div id="layoutSidenav">
       <%- include('../../components/sidebars.html',{role: role}); -%>
-      <div id="layoutSidenav_content" style="top: 0">
+      <div id="layoutSidenav_content">
         <main>
           <%- include('../../components/loading.html') -%>
-
           <header
             class="page-header page-header-compact page-header-light border-bottom bg-white mb-4"
           >

@@ -24,6 +24,7 @@ function removeInputForm(id_form) {
   }
 }
 function checkNik(nik) {
+  loadingInit();
   axios({
     url: `${baseUrl}/api/residents/${nik}`,
     method: "get",
@@ -120,6 +121,9 @@ function checkNik(nik) {
         title: resError,
         showConfirmButton: true,
       });
+    })
+    .finally(() => {
+      loadingDestroy();
     });
 }
 document.getElementById("nik").addEventListener(
