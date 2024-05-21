@@ -17,7 +17,6 @@ export const getIdAndAlamatByNoKK = async (no_kk: string) => {
     .innerJoin("rt", "families.rt_id", "rt.rt_id")
     .where({ no_kk: no_kk })
     .then((res) => {
-      console.log(res);
       return res[0];
     });
 

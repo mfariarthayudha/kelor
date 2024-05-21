@@ -110,7 +110,9 @@ export const getFamily = async (request: Request, response: Response) => {
 export const checkNoKK = async (request: Request, response: Response) => {
   try {
     const res = await familyRepository.getIdAndAlamatByNoKK(request.body.no_kk);
-
+    if (!res) {
+      throw Error(undefined);
+    }
     return response.status(200).send(res);
   } catch (error: any) {
     console.log(error?.code);
