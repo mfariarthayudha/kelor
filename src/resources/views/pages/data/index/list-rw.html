@@ -132,12 +132,7 @@
             }, 1200);
           })
           .catch((err) => {
-            swal.fire({
-              icon: "error",
-              title: "Oops...",
-              text: err.response.data.errorMessages,
-            });
-            console.log(err);
+            error;
           });
       }
     </script>

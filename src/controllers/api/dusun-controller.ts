@@ -30,11 +30,12 @@ export const getDusunName = async (request: Request, response: Response) => {
   }
 };
 export const dusunAdd = async (request: Request, response: Response) => {
+  const nik_kepala_dusun = request.body.kepala_dusun_nik;
   try {
     await validatorjs(
       {
         nama_dusun: request.body.nama_dusun,
-        kepala_dusun_nik: request.body.kepala_dusun_nik,
+        kepala_dusun_nik: nik_kepala_dusun,
         jumlah_warga: request.body.jumlah_warga,
         luas_wilayah: request.body.luas_wilayah,
         keterangan: request.body.keterangan,
@@ -53,13 +54,14 @@ export const dusunAdd = async (request: Request, response: Response) => {
       .then((res) => {
         return res[0];
       });
-
     if (checkDusun) {
+      console.log(checkDusun);
       return response.status(400).send({
         errorMessages: checkDusun.nama_dusun + " sudah terdaftar ",
       });
     }
-    const checkNik = await getName(request.body.kepala_dusun_nik);
+    const checkNik = await getName(nik_kepala_dusun);
+    // console.log(checkNik);
     if (checkNik === undefined) {
       return response.status(400).send({
         errorMessages: "NIK tidak terdaftar",
@@ -70,7 +72,7 @@ export const dusunAdd = async (request: Request, response: Response) => {
     await knex("dusun").insert({
       dusun_id: dusunId,
       nama_dusun: request.body.nama_dusun,
-      kepala_dusun_nik: request.body.kepala_dusun_nik,
+      kepala_dusun_nik: nik_kepala_dusun,
       luas_wilayah: request.body.luas_wilayah,
       jumlah_warga: request.body.jumlah_warga,
       keterangan: request.body.keterangan,
@@ -80,7 +82,7 @@ export const dusunAdd = async (request: Request, response: Response) => {
 
     return response.status(201).send({ nama_dusun: request.body.nama_dusun });
   } catch (error: any) {
-    //console.log(error);
+    console.log(error);
     switch (error?.code) {
       case "validation-fails":
         return response.status(400).send({
@@ -152,7 +154,6 @@ export const dusunUpdate = async (request: Request, response: Response) => {
 
     return response.status(200).send({ nama_dusun: request.body.nama_dusun });
   } catch (error: any) {
-    //console.log(error);
     switch (error?.code) {
       case "validation-fails":
         return response.status(400).send({
@@ -189,8 +190,6 @@ export const dusunRemove = async (request: Request, response: Response) => {
 
     return response.status(200).send({ message: "Sukses Hapus dusun" });
   } catch (error: any) {
-    //console.log(error);
-
     return response.status(500).send({
       code: "internal-server-error",
       errorMessages: error,

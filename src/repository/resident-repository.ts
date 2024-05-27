@@ -1,6 +1,7 @@
 import knex from "../utilities/knex";
 import resident from "../interface/resident";
 import { Knex } from "knex";
+import { object } from "zod";
 
 export const getResidentMain = async (nik: string) => {
   const res = await knex("residents")
@@ -19,13 +20,28 @@ export const getResidentMain = async (nik: string) => {
   return res;
 };
 
-export const getName = async (nik: string) => {
-  const res = await knex("residents").select("nama").where("nik", nik);
-  return res[0];
+export const getName = async (nik: string, like = false) => {
+  const res = await knex("residents")
+    .select("nama", "nik")
+    .where((builder) => {
+      if (like) {
+        builder.where("nik", "like", `%${nik}%`);
+      } else {
+        builder.where("nik", nik);
+      }
+    });
+  if (!like) {
+    return res[0];
+  }
+  return res;
 };
 export const getResidentFull = async (nik: string) => {
   return await knex("residents")
-    .select("residents.*", "families_member.status_keluarga")
+    .select(
+      "residents.*",
+      "families_member.status_keluarga",
+      "families_member.no_kk"
+    )
     .innerJoin("families_member", "residents.nik", "families_member.nik")
     .where("residents.  nik", nik);
 };
@@ -34,7 +50,6 @@ export const insertResident = async (
   no_kk: string,
   trx: Knex.Transaction<any, any[]>
 ) => {
-  // await knex.transaction(async (trx) => {
   await trx("residents").insert({
     nik: obj.nik,
     nama: obj.nama,
@@ -75,7 +90,6 @@ export const insertResident = async (
     .into("families_member");
 
   return "sukses";
-  // });
 };
 
 export const deleteResident = async (nik: string) => {
@@ -89,10 +103,24 @@ export const deleteResident = async (nik: string) => {
     });
   console.log("sukses hapus");
 };
+export const isResidentInFamily = async (
+  residentId: string
+): Promise<boolean> => {
+  const count = await knex("families_member")
+    .select("nik")
+    .where("resident_id", residentId)
+    .count("nik as count")
+    .then((res) => {
+      return Number(res[0].count);
+    });
+
+  return count > 0;
+};
 module.exports = {
   deleteResident,
   insertResident,
   getName,
   getResidentMain,
   getResidentFull,
+  isResidentInFamily,
 };

@@ -8,7 +8,6 @@
       <%- include('../../components/sidebars.html',{role: role}); -%>
       <div id="layoutSidenav_content">
         <main>
-          <%- include('../../components/loading.html') -%>
           <header
             class="page-header page-header-compact page-header-light border-bottom bg-white mb-4"
           >
@@ -47,8 +46,31 @@
                   <div class="card-header justify-content-center">
                     <h3 class="fw-light my-4">Data Warga</h3>
                   </div>
-
                   <div class="card-body">
+                    <div class="mb-3">
+                      <div class="row">
+                        <label class="small mb-1" for="no_kk"
+                          >No Kartu Keluarga:</label
+                        >
+                        <div class="col-md-9">
+                          <input
+                            class="form-control"
+                            id="no_kk"
+                            type="number"
+                            value="<%= no_kk %>"
+                          />
+                        </div>
+                        <div class="col-md-3">
+                          <button
+                            class="btn btn-warning"
+                            id="btn-check-noKK"
+                            type="submit"
+                          >
+                            Ubah
+                          </button>
+                        </div>
+                      </div>
+                    </div>
                     <form id="form-warga">
                       <div class="mb-3">
                         <div class="row">
@@ -556,17 +578,8 @@
       </div>
     </div>
     <%- include('./../../../layouts/javascript.html') %>
+    <script src="/javascript/family/check.js"></script>
     <script>
-      // var form = document.getElementById("form-warga");
-      // var elements = form.elements;
-
-      // for (var i = 0; i < elements.length; i++) {
-      //   var element = elements[i];
-
-      //   if (element.tagName === "SELECT" || element.tagName === "INPUT") {
-      //     element.disabled = true;
-      //   }
-      // }
       document.querySelector('[name="jenis_kelamin"]').value =
         "<%= jenis_kelamin %>";
       document.querySelector('[name="agama"]').value = "<%= agama %>";
@@ -627,19 +640,27 @@
         });
       });
       document
+        .getElementById("btn-check-noKK")
+        .addEventListener("click", (event) => {
+          checkNoKK(
+            document.getElementById("no_kk").value,
+            (value = "<%= no_kk %>")
+          );
+        });
+      document
         .querySelector("#button-submit")
         .addEventListener("click", (event) => {
           loadingInit();
           event.preventDefault();
-          document.querySelector("#button-submit").innerHTML = "Loading...";
 
-          var form1 = document.getElementById("form-warga");
-          var formData1 = new FormData(form1);
+          var form = document.getElementById("form-warga");
+          var formData = new FormData(form);
           // Convert FormData to an object
           var formDataObject = {};
-          formData1.forEach(function (value, key) {
+          formData.forEach(function (value, key) {
             formDataObject[key] = value;
           });
+          formDataObject["no_kk"] = document.getElementById("no_kk").value;
           console.log(formDataObject);
           const nik = document.querySelector('[name="nik"]').value;
 
@@ -666,26 +687,7 @@
               }, 2000);
             })
             .catch((error) => {
-              document.querySelector("#button-submit").innerHTML = "Edit";
-
-              let resError = "";
-              if (typeof error.response.data.errorMessages === "object") {
-                for (const key in error.response.data.errorMessages) {
-                  if (error.response.data.errorMessages.hasOwnProperty(key)) {
-                    resError +=
-                      error.response.data.errorMessages[key] + "<br />";
-                  }
-                }
-              } else {
-                resError = error.response.data.errorMessages;
-                console.log(resError);
-              }
-
-              Swal.fire({
-                icon: "error",
-                title: resError,
-                showConfirmButton: true,
-              });
+              showError(error);
             })
             .finally(() => {
               loadingDestroy();

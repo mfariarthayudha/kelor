@@ -1,6 +1,6 @@
 import knex from "../utilities/knex";
 
-export const getAlamatByRtId = async (rt_id: string) => {
+export const getAddressByRtId = async (rt_id: string) => {
   const dusun = await knex("rt")
     .select("dusun.nama_dusun", "rw.no_rw", "rt.no_rt")
     .innerJoin("rw", "rt.rw_id", "rw.rw_id")

@@ -290,7 +290,7 @@
 
             .catch((error) => {
               document.querySelector("#submit-form").innerHTML = "Buat Surat";
-              //console.log(error);
+
               let resError = "";
               if (typeof error.response.data.errorMessages === "object") {
                 for (const key in error.response.data.errorMessages) {

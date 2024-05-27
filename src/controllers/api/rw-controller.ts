@@ -143,7 +143,6 @@ export const createRw = async (request: Request, response: Response) => {
       .status(201)
       .send({ nama_dusun: res.nama_dusun, no_rw: request.body.no_rw });
   } catch (error: any) {
-    //console.log(error);
     switch (error?.code) {
       case "validation-fails":
         return response.status(400).send({
@@ -220,7 +219,6 @@ export const rwUpdate = async (request: Request, response: Response) => {
 
     return response.status(200).send(res);
   } catch (error: any) {
-    //console.log(error);
     switch (error?.code) {
       case "validation-fails":
         return response.status(400).send({
@@ -245,8 +243,6 @@ export const rwRemove = async (request: Request, response: Response) => {
 
     return response.status(200).send({ message: "Sukses Hapus RW" });
   } catch (error: any) {
-    //console.log(error);
-
     return response.status(500).send({
       code: "internal-server-error",
       errorMessages: error,

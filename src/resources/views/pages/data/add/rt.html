@@ -8,7 +8,6 @@
       <%- include('../../components/sidebars.html',{role: role}); -%>
       <div id="layoutSidenav_content">
         <main>
-          <%- include('../../components/loading.html') -%>
           <header
             class="page-header page-header-compact page-header-light border-bottom bg-white mb-4"
           >
@@ -81,7 +80,7 @@
                           id="dusun"
                           required
                         >
-                          <option>Pilih Dusun</option>
+                          <option>Pilih</option>
                         </select>
                       </div>
                       <div class="mb-3">
@@ -92,7 +91,7 @@
                           id="rw"
                           required
                         >
-                          <option>Pilih RW</option>
+                          <option>Pilih</option>
                         </select>
                       </div>
 
@@ -197,12 +196,12 @@
         return !regexPattern.test(value);
       }
 
-      window.onload = getDusun("dusun");
+      window.onload = updateDusun("dusun");
 
       document.getElementById("dusun").addEventListener("change", (event) => {
         document.getElementById("dusun").firstChild.disable = true;
         let dusun = document.getElementById("dusun").value;
-        getRW(dusun, "rw");
+        updateRW(dusun, "rw");
       });
 
       document
@@ -248,23 +247,7 @@
                 }, 2000);
               })
               .catch((error) => {
-                let resError = "";
-                if (typeof error.response.data.errorMessages === "object") {
-                  for (const key in error.response.data.errorMessages) {
-                    if (error.response.data.errorMessages.hasOwnProperty(key)) {
-                      resError +=
-                        error.response.data.errorMessages[key] + "<br />";
-                    }
-                  }
-                } else {
-                  resError = error.response.data.errorMessages;
-                }
-
-                Swal.fire({
-                  icon: "error",
-                  title: resError,
-                  showConfirmButton: true,
-                });
+                showError(error);
               })
               .finally(() => {
                 loadingDestroy();

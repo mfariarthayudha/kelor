@@ -1,77 +1,29 @@
-function getDusun(id_element_dusun, dusun_id = false) {
-  axios({
-    url: `${baseUrl}/api/dusun`,
-    method: "get",
-    headers: { "content-type": "application/json" },
-  }).then((response) => {
-    let data = response.data;
-    let selectElement = document.getElementById(id_element_dusun);
-
-    for (let i = 0; i < Object.keys(response.data).length; i++) {
-      let newOption = document.createElement("option");
-
-      newOption.value = data[i]["dusun_id"];
-      newOption.text = data[i]["nama_dusun"];
-      if (data[i]["dusun_id"] === dusun_id) {
-        newOption.selected = true;
-      }
-      selectElement.appendChild(newOption);
-    }
-  });
+function updateDusun(id_element_dusun, dusun_id = false) {
+  updateSelectElement(
+    "/api/dusun",
+    id_element_dusun,
+    "dusun_id",
+    "nama_dusun",
+    (dusun_id = dusun_id)
+  );
 }
 
-function getRW(id_dusun, id_element_rw, rw_id = false) {
-  axios({
-    url: `${baseUrl}/api/rw/dusun/${id_dusun}`,
-    method: "get",
-    headers: { "content-type": "application/json" },
-  }).then((response) => {
-    let data = response.data;
-
-    let selectElement = document.getElementById(id_element_rw);
-    selectElement.querySelectorAll("option").forEach(function (option) {
-      if (option.text !== "Pilih RW") {
-        option.remove();
-      }
-    });
-    for (let i = 0; i < Object.keys(response.data).length; i++) {
-      let newOption = document.createElement("option");
-
-      newOption.value = data[i]["rw_id"];
-      newOption.text = data[i]["no_rw"];
-      if (data[i]["rw_id"] === rw_id) {
-        selectElement.value = data[i]["rw_id"];
-        newOption.selected = true;
-      }
-      selectElement.appendChild(newOption);
-    }
-  });
+function updateRW(id_dusun, id_element_rw, rw_id = false) {
+  updateSelectElement(
+    `/api/rw/dusun/${id_dusun}`,
+    id_element_rw,
+    "rw_id",
+    "no_rw",
+    (rw_id = rw_id)
+  );
 }
 
-function getRT(rw_id, rt_id_element, rt_id = false) {
-  axios({
-    url: `${baseUrl}/api/rt/rw/${rw_id}`,
-    method: "get",
-    headers: { "content-type": "application/json" },
-  }).then((response) => {
-    let data = response.data;
-    let selectElement = document.getElementById(rt_id_element);
-    selectElement.querySelectorAll("option").forEach(function (option) {
-      if (option.text !== "Pilih RT") {
-        option.remove();
-      }
-    });
-
-    for (let i = 0; i < Object.keys(response.data).length; i++) {
-      let newOption = document.createElement("option");
-
-      newOption.value = data[i]["rt_id"];
-      newOption.text = data[i]["no_rt"];
-      if (data[i]["rt_id"] === rt_id) {
-        selectElement.value = data[i]["rt_id"];
-        newOption.selected = true;
-      }
-      selectElement.appendChild(newOption);
-    }
-  });
+function updateRT(rw_id, rt_id_element, rt_id = false) {
+  updateSelectElement(
+    `/api/rt/rw/${rw_id}`,
+    rt_id_element,
+    "rt_id",
+    "no_rt",
+    (rt_id = rt_id)
+  );
 }

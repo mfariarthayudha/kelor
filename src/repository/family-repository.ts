@@ -1,29 +1,27 @@
 import knex from "../utilities/knex";
 import family from "../interface/family";
 
-export const getIdAndAlamatByNoKK = async (no_kk: string) => {
-  const id_alamat = await knex("families")
-    .select(
-      "families.alamat",
-      "families.rt_id",
-      "families.rw_id",
-      "families.dusun_id",
-      "dusun.nama_dusun",
-      "rw.no_rw",
-      "rt.no_rt"
-    )
+export const getAddressByNoKK = async (no_kk: string, like = false) => {
+  const res = await knex("families")
+    .select("families.alamat", "dusun.nama_dusun", "rw.no_rw", "rt.no_rt")
     .innerJoin("dusun", "families.dusun_id", "dusun.dusun_id")
     .innerJoin("rw", "families.rw_id", "rw.rw_id")
     .innerJoin("rt", "families.rt_id", "rt.rt_id")
-    .where({ no_kk: no_kk })
+    .where((builder) => {
+      if (like) {
+        builder.where("families.no_kk", "like", `%${no_kk}%`);
+      } else {
+        builder.where("families.no_kk", no_kk);
+      }
+    })
     .then((res) => {
       return res[0];
     });
 
-  return id_alamat;
+  return res;
 };
 
-export const getIdAlamatByNoKK = async (no_kk: string) => {
+export const getIdAddressByNoKK = async (no_kk: string) => {
   const alamat = await knex("families")
     .select(
       "families.alamat",
@@ -39,6 +37,28 @@ export const getIdAlamatByNoKK = async (no_kk: string) => {
 
   return alamat;
 };
+
+// export const getAddressByNoKK = async (no_kk: string, like = false) => {
+//   const id_alamat = await knex("families")
+//     .select(
+//       "families.alamat",
+//       "families.rt_id",
+//       "families.rw_id",
+//       "families.dusun_id",
+//       "dusun.nama_dusun",
+//       "rw.no_rw",
+//       "rt.no_rt"
+//     )
+//     .innerJoin("dusun", "families.dusun_id", "dusun.dusun_id")
+//     .innerJoin("rw", "families.rw_id", "rw.rw_id")
+//     .innerJoin("rt", "families.rt_id", "rt.rt_id")
+//     .where({ no_kk: no_kk })
+//     .then((res) => {
+//       return res[0];
+//     });
+
+//   return id_alamat;
+// };
 export const insertFamily = async (
   obj: family,
   approved: number = 1,

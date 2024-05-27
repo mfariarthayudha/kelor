@@ -123,7 +123,7 @@
                             aria-label="Default select example"
                             id="dusun"
                           >
-                            <option>Pilih Dusun</option>
+                            <option>Pilih</option>
                           </select>
                         </div>
 
@@ -134,7 +134,7 @@
                             aria-label="Default select example"
                             id="rw"
                           >
-                            <option>Pilih RW</option>
+                            <option>Pilih</option>
                           </select>
                         </div>
 
@@ -145,7 +145,7 @@
                             aria-label="Default select example"
                             id="rt"
                           >
-                            <option>Pilih RT</option>
+                            <option>Pilih</option>
                           </select>
                         </div>
                         <div class="col-md-3">
@@ -221,25 +221,7 @@
               }, 1000);
             })
             .catch((error) => {
-              let resError = "";
-              if (typeof error.response.data.errorMessages === "object") {
-                for (const key in error.response.data.errorMessages) {
-                  if (error.response.data.errorMessages.hasOwnProperty(key)) {
-                    resError +=
-                      error.response.data.errorMessages[key] + "<br />";
-                  }
-                }
-              } else {
-                resError = error.response.data.errorMessages;
-                console.log(resError);
-              }
-
-              Swal.fire({
-                position: "top-end",
-                icon: "error",
-                title: resError,
-                showConfirmButton: true,
-              });
+              showError(error);
             });
         });
     </script>

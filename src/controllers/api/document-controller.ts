@@ -11,7 +11,7 @@ import {
 } from "../../utilities/convert";
 import resident from "../../interface/resident";
 import { getName } from "../../repository/resident-repository";
-import { getAlamatByRtId } from "../../repository/rt-repository";
+import { getAddressByRtId } from "../../repository/rt-repository";
 import moment from "moment";
 
 moment().local();
@@ -180,8 +180,6 @@ export const updateDocumentType = async (
 
     return response.status(204).send();
   } catch (error: any) {
-    //console.log(error);
-
     switch (error.code) {
       case "validation-fails":
         return next({
@@ -236,8 +234,6 @@ export const removeDocumentResult = async (
 
     return response.status(200).send({ message: "Sukses hapus surat" });
   } catch (error: any) {
-    //console.log(error);
-
     switch (error.code) {
       case "document-result-id-not-found":
         return response.status(400).send({
@@ -697,7 +693,7 @@ export const createSuratkkF101 = async (
       .then((res) => {
         return res[0].nama;
       });
-    const alamat = await getAlamatByRtId(request.body.rt).then((result) => {
+    const alamat = await getAddressByRtId(request.body.rt).then((result) => {
       if (result.nama_dusun) {
         result.nama_dusun = result.nama_dusun.toUpperCase();
       }
@@ -741,8 +737,6 @@ export const createSuratkkF101 = async (
       }
     );
   } catch (error: any) {
-    //console.log(error);
-
     switch (error?.code) {
       case "validation-fails":
         return next({
@@ -811,7 +805,7 @@ export const createSuratPernyataanSKU = async (
       });
 
     // take no_rw and no_rt from rw and rt table
-    const rt_rw = getAlamatByRtId(rt_id).then((res) => {
+    const rt_rw = getAddressByRtId(rt_id).then((res) => {
       return res.no_rt + "/" + res.no_rw;
     });
 
@@ -1010,7 +1004,7 @@ export const createSKKMRumahSakit = async (
       });
 
     // take no_rw and no_rt from rw and rt table
-    const rt_rw = await getAlamatByRtId(alamat_rt_id.rt_id);
+    const rt_rw = await getAddressByRtId(alamat_rt_id.rt_id);
 
     const alamat_rt_rw =
       alamat_rt_id.alamat + " RT " + rt_rw.no_rt + "/" + rt_rw.no_rw;

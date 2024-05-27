@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import knex from "../../utilities/knex";
-import { getIdAlamatByNoKK } from "../../repository/family-repository";
+import { getIdAddressByNoKK } from "../../repository/family-repository";
 import moment from "moment";
 moment().local();
 moment.locale("id");
@@ -12,7 +12,7 @@ export const familyAdd = (request: Request, response: Response) => {
 export const familyUpdate = async (request: Request, response: Response) => {
   try {
     const no_kk = request.params.no_kk;
-    const alamat = await getIdAlamatByNoKK(no_kk);
+    const alamat = await getIdAddressByNoKK(no_kk);
     const additional = await knex("families")
       .select("kode_pos", "approved", "update_at")
       .where("no_kk", no_kk)

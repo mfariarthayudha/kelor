@@ -8,7 +8,6 @@
       <%- include('../../components/sidebars.html',{role: role}); -%>
       <div id="layoutSidenav_content">
         <main>
-          <%- include('../../components/loading.html') -%>
           <header
             class="page-header page-header-compact page-header-light border-bottom bg-white mb-4"
           >
@@ -560,63 +559,10 @@
       </div>
     </div>
     <%- include('./../../../layouts/javascript.html') %>
+    <script src="/javascript/family/check.js"></script>
     <script>
       document.getElementById("form-warga").hidden = true;
-      function checkNoKK(no_kk) {
-        axios({
-          url: `${baseUrl}/api/families/check`,
-          method: "post",
-          headers: { "content-type": "application/json" },
-          data: { no_kk: no_kk },
-        })
-          .then((response) => {
-            var { nama_dusun, no_rw, no_rt, alamat } = response.data;
 
-            Swal.fire({
-              icon: "question",
-              showDenyButton: true,
-              confirmButtonText: "Ya",
-              denyButtonText: `Tidak`,
-              title: "Apakah data benar ?",
-              html:
-                "No KK : " +
-                no_kk +
-                "</br >Dusun : " +
-                nama_dusun +
-                "</br>Alamat : " +
-                alamat +
-                " RT " +
-                no_rt +
-                "/" +
-                no_rw,
-              showConfirmButton: true,
-            }).then((result) => {
-              if (result.isConfirmed) {
-                document.getElementById("form-warga").hidden = false;
-                document.getElementById("no_kk").value = no_kk;
-                Swal.fire({
-                  title: "Data digunakan",
-                  icon: "success",
-                  showConfirmButton: false,
-                  timer: 1000,
-                });
-                document.getElementById("btn-check-noKK").hidden = true;
-                document.getElementById("no_kk").readOnly = true;
-              } else if (result.isDenied) {
-                document.getElementById("no_kk").value = "";
-                Swal.fire("Silahkan ketik ulang No KK", "", "info");
-              }
-            });
-          })
-
-          .catch((error) => {
-            Swal.fire({
-              icon: "error",
-              title: error.response.data.errorMessages,
-              showConfirmButton: true,
-            });
-          });
-      }
       const urlParams = new URLSearchParams(window.location.search);
       const param_no_kk = urlParams.get("no_kk");
       if (param_no_kk) {
@@ -734,26 +680,7 @@
               }, 2000);
             })
             .catch((error) => {
-              document.querySelector("#button-submit").innerHTML = "Tambah";
-
-              let resError = "";
-              if (typeof error.response.data.errorMessages === "object") {
-                for (const key in error.response.data.errorMessages) {
-                  if (error.response.data.errorMessages.hasOwnProperty(key)) {
-                    resError +=
-                      error.response.data.errorMessages[key] + "<br />";
-                  }
-                }
-              } else {
-                resError = error.response.data.errorMessages;
-              }
-
-              Swal.fire({
-                position: "top-end",
-                icon: "error",
-                title: resError,
-                showConfirmButton: true,
-              });
+              showError(error);
             })
             .finally(() => {
               loadingDestroy();

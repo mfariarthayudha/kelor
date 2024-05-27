@@ -1,21 +1,13 @@
 window.onload = function () {
-  getDusun("dusun");
+  updateDusun("dusun");
 };
-document.getElementById("rw").addEventListener("change", (event) => {
-  let rw = document.getElementById("rw").value;
-  if (document.querySelector('#rw option[value="Pilih RW"]')) {
-    document.querySelector('#rw option[value="Pilih RW"]').disabled = true;
-  }
-  getRT(rw, "rt");
-});
 
 document.getElementById("dusun").addEventListener("change", (event) => {
-  if (document.querySelector('#dusun option[value="Pilih Dusun"]')) {
-    document.querySelector(
-      '#dusun option[value="Pilih Dusun"]'
-    ).disabled = true;
-  }
+  const dusun = event.target.value;
+  updateRW(dusun, "rw");
+});
 
-  let dusun = document.getElementById("dusun").value;
-  getRW(dusun, "rw");
+document.getElementById("rw").addEventListener("change", (event) => {
+  const rw = event.target.value;
+  updateRT(rw, "rt");
 });

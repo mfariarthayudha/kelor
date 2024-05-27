@@ -107,9 +107,10 @@ export const getFamily = async (request: Request, response: Response) => {
   }
 };
 
-export const checkNoKK = async (request: Request, response: Response) => {
+export const getAddress = async (request: Request, response: Response) => {
   try {
-    const res = await familyRepository.getIdAndAlamatByNoKK(request.body.no_kk);
+    const no_kk = request.body.no_kk;
+    const res = await familyRepository.getAddressByNoKK(no_kk);
     if (!res) {
       throw Error(undefined);
     }
@@ -220,8 +221,6 @@ export const RemoveFamily = async (request: Request, response: Response) => {
 
     return response.status(200).send({ message: "Sukses hapus surat" });
   } catch (error: any) {
-    //console.log(error);
-
     switch (error.code) {
       case "no-kk-not-found":
         return response.status(400).send({
@@ -231,6 +230,31 @@ export const RemoveFamily = async (request: Request, response: Response) => {
       default:
         return response.status(500).send({
           code: "Error",
+          errorMessages: error,
+        });
+    }
+  }
+};
+export const getFamilyAddress = async (
+  request: Request,
+  response: Response
+) => {
+  try {
+    const no_kk = request.params.nik;
+    const res = await familyRepository.getAddressByNoKK(no_kk, true);
+    return response.status(200).send(res);
+  } catch (error: any) {
+    console.log(error?.code);
+
+    switch (error?.code) {
+      case undefined:
+        return response.status(404).send({
+          code: "Tidak ditemukan",
+          errorMessages: "Nik tidak ditemukan",
+        });
+      default:
+        return response.status(500).send({
+          code: "internal-server-error",
           errorMessages: error,
         });
     }

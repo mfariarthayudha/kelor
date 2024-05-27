@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import knex from "../../utilities/knex";
 import validatorjs from "../../utilities/validatorjs";
 import moment from "moment";
-import { getAlamatByRtId } from "../../repository/rt-repository";
+import { getAddressByRtId } from "../../repository/rt-repository";
 import { v4 as uuidV4 } from "uuid";
 import { getName } from "../../repository/resident-repository";
 
@@ -63,7 +63,7 @@ export const rtAdd = async (request: Request, response: Response) => {
         return res[0];
       });
     if (checkRt) {
-      const dusun = await getAlamatByRtId(checkRt.rt_id);
+      const dusun = await getAddressByRtId(checkRt.rt_id);
 
       return response.status(400).send({
         code: "400",
@@ -93,11 +93,10 @@ export const rtAdd = async (request: Request, response: Response) => {
       create_at: moment().format("YYYY-MM-DD"),
       update_at: moment().format("YYYY-MM-DD"),
     });
-    const res = await getAlamatByRtId(rtId);
+    const res = await getAddressByRtId(rtId);
 
     return response.status(201).send(res);
   } catch (error: any) {
-    //console.log(error);
     switch (error?.code) {
       case "validation-fails":
         return response.status(400).send({
@@ -164,11 +163,10 @@ export const rtUpdate = async (request: Request, response: Response) => {
     } catch (error) {
       knexTransaction.rollback();
     }
-    const res = await getAlamatByRtId(rt_id);
+    const res = await getAddressByRtId(rt_id);
 
     return response.status(200).send(res);
   } catch (error: any) {
-    //console.log(error);
     switch (error?.code) {
       case "validation-fails":
         return response.status(400).send({
@@ -193,8 +191,6 @@ export const rtRemove = async (request: Request, response: Response) => {
 
     return response.status(200).send({ message: "Sukses Hapus RT" });
   } catch (error: any) {
-    //console.log(error);
-
     return response.status(500).send({
       code: "internal-server-error",
       errorMessages: error,

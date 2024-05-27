@@ -5,7 +5,7 @@ import knex from "../../utilities/knex";
 import moment from "moment";
 import { convertEmptyStringsToNull } from "../../utilities/convert";
 import * as residentRepository from "../../repository/resident-repository";
-import { getIdAndAlamatByNoKK } from "../../repository/family-repository";
+import { getAddressByNoKK } from "../../repository/family-repository";
 moment().local();
 moment.locale("id");
 
@@ -68,7 +68,6 @@ export const addResident = async (
       throw new Error("gagal");
     }
   } catch (error: any) {
-    //console.log(error);
     switch (error?.code) {
       case "validation-fails":
         return response.status(400).send({
@@ -160,13 +159,9 @@ export const updateResident = async (request: Request, response: Response) => {
     await knex("families_member")
       .update({
         status_keluarga: request.body.status_keluarga,
+        no_kk: request.body.no_kk,
       })
       .where({ nik: request.params.nik });
-    // await knexTransaction.commit();
-    // // } catch (error) {
-    //   //console.log(error);
-    //   // knexTransaction.rollback();
-    // }
 
     return response.status(201).send({ message: "Success update resident" });
   } catch (error: any) {
@@ -203,7 +198,7 @@ export const getResidentByNik = async (
         return res[0];
       });
 
-    const alamat = await getIdAndAlamatByNoKK(member["no_kk"]);
+    const alamat = await getAddressByNoKK(member["no_kk"]);
 
     const resident = await residentRepository
       .getResidentMain(request.params.nik)
@@ -241,10 +236,7 @@ export const getResidentByNik = async (
 export const getResidentName = async (request: Request, response: Response) => {
   try {
     const nik = request.params.nik;
-    // console.log(nik);
-    const res = await knex("residents")
-      .select("nik", "nama")
-      .whereILike("nik", "%" + nik + "%");
+    const res = await residentRepository.getName(nik, true);
     return response.status(200).send(res);
   } catch (error: any) {
     console.log(error?.code);
@@ -252,7 +244,7 @@ export const getResidentName = async (request: Request, response: Response) => {
     switch (error?.code) {
       case undefined:
         return response.status(404).send({
-          code: "Tidak ditemukan",
+          code: "not-found",
           errorMessages: "Nik tidak ditemukan",
         });
       default:
@@ -271,11 +263,44 @@ export const residentRemove = async (request: Request, response: Response) => {
 
     return response.status(200).send({ message: "Sukses Hapus " });
   } catch (error: any) {
-    //console.log(error);
-
     return response.status(500).send({
       code: "internal-server-error",
       errorMessages: error,
+    });
+  }
+};
+
+export const changeResidentFamily = async (
+  request: Request,
+  response: Response
+) => {
+  const nik = request.params.nik;
+  const no_kk_new = request.body.no_kk;
+  const status = request.body.status;
+  const inFamily = await residentRepository.isResidentInFamily(nik);
+
+  const checkNoKK = await knex("families")
+    .select("no_kk")
+    .where("no_kk", no_kk_new)
+    .then((res) => {
+      return res[0];
+    });
+  if (!checkNoKK) {
+    return response.status(400).send({
+      code: "not-found",
+      errorMessages: "No KK Tidak Ditemukan",
+    });
+  }
+  if (inFamily) {
+    // Update existing family assignment
+    await knex("families_member")
+      .where("nik", nik)
+      .update({ family_id: no_kk_new, status: status });
+    return response.status(200).send({ message: "Sukses Mengubah" });
+  } else {
+    return response.status(400).send({
+      code: "not-found",
+      errorMessages: "NIK Tidak Ditemukan",
     });
   }
 };

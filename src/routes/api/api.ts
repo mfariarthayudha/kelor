@@ -23,8 +23,6 @@ router.use("/dashboard", dashboardRoute);
 
 router.use(
   (error: any, request: Request, response: Response, next: NextFunction) => {
-    //console.log(error);
-
     return response
       .status(error.httpStatusCode || 500)
       .send(error.responseBody || { code: "internal-server-error" });

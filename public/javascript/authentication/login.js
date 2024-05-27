@@ -56,7 +56,6 @@ loginForm.addEventListener("submit", async (event) => {
 
     window.location.href = `${baseUrl}/`;
   } catch (error) {
-    //console.log(error);
     return;
   } finally {
     loadingDestroy();
