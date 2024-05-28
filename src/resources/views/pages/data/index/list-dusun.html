@@ -116,12 +116,8 @@
         axios
           .delete(baseUrl + "/api/dusun/" + id)
           .then((res) => {
-            swal.fire({
-              icon: "success",
-              title: "Dihapus",
-              showConfirmButton: false,
-              timer: 1200,
-            });
+            showSuccess("Berhasil dihapus");
+
             location.reload();
           })
           .catch((error) => {

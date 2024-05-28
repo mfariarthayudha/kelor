@@ -18,7 +18,7 @@ export const getDusunName = async (request: Request, response: Response) => {
     switch (error?.code) {
       case undefined:
         return response.status(404).send({
-          code: "Tidak ditemukan",
+          code: "not-found",
           errorMessages: "Dusun tidak ditemukan",
         });
       default:

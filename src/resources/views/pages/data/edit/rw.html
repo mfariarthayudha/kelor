@@ -189,13 +189,6 @@
     <script src="/javascript/area/rw.js"></script>
 
     <script>
-      function checkFalsyValue(value) {
-        // Define a regex pattern to match exactly "0"
-        var regexPattern = /^0+$/;
-        // Test if the value matches the regex pattern
-        return !regexPattern.test(value);
-      }
-
       window.onload = updateDusun("dusun", "<%= dusun_id %>");
       document
         .querySelector("#button-submit")
@@ -218,17 +211,11 @@
           })
             .then((response) => {
               let { nama_dusun, no_rw } = response.data;
-              Swal.fire({
-                position: "top-end",
-                icon: "success",
-                title: "RW  " + no_rw + " " + nama_dusun + " sudah diubah",
-                showConfirmButton: false,
-                timer: 1800,
-              });
+              showSuccess(`RW ${no_rw} ${nama_dusun} sudah diubah`);
 
               setTimeout(() => {
                 window.location.href = "/rw/";
-              }, 2000);
+              }, 1500);
             })
             .catch((error) => {
               showError(error);

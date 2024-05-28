@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.post("/create", checkRole("Admin"), familyController.createFamily);
 router.get("/:no_kk", familyController.getFamily);
-router.post("/check", familyController.getAddress);
+router.get("/:no_kk/address", familyController.getAddress);
 router.put("/:no_kk/update", checkRole("Admin"), familyController.updateFamily);
 router.delete("/:no_kk", checkRole("Admin"), familyController.RemoveFamily);
 

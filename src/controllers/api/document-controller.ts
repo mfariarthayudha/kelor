@@ -237,7 +237,7 @@ export const removeDocumentResult = async (
     switch (error.code) {
       case "document-result-id-not-found":
         return response.status(400).send({
-          code: "Tidak ditemukan",
+          code: "not-found",
           errorMessages: "Dokumen tidak ditemukan",
         });
       default:

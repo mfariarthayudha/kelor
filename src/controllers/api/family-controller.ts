@@ -31,16 +31,11 @@ export const createFamily = async (
         dusun: "required|string|max:36",
       }
     );
-    const checkNoKK = await knex("families")
-      .select("no_kk")
-      .where("no_kk", request.body.no_kk)
-      .then((res) => {
-        return res[0];
-      });
+    const checkNoKK = familyRepository.checkNoKK(request.body.no_kk);
 
     if (checkNoKK) {
       return response.status(400).send({
-        errorMessages: "No KK " + checkNoKK.no_kk + " sudah terdaftar",
+        errorMessages: "No KK " + checkNoKK + " sudah terdaftar",
       });
     }
     const family: family = {
@@ -95,7 +90,7 @@ export const getFamily = async (request: Request, response: Response) => {
         });
       case undefined:
         return response.status(404).send({
-          code: "Tidak ditemukan",
+          code: "not-found",
           errorMessages: "No Kartu kelurga tidak ditemukan",
         });
       default:
@@ -109,8 +104,8 @@ export const getFamily = async (request: Request, response: Response) => {
 
 export const getAddress = async (request: Request, response: Response) => {
   try {
-    const no_kk = request.body.no_kk;
-    const res = await familyRepository.getAddressByNoKK(no_kk);
+    const no_kk = request.params.no_kk;
+    const res = await familyRepository.getAddressByNoKK(no_kk, true);
     if (!res) {
       throw Error(undefined);
     }
@@ -126,7 +121,7 @@ export const getAddress = async (request: Request, response: Response) => {
         });
       case undefined:
         return response.status(404).send({
-          code: "Tidak ditemukan",
+          code: "not-found",
           errorMessages: "No Kartu kelurga tidak ditemukan",
         });
       default:
@@ -188,7 +183,7 @@ export const updateFamily = async (request: Request, response: Response) => {
         });
       case undefined:
         return response.status(404).send({
-          code: "Tidak ditemukan",
+          code: "not-found",
           errorMessages: "No Kartu kelurga tidak ditemukan",
         });
       default:
@@ -224,7 +219,7 @@ export const RemoveFamily = async (request: Request, response: Response) => {
     switch (error.code) {
       case "no-kk-not-found":
         return response.status(400).send({
-          code: "Tidak ditemukan",
+          code: "not-found",
           errorMessages: "Nomor Kartu Keluarga tidak ditemukan",
         });
       default:
@@ -249,7 +244,7 @@ export const getFamilyAddress = async (
     switch (error?.code) {
       case undefined:
         return response.status(404).send({
-          code: "Tidak ditemukan",
+          code: "not-found",
           errorMessages: "Nik tidak ditemukan",
         });
       default:

@@ -118,12 +118,8 @@
         axios
           .delete(baseUrl + "/api/rt/" + id)
           .then((res) => {
-            swal.fire({
-              icon: "success",
-              title: "Dihapus",
-              showConfirmButton: false,
-              timer: 1200,
-            });
+            showSuccess("Berhasil dihapus");
+
             setTimeout(() => {
               location.reload();
             }, 1500);

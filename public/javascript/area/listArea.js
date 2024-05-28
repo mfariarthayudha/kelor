@@ -27,3 +27,9 @@ function updateRT(rw_id, rt_id_element, rt_id = false) {
     (rt_id = rt_id)
   );
 }
+function checkFalsyValue(value) {
+  // Define a regex pattern to match exactly "0"
+  var regexPattern = /^0+$/;
+  // Test if the value matches the regex pattern
+  return !regexPattern.test(value);
+}

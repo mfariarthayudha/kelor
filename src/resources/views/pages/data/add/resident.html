@@ -57,13 +57,15 @@
                           id="no_kk"
                           type="number"
                           placeholder="Masukkan No Kartu Keluarga"
+                          list="noKKList"
                         />
+                        <datalist id="noKKList"></datalist>
                       </div>
 
                       <div class="col-md-3">
                         <button
                           class="btn btn-warning"
-                          id="btn-check-noKK"
+                          id="btn-edit-noKK"
                           type="submit"
                         >
                           Check
@@ -560,56 +562,16 @@
     </div>
     <%- include('./../../../layouts/javascript.html') %>
     <script src="/javascript/family/check.js"></script>
+    <script src="/javascript/resident/resident.js"></script>
     <script>
       document.getElementById("form-warga").hidden = true;
 
       const urlParams = new URLSearchParams(window.location.search);
       const param_no_kk = urlParams.get("no_kk");
       if (param_no_kk) {
-        checkNoKK(param_no_kk);
+        document.getElementById("no_kk").value = param_no_kk;
+        fetchData(`/api/families/${no_kk}/address`);
       }
-      document
-        .getElementById("btn-check-noKK")
-        .addEventListener("click", (event) => {
-          checkNoKK(document.getElementById("no_kk").value);
-        });
-
-      const radioGroup = document.querySelector('[role="group"]');
-      const radios = radioGroup.querySelectorAll('[type="radio"]');
-      var status_pernikahan = "Belum kawin";
-      radios.forEach((radio) => {
-        radio.addEventListener("change", (event) => {
-          const selectedRadio = event.target;
-          const selectedValue = selectedRadio.value;
-
-          switch (selectedValue) {
-            case "Belum kawin":
-              document.getElementById("cerai").hidden = true;
-              document.getElementById("kawin").hidden = true;
-              break;
-
-            case "Kawin":
-              document.getElementById("cerai").hidden = true;
-              document.getElementById("kawin").hidden = false;
-              break;
-
-            case "Cerai hidup":
-              document.getElementById("cerai").hidden = false;
-              document.getElementById("kawin").hidden = true;
-
-              break;
-
-            case "Cerai mati":
-              document.getElementById("cerai").hidden = true;
-              document.getElementById("kawin").hidden = true;
-              break;
-
-            default:
-              break;
-          }
-          status_pernikahan = selectedRadio.value;
-        });
-      });
 
       document
         .querySelector("#button-submit")
@@ -632,7 +594,7 @@
               jenis_kelamin: document.getElementById("jenis_kelamin").value,
               pekerjaan: document.getElementById("pekerjaan").value,
               agama: document.getElementById("agama").value,
-              status_pernikahan: status_pernikahan,
+              status_pernikahan: getStatusPernikahan(),
               pendidikan_terakhir: document.getElementById(
                 "pendidikan_terakhir"
               ).value,
@@ -664,16 +626,8 @@
             },
           })
             .then((response) => {
-              Swal.fire({
-                position: "top-end",
-                icon: "success",
-                title:
-                  "Data " +
-                  document.getElementById("nama").value +
-                  " sudah ditambahkan",
-                showConfirmButton: false,
-                timer: 1800,
-              });
+              const nama = document.getAnimations("nama").value;
+              showSuccess(`Data ${nama} telah ditambahkan`);
 
               setTimeout(() => {
                 window.location.href = "/residents/";

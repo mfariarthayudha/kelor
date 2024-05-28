@@ -3,7 +3,13 @@ import family from "../interface/family";
 
 export const getAddressByNoKK = async (no_kk: string, like = false) => {
   const res = await knex("families")
-    .select("families.alamat", "dusun.nama_dusun", "rw.no_rw", "rt.no_rt")
+    .select(
+      "families.no_kk",
+      "families.alamat",
+      "dusun.nama_dusun",
+      "rw.no_rw",
+      "rt.no_rt"
+    )
     .innerJoin("dusun", "families.dusun_id", "dusun.dusun_id")
     .innerJoin("rw", "families.rw_id", "rw.rw_id")
     .innerJoin("rt", "families.rt_id", "rt.rt_id")
@@ -13,11 +19,10 @@ export const getAddressByNoKK = async (no_kk: string, like = false) => {
       } else {
         builder.where("families.no_kk", no_kk);
       }
-    })
-    .then((res) => {
-      return res[0];
     });
-
+  if (!like) {
+    return res[0];
+  }
   return res;
 };
 
@@ -59,6 +64,15 @@ export const getIdAddressByNoKK = async (no_kk: string) => {
 
 //   return id_alamat;
 // };
+export const checkNoKK = async (no_kk: string) => {
+  const res = await knex("families")
+    .select("no_kk")
+    .where("no_kk", no_kk)
+    .then((res) => {
+      return res[0];
+    });
+  return res;
+};
 export const insertFamily = async (
   obj: family,
   approved: number = 1,
@@ -80,4 +94,10 @@ export const insertFamily = async (
   } else {
     return await query;
   }
+};
+module.exports = {
+  insertFamily,
+  checkNoKK,
+  getAddressByNoKK,
+  getIdAddressByNoKK,
 };

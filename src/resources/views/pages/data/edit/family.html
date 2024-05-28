@@ -97,15 +97,12 @@
                 <div class="card-body">
                   <div class="mb-3">
                     <div class="row">
-                      <div class="col-md-9">
+                      <div class="col-md">
                         <label class="small mb-1" for="no_kk">No KK :</label>
-                      </div>
-                      <div class="col-md-3">
-                        <label class="small mb-1" for="status">Status:</label>
                       </div>
                     </div>
                     <div class="row">
-                      <div class="col-md-9">
+                      <div class="col-md">
                         <input
                           class="form-control"
                           id="no_kk"
@@ -113,19 +110,6 @@
                           readonly
                           value="<%= no_kk %>"
                         />
-                      </div>
-                      <div class="col-md-3">
-                        <div class="m-2">
-                          <input
-                            class="form-check-input"
-                            type="checkbox"
-                            id="approved"
-                            value="<%= approved %>"
-                          />
-                          <label id="label-approved" for="approved"
-                            >Belum Terdaftar</label
-                          >
-                        </div>
                       </div>
                     </div>
                   </div>
@@ -251,29 +235,6 @@
     <script src="/javascript/area/listArea.js"></script>
 
     <script>
-      // console.log(document.getElementById("approved").checked);
-      if (document.getElementById("approved").value === "1") {
-        document.getElementById("approved").checked = true;
-        document.getElementById("label-approved").innerHTML = "Sudah Terdaftar";
-      } else {
-        document.getElementById("approved").checked = false;
-        document.getElementById("label-approved").innerHTML = "Belum terdaftar";
-      }
-
-      document
-        .getElementById("approved")
-        .addEventListener("change", (event) => {
-          if (document.getElementById("approved").checked) {
-            document.getElementById("approved").value = 1;
-            document.getElementById("label-approved").innerHTML =
-              "Sudah Terdaftar";
-          } else {
-            document.getElementById("approved").value = 0;
-            document.getElementById("label-approved").innerHTML =
-              "Belum terdaftar";
-          }
-        });
-
       window.onload = updateDusun("dusun", "<%= alamat.dusun_id %>");
       window.onload = updateRW(
         "<%= alamat.dusun_id %>",
@@ -317,20 +278,11 @@
             },
           })
             .then((response) => {
-              Swal.fire({
-                position: "top-end",
-                icon: "success",
-                title:
-                  "Data Nomor Kartu Keluarga " +
-                  response.data.no_kk +
-                  " sudah diubah",
-                showConfirmButton: false,
-                timer: 1800,
-              });
-              // console.log(response);
+              showSuccess("Data Keluarga sudah diubah");
+
               setTimeout(() => {
                 window.location.href = "/families/";
-              }, 2000);
+              }, 1000);
             })
             .catch((error) => {
               showError(error);

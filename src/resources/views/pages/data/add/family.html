@@ -205,16 +205,8 @@
             },
           })
             .then((response) => {
-              Swal.fire({
-                position: "top-end",
-                icon: "success",
-                title:
-                  "Data Nomor Kartu Keluarga " +
-                  response.data.no_kk +
-                  " sudah ditambahkan",
-                showConfirmButton: false,
-                timer: 1800,
-              });
+              showSuccess("Data Keluarga sudah ditambahkan");
+
               console.log(response);
               setTimeout(() => {
                 window.location.href = "/families/";

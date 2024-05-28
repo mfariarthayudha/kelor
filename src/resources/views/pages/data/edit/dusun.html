@@ -192,17 +192,11 @@
           })
             .then((response) => {
               let nama_dusun = response.data.nama_dusun;
-              Swal.fire({
-                position: "top-end",
-                icon: "success",
-                title: "Dusun " + nama_dusun + " sudah diubah",
-                showConfirmButton: false,
-                timer: 1800,
-              });
+              showsuccess("Dusun " + nama_dusun + " sudah diubah");
 
               setTimeout(() => {
                 window.location.href = "/dusun/";
-              }, 2000);
+              }, 1000);
             })
             .catch((error) => {
               showError(error);

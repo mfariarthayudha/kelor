@@ -1,19 +1,18 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response } from "express";
 
 import validatorjs from "../../utilities/validatorjs";
 import knex from "../../utilities/knex";
 import moment from "moment";
 import { convertEmptyStringsToNull } from "../../utilities/convert";
 import * as residentRepository from "../../repository/resident-repository";
-import { getAddressByNoKK } from "../../repository/family-repository";
+import {
+  getAddressByNoKK,
+  checkNoKK,
+} from "../../repository/family-repository";
 moment().local();
 moment.locale("id");
 
-export const addResident = async (
-  request: Request,
-  response: Response,
-  next: NextFunction
-) => {
+export const addResident = async (request: Request, response: Response) => {
   try {
     await validatorjs(
       {
@@ -56,6 +55,11 @@ export const addResident = async (
         errorMessages: "NIK " + request.body.nik + " sudah terdaftar",
       });
     }
+    const checkKK = await checkNoKK(request.body.no_kk);
+    if (!checkKK) {
+      throw Error(undefined);
+    }
+
     const obj = convertEmptyStringsToNull(request.body);
     const trx = await knex.transaction();
 
@@ -65,7 +69,7 @@ export const addResident = async (
       return response.status(201).send({ nama: request.body.nama });
     } catch (error) {
       await trx.rollback();
-      throw new Error("gagal");
+      throw new Error("gagal edit");
     }
   } catch (error: any) {
     switch (error?.code) {
@@ -74,7 +78,11 @@ export const addResident = async (
           code: "validation-fails",
           errorMessages: error.errorMessages,
         });
-
+      case undefined:
+        return response.status(404).send({
+          code: "not-found",
+          errorMessages: "NIK / NO KK tidak ditemukan",
+        });
       default:
         return response.status(500).send({
           code: "internal-server-error",
@@ -121,11 +129,12 @@ export const updateResident = async (request: Request, response: Response) => {
         nik_ibu: "required|string|max:36",
       }
     );
-    // const knexTransaction = await knex.transaction();
+    const checkKK = await checkNoKK(request.body.no_kk);
+    if (!checkKK) {
+      throw Error(undefined);
+    }
 
-    // try {
     await knex("residents")
-      // .transacting(knexTransaction)
       .update({
         nama: obj.nama,
         alamat_sebelumnya: obj.alamat_sebelumnya,
@@ -171,7 +180,11 @@ export const updateResident = async (request: Request, response: Response) => {
           code: "validation-fails",
           errorMessages: error.errorMessages,
         });
-
+      case undefined:
+        return response.status(404).send({
+          code: "not-found",
+          errorMessages: "NIK / NO KK tidak ditemukan",
+        });
       default:
         return response.status(500).send({
           code: "internal-server-error",

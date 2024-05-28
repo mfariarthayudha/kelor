@@ -176,13 +176,7 @@
           type: "DELETE",
           success: function () {
             $("#daftar_surat").DataTable().ajax.reload();
-            swal.fire({
-              icon: "success",
-              title: "Terhapus",
-              text: "Surat berhasil dihapus",
-              showConfirmButton: false,
-              timer: 1200,
-            });
+            showSuccess("Surat berhasil dihapus");
           },
         });
       }
@@ -192,13 +186,7 @@
           type: "PUT",
           success: function () {
             $("#daftar_surat").DataTable().ajax.reload();
-            swal.fire({
-              icon: "success",
-              title: "Tanda Tangan",
-              text: "Surat berhasil ditandangani",
-              showConfirmButton: false,
-              timer: 1800,
-            });
+            showSuccess("Surat berhasil ditandangani");
           },
         });
       }

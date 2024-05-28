@@ -194,18 +194,10 @@
     <script src="/javascript/area/rt.js"></script>
 
     <script>
-      function checkFalsyValue(value) {
-        // Define a regex pattern to match exactly "0"
-        var regexPattern = /^0+$/;
-        // Test if the value matches the regex pattern
-        return !regexPattern.test(value);
-      }
-
       window.onload = updateDusun("dusun", "<%= dusun_id %>");
       window.onload = updateRW("<%= dusun_id %>", "rw", "<%= rw_id %>");
 
       document.getElementById("dusun").addEventListener("click", (event) => {
-        document.getElementById("dusun").firstChild.disable = true;
         let dusun = document.getElementById("dusun").value;
         updateRW(dusun, "rw");
       });
@@ -232,20 +224,9 @@
           })
             .then((response) => {
               let { nama_dusun, no_rw, no_rt } = response.data;
-              Swal.fire({
-                position: "top-end",
-                icon: "success",
-                title:
-                  "Data RT  " +
-                  no_rw +
-                  "/" +
-                  no_rt +
-                  " " +
-                  nama_dusun +
-                  " sudah diubah",
-                showConfirmButton: false,
-                timer: 1800,
-              });
+              showSuccess(
+                `Data RT ${no_rw} / ${no_rt} ${nama_dusun} sudah diubah`
+              );
 
               setTimeout(() => {
                 window.location.href = "/rt/";

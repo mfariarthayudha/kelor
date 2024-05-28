@@ -14,7 +14,7 @@ export const familyUpdate = async (request: Request, response: Response) => {
     const no_kk = request.params.no_kk;
     const alamat = await getIdAddressByNoKK(no_kk);
     const additional = await knex("families")
-      .select("kode_pos", "approved", "update_at")
+      .select("kode_pos", "update_at")
       .where("no_kk", no_kk)
       .then((result: any) => {
         return result.map((family: any) => {
@@ -68,6 +68,5 @@ export const getFamilyAll = async (request: Request, response: Response) => {
         };
       });
     });
-  console.log(res);
   return response.render("pages/data/index/list-family", { family: res });
 };

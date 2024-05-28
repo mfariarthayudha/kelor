@@ -58,12 +58,14 @@
                             id="no_kk"
                             type="number"
                             value="<%= no_kk %>"
+                            list="noKKList"
                           />
+                          <datalist id="noKKList"></datalist>
                         </div>
                         <div class="col-md-3">
                           <button
                             class="btn btn-warning"
-                            id="btn-check-noKK"
+                            id="btn-edit-noKK"
                             type="submit"
                           >
                             Ubah
@@ -579,6 +581,7 @@
     </div>
     <%- include('./../../../layouts/javascript.html') %>
     <script src="/javascript/family/check.js"></script>
+    <script src="/javascript/resident/resident.js"></script>
     <script>
       document.querySelector('[name="jenis_kelamin"]').value =
         "<%= jenis_kelamin %>";
@@ -598,55 +601,8 @@
       document.querySelector('[name="penyandang_cacat"]').value =
         "<%= penyandang_cacat %>";
 
-      const radioGroup = document.querySelector('[role="group"]');
-      const radios = radioGroup.querySelectorAll('[type="radio"]');
+      updateVisibility("<%= status_pernikahan %>");
 
-      function changeStatus(selectedValue) {
-        // console.log();
-        document.querySelector(
-          'input[name="status_pernikahan"][value="' + selectedValue + '"]'
-        ).checked = true;
-        switch (selectedValue) {
-          case "Belum kawin":
-            document.getElementById("cerai").hidden = true;
-            document.getElementById("kawin").hidden = true;
-            break;
-
-          case "Kawin":
-            document.getElementById("cerai").hidden = true;
-            document.getElementById("kawin").hidden = false;
-            break;
-
-          case "Cerai hidup":
-            document.getElementById("cerai").hidden = false;
-            document.getElementById("kawin").hidden = true;
-
-            break;
-
-          case "Cerai mati":
-            document.getElementById("cerai").hidden = true;
-            document.getElementById("kawin").hidden = true;
-            break;
-
-          default:
-            break;
-        }
-      }
-      changeStatus("<%= status_pernikahan %>");
-      radios.forEach((radio) => {
-        radio.addEventListener("change", (event) => {
-          const selectedRadio = event.target;
-          changeStatus(selectedRadio.value);
-        });
-      });
-      document
-        .getElementById("btn-check-noKK")
-        .addEventListener("click", (event) => {
-          checkNoKK(
-            document.getElementById("no_kk").value,
-            (value = "<%= no_kk %>")
-          );
-        });
       document
         .querySelector("#button-submit")
         .addEventListener("click", (event) => {
@@ -671,16 +627,8 @@
             data: formDataObject,
           })
             .then((response) => {
-              Swal.fire({
-                position: "top-end",
-                icon: "success",
-                title:
-                  "Data " +
-                  document.querySelector('[name="nama"]').value +
-                  " telah diubah",
-                showConfirmButton: false,
-                timer: 1800,
-              });
+              const nama = document.querySelector('[name="nama"]').value;
+              showSuccess(`Data ${nama} telah diubah`);
 
               setTimeout(() => {
                 window.location.href = "/residents/";

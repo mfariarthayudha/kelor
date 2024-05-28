@@ -21,7 +21,7 @@ export const getRwName = async (request: Request, response: Response) => {
     switch (error?.code) {
       case undefined:
         return response.status(404).send({
-          code: "Tidak ditemukan",
+          code: "not-found",
           errorMessages: "No RW tidak ditemukan",
         });
       default:

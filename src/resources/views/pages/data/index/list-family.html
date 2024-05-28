@@ -118,12 +118,8 @@
         axios
           .delete(baseUrl + "/api/families/" + no_kk)
           .then((res) => {
-            swal.fire({
-              icon: "success",
-              title: "Berhasil dihapus",
-              showConfirmButton: false,
-              timer: 1200,
-            });
+            showSuccess("Berhasil dihapus");
+
             location.reload();
           })
           .catch((error) => {

@@ -189,13 +189,6 @@
     <script src="/javascript/area/rt.js"></script>
 
     <script>
-      function checkFalsyValue(value) {
-        // Define a regex pattern to match exactly "0"
-        var regexPattern = /^0+$/;
-        // Test if the value matches the regex pattern
-        return !regexPattern.test(value);
-      }
-
       window.onload = updateDusun("dusun");
 
       document.getElementById("dusun").addEventListener("change", (event) => {
@@ -227,24 +220,13 @@
             })
               .then((response) => {
                 let { nama_dusun, no_rw, no_rt } = response.data;
-                Swal.fire({
-                  position: "top-end",
-                  icon: "success",
-                  title:
-                    "Data RT  " +
-                    no_rw +
-                    "/" +
-                    no_rt +
-                    " " +
-                    nama_dusun +
-                    " sudah ditambahkan",
-                  showConfirmButton: false,
-                  timer: 1800,
-                });
+                showSuccess(
+                  `Data RT ${no_rw} / ${no_rt} ${nama_dusun} sudah ditambahkan`
+                );
 
                 setTimeout(() => {
                   window.location.href = "/rt/";
-                }, 2000);
+                }, 1500);
               })
               .catch((error) => {
                 showError(error);
